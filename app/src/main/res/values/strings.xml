@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Tic Tac Toe</string>
+    <string name="single_player">Single Player</string>
+    <string name="multiplayer">Multiplayer</string>
+    <string name="local_multiplayer">Local Multiplayer</string>
+    <string name="game_title">
+        <font color="#fed032">T</font>
+        <font color="#eb1751">I</font>
+        <font color="#fed032">C</font>
+        <font color="#fed032">\n</font>
+        <font color="#eb1751">T</font>
+        <font color="#fed032">A</font>
+        <font color="#eb1751">C</font>
+        <font color="#fed032">\n</font>
+        <font color="#fed032">T</font>
+        <font color="#eb1751">O</font>
+        <font color="#fed032">E</font>
+    </string>
+</resources>
