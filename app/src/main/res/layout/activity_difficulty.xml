@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_screen_gradient"
+        app:snowflakeAlphaMax="255"
+        app:snowflakeAlphaMin="180"
+        app:snowflakeAngleMax="4"
+        app:snowflakeSizeMax="8dp"
+        app:snowflakeSizeMin="1dp"
+        app:snowflakeSpeedMax="5"
+        app:snowflakeSpeedMin="1"
+        app:snowflakesAlreadyFalling="false"
+        app:snowflakesFadingEnabled="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:background="@drawable/view_line_rounded"
+        app:layout_constraintStart_toStartOf="@id/text_select_difficulty"
+        app:layout_constraintTop_toBottomOf="@id/text_select_difficulty"
+        app:layout_constraintWidth_percent="0.55" />
+
+    <TextView
+        android:id="@+id/text_select_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:lines="1"
+        android:text="@string/select_difficulty"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_easyy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/button_easy_bot"
+        android:paddingStart="45dp"
+        android:paddingEnd="0dp"
+        android:text="@string/easy_bot"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@id/btn_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_select_difficulty"
+        app:layout_constraintWidth_percent="0.65" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="-60dp"
+        android:src="@drawable/easy_bot"
+        android:contentDescription="@string/easy_difficulty_level_image"
+        app:layout_constraintBottom_toBottomOf="@id/btn_easyy"
+        app:layout_constraintEnd_toStartOf="@id/btn_easyy"
+        app:layout_constraintTop_toTopOf="@id/btn_easyy"
+
+        />
+
+
+    <Button
+        android:id="@+id/btn_medium"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/button_medium_bot"
+        android:paddingStart="45dp"
+        android:paddingEnd="0dp"
+        android:text="@string/medium_bot"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_select_difficulty"
+        app:layout_constraintWidth_percent="0.65" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="-60dp"
+        android:src="@drawable/medium_bot"
+        android:contentDescription="@string/medium_difficulty_level_image"
+        app:layout_constraintBottom_toBottomOf="@id/btn_medium"
+        app:layout_constraintEnd_toStartOf="@id/btn_medium"
+        app:layout_constraintTop_toTopOf="@id/btn_medium"
+
+        />
+
+    <Button
+        android:id="@+id/btn_difficult"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/button_difficult_bot"
+        android:paddingStart="45dp"
+        android:paddingEnd="0dp"
+        android:text="@string/difficult_bot"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_medium"
+        app:layout_constraintWidth_percent="0.65" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="-60dp"
+        android:src="@drawable/difficult_bot"
+        android:contentDescription="@string/difficult_level_image"
+        app:layout_constraintBottom_toBottomOf="@id/btn_difficult"
+        app:layout_constraintEnd_toStartOf="@id/btn_difficult"
+        app:layout_constraintTop_toTopOf="@id/btn_difficult"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

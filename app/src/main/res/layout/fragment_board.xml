@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,15 +17,18 @@
         app:snowflakeSpeedMax="5"
         app:snowflakeSpeedMin="1"
         app:snowflakesAlreadyFalling="false"
-        app:snowflakesFadingEnabled="true" />
+        app:snowflakesFadingEnabled="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/view_board_rounded"
-        app:cornerRadius="100dp"
+        app:cornerRadius="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +39,7 @@
         android:id="@+id/cell_5"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
@@ -67,32 +72,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cell_5"
         app:layout_constraintWidth_percent="0.3" />
+
     <View
         android:id="@+id/cell_6"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginTop="200dp"
         android:background="@drawable/view_cell_rounded"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toEndOf="@id/cell_5"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
+
     <View
         android:id="@+id/cell_4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/view_cell_rounded"
-        app:layout_constraintWidth_percent="0.3"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="5dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/view_cell_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/cell_5"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
+
     <View
         android:id="@+id/cell_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/view_cell_rounded"
+        app:layout_constraintBottom_toTopOf="@id/cell_4"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/cell_2"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <View
+        android:id="@+id/cell_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/view_cell_rounded"
+        app:layout_constraintBottom_toTopOf="@id/cell_6"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toEndOf="@id/cell_2"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <View
+        android:id="@+id/cell_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/view_cell_rounded"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/cell_8"
+        app:layout_constraintTop_toBottomOf="@id/cell_4"
+        app:layout_constraintWidth_percent="0.3"
+
+        />
+
+    <View
+        android:id="@+id/cell_9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/view_cell_rounded"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toEndOf="@id/cell_8"
+        app:layout_constraintTop_toBottomOf="@id/cell_6"
+        app:layout_constraintWidth_percent="0.3" />
+    <View
+        android:id="@+id/cell_11"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.3"
@@ -101,42 +158,6 @@
         app:layout_constraintEnd_toStartOf="@id/cell_2"
         app:layout_constraintBottom_toTopOf="@id/cell_4"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        />
-    <View
-        android:id="@+id/cell_3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintDimensionRatio="1:1"
-        android:background="@drawable/view_cell_rounded"
-        app:layout_constraintStart_toEndOf="@id/cell_2"
-        app:layout_constraintBottom_toTopOf="@id/cell_6"
-        />
-    <View
-        android:id="@+id/cell_7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintDimensionRatio="1:1"
-        android:background="@drawable/view_cell_rounded"
-        app:layout_constraintEnd_toStartOf="@id/cell_8"
-        app:layout_constraintTop_toBottomOf="@id/cell_4"
-        />
-    <View
-        android:id="@+id/cell_9"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-       android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintDimensionRatio="1:1"
-        android:background="@drawable/view_cell_rounded"
-        app:layout_constraintTop_toBottomOf="@id/cell_6"
-        app:layout_constraintStart_toEndOf="@id/cell_8"
-        />
+        android:layout_marginBottom="5dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,4 +16,11 @@
         <font color="#eb1751">O</font>
         <font color="#fed032">E</font>
     </string>
+    <string name="select_difficulty">Select Difficulty</string>
+    <string name="easy_bot">Easy Bot</string>
+    <string name="difficult_level_image">Difficult level image</string>
+    <string name="difficult_bot">Difficult Bot</string>
+    <string name="medium_difficulty_level_image">Medium difficulty level image</string>
+    <string name="medium_bot">Medium Bot</string>
+    <string name="easy_difficulty_level_image">Easy difficulty level image</string>
 </resources>
