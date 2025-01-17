@@ -2,11 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_screen_gradient"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+
+    >
 
 
     <com.jetradarmobile.snowfall.SnowfallView
@@ -66,7 +69,7 @@
         android:id="@+id/btn_multiplayer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_gradient_two"
         android:text="@string/multiplayer"
         android:textColor="@color/white"
@@ -82,7 +85,7 @@
     <Button
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_gradient_three"
         android:text="@string/local_multiplayer"
         android:textColor="@color/white"

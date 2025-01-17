@@ -23,4 +23,5 @@
     <string name="medium_difficulty_level_image">Medium difficulty level image</string>
     <string name="medium_bot">Medium Bot</string>
     <string name="easy_difficulty_level_image">Easy difficulty level image</string>
+    <string name="opponent">Opponent</string>
 </resources>
