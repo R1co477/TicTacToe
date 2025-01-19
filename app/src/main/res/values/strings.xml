@@ -27,4 +27,8 @@
     <string name="toolbar_menu">Game Menu</string>
     <string name="toolbar_difficulty">Choose Difficulty</string>
     <string name="toolbar_bot">Tic-Tac-Toe: Bot</string>
+    <string name="player_avatar">Player avatar</string>
+    <string name="bot_avatar">Bot avatar</string>
+    <string name="player_human">Player human</string>
+    <string name="player_bot">Player bot</string>
 </resources>

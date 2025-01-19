@@ -86,9 +86,9 @@
 
     <View
         android:id="@+id/opponent_status_view"
-        android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:layout_marginEnd="25dp"
+        android:layout_width="130dp"
+        android:layout_height="160dp"
+        android:layout_marginEnd="45dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/inactive_turn_background"
         app:layout_constraintBottom_toTopOf="@id/background_board"
@@ -97,6 +97,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/opponent_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/opponent"
@@ -108,11 +109,32 @@
         app:layout_constraintStart_toStartOf="@id/opponent_status_view"
         app:layout_constraintTop_toTopOf="@id/opponent_status_view" />
 
+    <ImageView
+        android:id="@+id/player_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/player_avatar"
+        android:src="@drawable/avatar"
+        app:layout_constraintBottom_toTopOf="@id/opponent_textview"
+        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
+        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
+        app:layout_constraintTop_toTopOf="@id/opponent_status_view" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/player_human"
+        android:src="@drawable/tac"
+        app:layout_constraintBottom_toBottomOf="@id/opponent_status_view"
+        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
+        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
+        app:layout_constraintTop_toBottomOf="@id/opponent_textview" />
+
     <View
         android:id="@+id/bot_info_view"
-        android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="25dp"
+        android:layout_width="130dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="45dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/inactive_turn_background"
         app:layout_constraintBottom_toTopOf="@id/background_board"
@@ -121,9 +143,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/bot_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/medium_bot"
+        android:text="@string/difficult_bot"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -132,6 +155,26 @@
         app:layout_constraintStart_toStartOf="@id/bot_info_view"
         app:layout_constraintTop_toTopOf="@id/bot_info_view" />
 
+    <ImageView
+        android:id="@+id/bot_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/bot_avatar"
+        android:src="@drawable/medium_bot"
+        app:layout_constraintBottom_toTopOf="@id/bot_textview"
+        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
+        app:layout_constraintStart_toStartOf="@id/bot_info_view"
+        app:layout_constraintTop_toTopOf="@id/bot_info_view" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/player_bot"
+        android:src="@drawable/tic"
+        app:layout_constraintBottom_toBottomOf="@id/bot_info_view"
+        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
+        app:layout_constraintStart_toStartOf="@id/bot_info_view"
+        app:layout_constraintTop_toBottomOf="@id/bot_textview" />
 
     <View
         android:id="@+id/cell_4"

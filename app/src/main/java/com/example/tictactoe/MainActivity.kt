@@ -40,6 +40,12 @@ class MainActivity : AppCompatActivity(), Navigator {
     private fun launchFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             .addToBackStack(null)
             .replace(R.id.fragmentContainer, fragment)
             .commit()
