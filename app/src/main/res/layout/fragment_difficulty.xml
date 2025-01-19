@@ -35,7 +35,7 @@
         android:id="@+id/text_select_difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:lines="1"
         android:text="@string/select_difficulty"
         android:textColor="@color/white"

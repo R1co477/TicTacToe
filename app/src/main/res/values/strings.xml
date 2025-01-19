@@ -24,4 +24,7 @@
     <string name="medium_bot">Medium Bot</string>
     <string name="easy_difficulty_level_image">Easy difficulty level image</string>
     <string name="opponent">Opponent</string>
+    <string name="toolbar_menu">Game Menu</string>
+    <string name="toolbar_difficulty">Choose Difficulty</string>
+    <string name="toolbar_bot">Tic-Tac-Toe: Bot</string>
 </resources>

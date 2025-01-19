@@ -8,12 +8,13 @@
     <color name="orange">#df6437</color>
     <color name="orange_pressed">#f08060</color>
     <color name="text_shadow">#2a1c53</color>
-    <color name="background_board">#6649c4</color>
-    <color name="background_board_cell">#332167</color>
+    <color name="board_background">#6649c4</color>
+    <color name="board_cell_background">#332167</color>
     <color name="indigo_violet">#552fd2</color>
     <color name="indigo_violet_pressed">#7a5ff5</color>
     <color name="pink">#ad53e7</color>
     <color name="ocean_blue">#2f88b1</color>
     <color name="ocean_blue_pressed">#55a8cc</color>
     <color name="dark_indigo">#27175d</color>
+    <color name="toolbar_background">#2a1c75</color>
 </resources>
