@@ -44,52 +44,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/cell_2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintBottom_toTopOf="@id/cell_5"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/cell_8"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cell_5"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/cell_6"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="150dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toEndOf="@id/cell_5"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/opponent_status_view"
         android:layout_width="130dp"
         android:layout_height="160dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/inactive_turn_background"
         app:layout_constraintBottom_toTopOf="@id/background_board"
         app:layout_constraintEnd_toStartOf="@id/cell_2"
@@ -134,8 +134,8 @@
         android:id="@+id/bot_info_view"
         android:layout_width="130dp"
         android:layout_height="160dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/inactive_turn_background"
         app:layout_constraintBottom_toTopOf="@id/background_board"
         app:layout_constraintEnd_toStartOf="@id/cell_3"
@@ -181,60 +181,60 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="150dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/cell_5"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/cell_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintBottom_toTopOf="@id/cell_4"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/cell_2"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/cell_3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintBottom_toTopOf="@id/cell_6"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toEndOf="@id/cell_2"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/cell_7"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/cell_8"
         app:layout_constraintTop_toBottomOf="@id/cell_4"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
     <View
         android:id="@+id/cell_9"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/view_cell_rounded"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toEndOf="@id/cell_8"
         app:layout_constraintTop_toBottomOf="@id/cell_6"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.29" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
