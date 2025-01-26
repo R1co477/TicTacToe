@@ -13,7 +13,12 @@ interface Navigator {
 
     fun showDifficultyScreen()
 
+    fun showEditProfileScreen()
+
     fun goBack()
 
     fun goToMenu()
+
+    fun createCustomToolbarAction(action: CustomAction)
+
 }

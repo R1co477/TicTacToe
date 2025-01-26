@@ -18,6 +18,12 @@ class DifficultyFragment : Fragment(), HasCustomTitle {
         binding.btnEasyy.setOnClickListener {
             navigator().showSingleGameScreen(1)
         }
+        binding.btnMedium.setOnClickListener {
+            navigator().showSingleGameScreen(2)
+        }
+        binding.btnDifficult.setOnClickListener {
+            navigator().showSingleGameScreen(3)
+        }
         return binding.root
     }
 

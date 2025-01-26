@@ -1,6 +1,8 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -41,8 +43,8 @@ android {
 }
 
 dependencies {
-    implementation("androidx.fragment:fragment-ktx:1.8.5")
-    implementation("com.github.jetradarmobile:android-snowfall:1.2.1")
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.android.snowfall)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

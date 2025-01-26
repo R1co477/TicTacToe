@@ -17,4 +17,14 @@
     <color name="ocean_blue_pressed">#55a8cc</color>
     <color name="dark_indigo">#27175d</color>
     <color name="toolbar_background">#2a1c75</color>
+    <color name="profile_background">#1e1b4b</color>
+    <color name="background_red">#FF6B6B</color>
+    <color name="background_teal">#4ECDC4</color>
+    <color name="background_blue">#45B7D1</color>
+    <color name="background_green">#96CEB4</color>
+    <color name="background_yellow">#FFEEAD</color>
+    <color name="background_pink">#D4A5A5</color>
+    <color name="background_purple">#9B59B6</color>
+    <color name="background_orange">#E67E22</color>
+    <color name="gray">#5A5A68</color>
 </resources>

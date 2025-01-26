@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_screen_gradient"
+        app:snowflakeAlphaMax="255"
+        app:snowflakeAlphaMin="180"
+        app:snowflakeAngleMax="4"
+        app:snowflakeSizeMax="8dp"
+        app:snowflakeSizeMin="1dp"
+        app:snowflakeSpeedMax="5"
+        app:snowflakeSpeedMin="1"
+        app:snowflakesAlreadyFalling="false"
+        app:snowflakesFadingEnabled="true" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/begin_GuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_GuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="32dp" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_board"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/opponent_status_view"
+        android:layout_width="150dp"
+        android:layout_height="184dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/inactive_turn_background"
+        app:layout_constraintBottom_toTopOf="@id/fragment_board"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/you_turn"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
+        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
+        app:layout_constraintTop_toBottomOf="@id/opponent_status_view" />
+
+    <TextView
+        android:id="@+id/opponent_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@null"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/opponent_status_view"
+        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
+        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
+        app:layout_constraintTop_toTopOf="@id/opponent_status_view" />
+
+    <ImageView
+        android:id="@+id/player_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/player_avatar"
+        android:src="@drawable/avatar"
+        app:layout_constraintBottom_toTopOf="@id/opponent_textview"
+        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
+        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
+        app:layout_constraintTop_toTopOf="@id/opponent_status_view" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/player_human"
+        android:src="@drawable/tac"
+        app:layout_constraintBottom_toBottomOf="@id/opponent_status_view"
+        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
+        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
+        app:layout_constraintTop_toBottomOf="@id/opponent_textview" />
+
+    <View
+        android:id="@+id/bot_info_view"
+        android:layout_width="150dp"
+        android:layout_height="184dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/inactive_turn_background"
+        app:layout_constraintBottom_toTopOf="@id/fragment_board"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/botTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@null"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/bot_info_view"
+        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
+        app:layout_constraintStart_toStartOf="@id/bot_info_view"
+        app:layout_constraintTop_toTopOf="@id/bot_info_view" />
+
+    <ImageView
+        android:id="@+id/botAvatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/bot_avatar"
+        android:src="@null"
+        app:layout_constraintBottom_toTopOf="@id/botTextView"
+        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
+        app:layout_constraintStart_toStartOf="@id/bot_info_view"
+        app:layout_constraintTop_toTopOf="@id/bot_info_view" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/player_bot"
+        android:src="@drawable/tic"
+        app:layout_constraintBottom_toBottomOf="@id/bot_info_view"
+        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
+        app:layout_constraintStart_toStartOf="@id/bot_info_view"
+        app:layout_constraintTop_toBottomOf="@id/botTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

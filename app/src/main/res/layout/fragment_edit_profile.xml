@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/profile_background">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/btn_save_changes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_nickname">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/view_red"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_red" />
+
+            <ImageView
+                android:id="@+id/view_teal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_teal" />
+
+            <ImageView
+                android:id="@+id/view_blue"
+                android:layout_width="80dp"
+
+                android:layout_height="80dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_blue" />
+
+            <ImageView
+                android:id="@+id/view_green"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_green" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/btn_save_changes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_nickname">
+
+            <ImageView
+                android:id="@+id/view_yellow"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="15dp"
+
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_yellow" />
+
+            <ImageView
+                android:id="@+id/view_pink"
+                android:layout_width="80dp"
+
+                android:layout_height="80dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_pink" />
+
+            <ImageView
+                android:id="@+id/view_purple"
+                android:layout_width="80dp"
+
+                android:layout_height="80dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_purple" />
+
+            <ImageView
+                android:id="@+id/view_orange"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/view_select_color"
+                android:backgroundTint="@color/background_orange" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/profile_avatar"
+        android:contentDescription="@string/player_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/background_red" />
+
+    <TextView
+        android:id="@+id/first_letter_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="@id/avatar"
+        app:layout_constraintStart_toStartOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/nickname"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/edt_nickname"
+        app:layout_constraintStart_toStartOf="@id/edt_nickname" />
+
+    <TextView
+        android:id="@+id/char_countTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/char_сountTextView"
+        android:textColor="#a5b4fc"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/edt_nickname"
+        app:layout_constraintTop_toBottomOf="@id/edt_nickname" />
+
+    <EditText
+        android:id="@+id/edt_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="15dp"
+        android:autofillHints="username"
+        android:background="@drawable/profile_edit_text"
+        android:hint="@string/enter_your_nickname"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatar" />
+
+
+    <Button
+        android:id="@+id/btn_save_changes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_gradient_save_changes"
+        android:text="@string/save_changes"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/icon_for_selecting_an_image_from_the_gallery"
+        android:src="@drawable/select_image"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="@id/avatar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

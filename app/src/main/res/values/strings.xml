@@ -31,4 +31,12 @@
     <string name="bot_avatar">Bot avatar</string>
     <string name="player_human">Player human</string>
     <string name="player_bot">Player bot</string>
+    <string name="you_turn">You Turn</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="done">Done</string>
+    <string name="enter_your_nickname">Enter your nickname</string>
+    <string name="nickname">Nickname</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="icon_for_selecting_an_image_from_the_gallery">Icon for selecting an image from the gallery</string>
+    <string name="char_сountTextView">%d/15</string>
 </resources>
