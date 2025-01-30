@@ -1,15 +1,23 @@
 package com.example.tictactoe.fragments
 
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.tictactoe.Profile
 import com.example.tictactoe.R
 import com.example.tictactoe.contract.CustomAction
@@ -17,9 +25,19 @@ import com.example.tictactoe.contract.HasCustomAction
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentEditProfileBinding
 
+
 class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
     private lateinit var profile: Profile
     private lateinit var binding: FragmentEditProfileBinding
+    private val pickMedia = registerForActivityResult(PickVisualMedia()) { uri ->
+        if (uri != null) {
+            Log.d("PhotoPicker", "Selected URI: $uri")
+            setAvatar(uri)
+        } else {
+            Log.d("PhotoPicker", "No media selected")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
@@ -44,9 +62,9 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
                 updateUi()
             }
 
-            override fun afterTextChanged(p0: Editable?) {  }
+            override fun afterTextChanged(p0: Editable?) {}
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {  }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
         initializeImageView(binding.viewRed)
@@ -57,6 +75,9 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         initializeImageView(binding.viewOrange)
         initializeImageView(binding.viewPurple)
         initializeImageView(binding.viewYellow)
+        binding.imgSelectPhoto.setOnClickListener {
+            pickMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
+        }
         setupProfile(profile)
         updateUi()
         return binding.root
@@ -73,6 +94,28 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         }
     }
 
+    private fun setAvatar(uri: Uri) {
+        profile.avatarUri = uri
+        binding.avatar.background = null
+        binding.avatar.backgroundTintMode = null
+        Glide.with(this)
+            .asDrawable()
+            .load(uri)
+            .circleCrop()
+            .into(object : CustomTarget<Drawable>() {
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?
+                ) {
+                    binding.avatar.background = resource
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
+    }
+
+
+
     private fun unfocusAllViews() {
         val iconDrawable =
             ContextCompat.getDrawable(requireContext(), R.drawable.view_select_color)
@@ -84,11 +127,11 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
     private fun setupProfile(profile: Profile) {
         binding.edtNickname.setText(profile.nickname)
 
-        if (profile.avatarUri != null) {
-            // release setAvatar from location
-        } else {
+        if (profile.avatarUri == null) {
             unfocusAllViews()
             setAvatarBackground(profile.selectedColor)
+        } else {
+            setAvatar(profile.avatarUri!!)
         }
 
     }

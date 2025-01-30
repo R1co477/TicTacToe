@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.glide)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.android.snowfall)
     implementation(libs.androidx.core.ktx)

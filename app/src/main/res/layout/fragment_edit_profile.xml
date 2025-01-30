@@ -110,6 +110,7 @@
         android:background="@drawable/profile_avatar"
         android:contentDescription="@string/player_avatar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/background_red" />
@@ -189,13 +190,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
 
+    <Button
+        android:id="@+id/img_select_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:contentDescription="@string/icon_for_selecting_an_image_from_the_gallery"
-        android:src="@drawable/select_image"
+        android:background="@drawable/ic_photo_picker"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintEnd_toEndOf="@id/avatar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
