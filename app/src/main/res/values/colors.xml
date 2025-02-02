@@ -27,4 +27,5 @@
     <color name="background_purple">#9B59B6</color>
     <color name="background_orange">#E67E22</color>
     <color name="gray">#5A5A68</color>
+    <color name="success_color">#22c55e</color>
 </resources>

@@ -27,11 +27,17 @@ class MainActivity : AppCompatActivity(), Navigator {
         get() = supportFragmentManager.findFragmentById(R.id.fragmentContainer)!!
 
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
-        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+        override fun onFragmentViewCreated(
+            fm: FragmentManager,
+            f: Fragment,
+            v: View,
+            savedInstanceState: Bundle?
+        ) {
             super.onFragmentViewCreated(fm, f, v, savedInstanceState)
             updateUi()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
@@ -52,7 +58,6 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
 
-
     private fun launchFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
@@ -66,6 +71,7 @@ class MainActivity : AppCompatActivity(), Navigator {
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
+
     override fun onSupportNavigateUp(): Boolean {
         goBack()
         return true
@@ -75,7 +81,6 @@ class MainActivity : AppCompatActivity(), Navigator {
         super.onDestroy()
         supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentListener)
     }
-
 
 
     override fun showDifficultyScreen() {
@@ -93,6 +98,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     override fun goToMenu() {
         supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
+
     private fun updateUi() {
         val fragment = currentFragment
 
@@ -116,6 +122,7 @@ class MainActivity : AppCompatActivity(), Navigator {
             binding.toolbar.menu.clear()
         }
     }
+
     override fun createCustomToolbarAction(action: CustomAction) {
         binding.toolbar.menu.clear()
 

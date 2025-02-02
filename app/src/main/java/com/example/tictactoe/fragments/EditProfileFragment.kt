@@ -1,18 +1,20 @@
 package com.example.tictactoe.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
+import android.graphics.ColorSpace.Rgb
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -24,88 +26,95 @@ import com.example.tictactoe.contract.CustomAction
 import com.example.tictactoe.contract.HasCustomAction
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentEditProfileBinding
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
+import com.example.tictactoe.extensions.getObject
+import com.example.tictactoe.extensions.putObject
+
+const val APP_PREFERENCES = "APP_PREFERENCES"
+const val KEY_PROFILE = "KEY_PROFILE"
 
 
 class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
+    private lateinit var sharedPref: SharedPreferences
     private lateinit var profile: Profile
     private lateinit var binding: FragmentEditProfileBinding
+
     private val pickMedia = registerForActivityResult(PickVisualMedia()) { uri ->
         if (uri != null) {
-            Log.d("PhotoPicker", "Selected URI: $uri")
             setAvatar(uri)
-        } else {
-            Log.d("PhotoPicker", "No media selected")
         }
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            updateUi()
+        }
+
+        override fun afterTextChanged(p0: Editable?) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-            val tint = createTintList(
-                ContextCompat.getColor(requireContext(), R.color.background_red),
-                ContextCompat.getColor(requireContext(), R.color.background_red)
+        sharedPref = requireContext().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        profile = sharedPref.getObject(
+            KEY_PROFILE, Profile(
+                "Player", null, createTintList(
+                    ContextCompat.getColor(requireContext(), R.color.background_red),
+                    ContextCompat.getColor(requireContext(), R.color.background_red)
+                )
             )
-            profile = Profile("Player", null, tint)
-        } else {
-            // release get profile with bundle
-        }
+        )
     }
 
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
-        binding.edtNickname.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                updateUi()
-            }
+        binding.edtNickname.addTextChangedListener(textWatcher)
 
-            override fun afterTextChanged(p0: Editable?) {}
+        for (imageView in getImageViews()) {
+            initializeImageView(imageView)
+        }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
-
-        initializeImageView(binding.viewRed)
-        initializeImageView(binding.viewTeal)
-        initializeImageView(binding.viewGreen)
-        initializeImageView(binding.viewBlue)
-        initializeImageView(binding.viewPink)
-        initializeImageView(binding.viewOrange)
-        initializeImageView(binding.viewPurple)
-        initializeImageView(binding.viewYellow)
         binding.imgSelectPhoto.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
         }
+        binding.btnSaveChanges.setOnClickListener { saveChanges() }
+
         setupProfile(profile)
         updateUi()
         return binding.root
     }
 
     private fun initializeImageView(imageView: ImageView) {
-        val iconDrawable =
-            ContextCompat.getDrawable(requireContext(), R.drawable.view_color_selected)
         imageView.setOnClickListener {
-            unfocusAllViews()
+            val iconDrawable =
+                ContextCompat.getDrawable(requireContext(), R.drawable.view_color_selected)
+            binding.firstLetterTextView.visibility = View.VISIBLE
+            unFocusAllViews()
+            binding.avatar.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.profile_avatar)
+            binding.avatar.backgroundTintList = imageView.backgroundTintList
+            binding.avatar.backgroundTintMode = android.graphics.PorterDuff.Mode.SRC_IN
             imageView.setImageDrawable(iconDrawable)
-            val tint = imageView.backgroundTintList
-            binding.avatar.backgroundTintList = tint
+            profile.selectedColor = imageView.backgroundTintList
+            profile.avatarUri = null
         }
     }
 
     private fun setAvatar(uri: Uri) {
+        unFocusAllViews()
+        binding.firstLetterTextView.visibility = View.INVISIBLE
         profile.avatarUri = uri
         binding.avatar.background = null
         binding.avatar.backgroundTintMode = null
-        Glide.with(this)
-            .asDrawable()
-            .load(uri)
-            .circleCrop()
+        Glide.with(this).asDrawable().load(uri).circleCrop()
             .into(object : CustomTarget<Drawable>() {
                 override fun onResourceReady(
-                    resource: Drawable,
-                    transition: Transition<in Drawable>?
+                    resource: Drawable, transition: Transition<in Drawable>?
                 ) {
                     binding.avatar.background = resource
                 }
@@ -114,11 +123,8 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
             })
     }
 
-
-
-    private fun unfocusAllViews() {
-        val iconDrawable =
-            ContextCompat.getDrawable(requireContext(), R.drawable.view_select_color)
+    private fun unFocusAllViews() {
+        val iconDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.view_select_color)
         for (imageView in getImageViews()) {
             imageView.setImageDrawable(iconDrawable)
         }
@@ -128,17 +134,16 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         binding.edtNickname.setText(profile.nickname)
 
         if (profile.avatarUri == null) {
-            unfocusAllViews()
+            unFocusAllViews()
             setAvatarBackground(profile.selectedColor)
         } else {
             setAvatar(profile.avatarUri!!)
         }
-
     }
 
     private fun setAvatarBackground(tint: ColorStateList?) {
         for (imageView in getImageViews()) {
-            if (imageView.backgroundTintList!!.defaultColor == tint?.defaultColor) {
+            if (imageView.backgroundTintList?.defaultColor == tint?.defaultColor) {
                 imageView.callOnClick()
                 break
             }
@@ -159,49 +164,44 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
     }
 
     private fun saveChanges() {
-
+        with(sharedPref.edit()) {
+            putObject(KEY_PROFILE, profile)
+            apply()
+        }
+        showCustomToast()
+    }
+    private fun showCustomToast() {
+        val inflater = LayoutInflater.from(requireContext())
+        val layout = inflater.inflate(R.layout.custom_toast, requireActivity().findViewById<ViewGroup>(android.R.id.content), false)
+        layout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val toast = Toast(requireContext())
+        toast.duration = Toast.LENGTH_LONG
+        toast.view = layout
+        toast.setGravity(Gravity.BOTTOM, 0, 200)
+        toast.show()
     }
 
-    fun updateUi() {
+    private fun updateUi() {
+        profile.nickname = binding.edtNickname.text.toString()
         val nickname = binding.edtNickname.text.toString().trim()
-        val nicknameLength = nickname.length
-        binding.firstLetterTextView.text = if (nickname.isEmpty()) {
-            ""
-        } else {
-            nickname[0].toString()
-        }
-        if (nicknameLength > 15) {
-            binding.edtNickname.error = "Nickname is too long"
-        } else {
-            binding.edtNickname.error = null
-        }
+        binding.firstLetterTextView.text = if (nickname.isEmpty()) "" else nickname[0].toString()
+        binding.edtNickname.error = if (nickname.length > 15) "Nickname is too long" else null
         binding.charCountTextView.text = getString(R.string.char_сountTextView, nickname.length)
     }
 
     private fun createTintList(enabledColor: Int, disabledColor: Int): ColorStateList {
         val states = arrayOf(
-            intArrayOf(android.R.attr.state_enabled),
-            intArrayOf(-android.R.attr.state_enabled)
+            intArrayOf(android.R.attr.state_enabled), intArrayOf(-android.R.attr.state_enabled)
         )
-
-        val colors = intArrayOf(
-            enabledColor,
-            disabledColor
-        )
-
+        val colors = intArrayOf(enabledColor, disabledColor)
         return ColorStateList(states, colors)
     }
-
 
     override fun getTitleRes(): Int = R.string.edit_profile
 
     override fun getCustomAction(): CustomAction {
-        return CustomAction(
-            iconRes = R.drawable.ic_done,
+        return CustomAction(iconRes = R.drawable.ic_done,
             textRes = R.string.done,
-            onCustomAction = {
-                saveChanges()
-            }
-        )
+            onCustomAction = { saveChanges() })
     }
 }

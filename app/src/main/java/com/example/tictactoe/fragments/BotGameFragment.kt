@@ -16,14 +16,17 @@ import kotlin.properties.Delegates
 class BotGameFragment : Fragment(), HasCustomTitle {
     private lateinit var binding: FragmentBotGameBinding
     private var levelDifficulty: Int by Delegates.notNull<Int>()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentBotGameBinding.inflate(inflater, container, false)
-    val fragment = BoardFragment()
-    childFragmentManager
-        .beginTransaction()
-        .add(R.id.fragment_board, fragment)
-        .commit()
-
+        val fragment = BoardFragment()
+        childFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_board, fragment)
+            .commit()
         levelDifficulty = arguments?.getInt(ARG_LEVEL)!!
         when (levelDifficulty) {
             1 -> setImage(R.drawable.easy_bot).also { setInfo(R.string.easy_bot) }
@@ -32,19 +35,22 @@ class BotGameFragment : Fragment(), HasCustomTitle {
         }
         return binding.root
     }
+
     private fun setImage(@DrawableRes imageResId: Int) {
         val drawable = ContextCompat.getDrawable(requireContext(), imageResId)
         binding.botAvatar.setImageDrawable(drawable)
     }
+
     private fun setInfo(@StringRes stringResId: Int) {
         binding.botTextView.text = getString(stringResId)
     }
 
     override fun getTitleRes(): Int = R.string.toolbar_bot
+
     companion object {
         private const val ARG_LEVEL = "levelDifficulty"
 
-        fun newInstance(level: Int) : BotGameFragment {
+        fun newInstance(level: Int): BotGameFragment {
             val args = Bundle()
             args.putInt(ARG_LEVEL, level)
             val fragment = BotGameFragment()
