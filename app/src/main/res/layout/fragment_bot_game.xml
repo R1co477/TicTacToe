@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -32,7 +33,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="32dp" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <com.example.tictactoe.BoardView
         android:id="@+id/fragment_board"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -56,18 +57,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/you_turn"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
         app:layout_constraintStart_toStartOf="@id/opponent_status_view"
         app:layout_constraintTop_toBottomOf="@id/opponent_status_view" />
 
     <TextView
-        android:id="@+id/opponent_textview"
+        android:id="@+id/player_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@null"
@@ -77,18 +78,34 @@
         app:layout_constraintBottom_toBottomOf="@id/opponent_status_view"
         app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
         app:layout_constraintStart_toStartOf="@id/opponent_status_view"
-        app:layout_constraintTop_toTopOf="@id/opponent_status_view" />
+        app:layout_constraintTop_toTopOf="@id/opponent_status_view"
+        tools:text="Player" />
 
     <ImageView
         android:id="@+id/player_avatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@drawable/profile_avatar"
         android:contentDescription="@string/player_avatar"
-        android:src="@drawable/avatar"
-        app:layout_constraintBottom_toTopOf="@id/opponent_textview"
+        app:layout_constraintBottom_toTopOf="@id/player_textview"
         app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
         app:layout_constraintStart_toStartOf="@id/opponent_status_view"
-        app:layout_constraintTop_toTopOf="@id/opponent_status_view" />
+        app:layout_constraintTop_toTopOf="@id/opponent_status_view"
+        app:tint="@color/background_red" />
+
+    <TextView
+        android:id="@+id/first_letter_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/player_avatar"
+        app:layout_constraintEnd_toEndOf="@id/player_avatar"
+        app:layout_constraintStart_toStartOf="@id/player_avatar"
+        app:layout_constraintTop_toTopOf="@id/player_avatar"
+        tools:text="P" />
+
 
     <ImageView
         android:layout_width="50dp"
@@ -98,7 +115,7 @@
         app:layout_constraintBottom_toBottomOf="@id/opponent_status_view"
         app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
         app:layout_constraintStart_toStartOf="@id/opponent_status_view"
-        app:layout_constraintTop_toBottomOf="@id/opponent_textview" />
+        app:layout_constraintTop_toBottomOf="@id/player_textview" />
 
     <View
         android:id="@+id/bot_info_view"
@@ -111,6 +128,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        tools:text="Bot"
         android:id="@+id/botTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,6 +147,7 @@
         android:layout_height="50dp"
         android:contentDescription="@string/bot_avatar"
         android:src="@null"
+        tools:src="@drawable/easy_bot"
         app:layout_constraintBottom_toTopOf="@id/botTextView"
         app:layout_constraintEnd_toEndOf="@id/bot_info_view"
         app:layout_constraintStart_toStartOf="@id/bot_info_view"

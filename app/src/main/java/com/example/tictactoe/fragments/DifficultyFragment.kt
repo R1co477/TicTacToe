@@ -13,7 +13,7 @@ import com.example.tictactoe.databinding.FragmentDifficultyBinding
 
 class DifficultyFragment : Fragment(), HasCustomTitle {
     private lateinit var binding: FragmentDifficultyBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View {
         binding = FragmentDifficultyBinding.inflate(inflater, container, false)
         binding.btnEasyy.setOnClickListener {
             navigator().showSingleGameScreen(1)

@@ -1,39 +1,83 @@
 package com.example.tictactoe.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.example.tictactoe.Profile
 import com.example.tictactoe.R
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentBotGameBinding
+import com.example.tictactoe.extensions.getObject
 import kotlin.properties.Delegates
 
 class BotGameFragment : Fragment(), HasCustomTitle {
     private lateinit var binding: FragmentBotGameBinding
     private var levelDifficulty: Int by Delegates.notNull<Int>()
+    private lateinit var profile: Profile
+    private lateinit var sharedPref: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedPref = requireContext().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        profile = sharedPref.getObject(
+            KEY_PROFILE, Profile.default(requireContext())
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBotGameBinding.inflate(inflater, container, false)
-        val fragment = BoardFragment()
-        childFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_board, fragment)
-            .commit()
+//        val fragment = BoardFragment()
+//        childFragmentManager
+//            .beginTransaction()
+//            .add(R.id.fragment_board, fragment)
+//            .commit()
         levelDifficulty = arguments?.getInt(ARG_LEVEL)!!
         when (levelDifficulty) {
             1 -> setImage(R.drawable.easy_bot).also { setInfo(R.string.easy_bot) }
             2 -> setImage(R.drawable.medium_bot).also { setInfo(R.string.medium_bot) }
             3 -> setImage(R.drawable.difficult_bot).also { setInfo(R.string.difficult_bot) }
         }
+        setupProfile()
         return binding.root
+    }
+
+    private fun setupProfile() {
+        val nickname = profile.nickname
+        binding.playerTextview.text = nickname
+        binding.firstLetterTextView.text = nickname[0].toString()
+
+        if (profile.avatarUri == null) {
+            binding.firstLetterTextView.visibility = TextView.VISIBLE
+            binding.playerAvatar.background = ContextCompat.getDrawable(requireContext(), R.drawable.profile_avatar)
+            binding.playerAvatar.backgroundTintList = profile.selectedColor
+        } else {
+            binding.firstLetterTextView.visibility = TextView.INVISIBLE
+            Glide.with(this).asDrawable().load(profile.avatarUri).circleCrop()
+                .into(object : CustomTarget<Drawable>() {
+                    override fun onResourceReady(
+                        resource: Drawable, transition: Transition<in Drawable>?
+                    ) {
+                        binding.playerAvatar.background = resource
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
+        }
     }
 
     private fun setImage(@DrawableRes imageResId: Int) {

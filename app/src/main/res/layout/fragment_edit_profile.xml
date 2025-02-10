@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/profile_background">
@@ -27,31 +28,38 @@
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_red" />
+                android:backgroundTint="@color/background_red"
+                android:contentDescription="@null" />
 
             <ImageView
                 android:id="@+id/view_teal"
+
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_teal" />
+                android:backgroundTint="@color/background_teal"
+                android:contentDescription="@null" />
 
             <ImageView
                 android:id="@+id/view_blue"
-                android:layout_width="80dp"
 
+                android:layout_width="80dp"
                 android:layout_height="80dp"
+
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_blue" />
+                android:backgroundTint="@color/background_blue"
+                android:contentDescription="@null" />
 
             <ImageView
                 android:id="@+id/view_green"
+
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_green" />
+                android:backgroundTint="@color/background_green"
+                android:contentDescription="@null" />
 
         </LinearLayout>
 
@@ -66,37 +74,45 @@
 
             <ImageView
                 android:id="@+id/view_yellow"
+
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_yellow" />
+
+                android:backgroundTint="@color/background_yellow"
+                android:contentDescription="@null" />
 
             <ImageView
                 android:id="@+id/view_pink"
-                android:layout_width="80dp"
 
+                android:layout_width="80dp"
                 android:layout_height="80dp"
+
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_pink" />
+                android:backgroundTint="@color/background_pink"
+                android:contentDescription="@null" />
 
             <ImageView
                 android:id="@+id/view_purple"
-                android:layout_width="80dp"
 
+                android:layout_width="80dp"
                 android:layout_height="80dp"
+
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_purple" />
+                android:backgroundTint="@color/background_purple"
+                android:contentDescription="@null" />
 
             <ImageView
                 android:id="@+id/view_orange"
+
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:background="@drawable/view_select_color"
-                android:backgroundTint="@color/background_orange" />
+                android:backgroundTint="@color/background_orange"
+                android:contentDescription="@null" />
 
         </LinearLayout>
     </LinearLayout>
@@ -110,7 +126,6 @@
         android:background="@drawable/profile_avatar"
         android:contentDescription="@string/player_avatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/background_red" />
@@ -126,7 +141,8 @@
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintEnd_toEndOf="@id/avatar"
         app:layout_constraintStart_toStartOf="@id/avatar"
-        app:layout_constraintTop_toTopOf="@id/avatar" />
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        tools:text="P" />
 
     <TextView
         android:layout_width="wrap_content"

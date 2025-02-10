@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/view_cell_rounded" />
+    <item
+        android:width="80dp"
+        android:height="80dp"
+        android:drawable="@drawable/tac"
+        android:gravity="center" />
+</layer-list>

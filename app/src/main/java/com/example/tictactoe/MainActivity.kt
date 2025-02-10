@@ -27,13 +27,8 @@ class MainActivity : AppCompatActivity(), Navigator {
         get() = supportFragmentManager.findFragmentById(R.id.fragmentContainer)!!
 
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
-        override fun onFragmentViewCreated(
-            fm: FragmentManager,
-            f: Fragment,
-            v: View,
-            savedInstanceState: Bundle?
-        ) {
-            super.onFragmentViewCreated(fm, f, v, savedInstanceState)
+        override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
+            super.onFragmentStarted(fm, f)
             updateUi()
         }
     }
