@@ -20,5 +20,4 @@ interface Navigator {
     fun goToMenu()
 
     fun createCustomToolbarAction(action: CustomAction)
-
 }
