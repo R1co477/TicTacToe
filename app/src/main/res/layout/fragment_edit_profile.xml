@@ -131,6 +131,7 @@
         app:tint="@color/background_red" />
 
     <TextView
+        android:saveEnabled="true"
         android:id="@+id/first_letter_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -211,6 +212,7 @@
         android:id="@+id/img_select_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:text="@null"
         android:background="@drawable/ic_photo_picker"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@id/avatar"

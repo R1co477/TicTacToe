@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.tictactoe.Profile
 import com.example.tictactoe.R
+import com.example.tictactoe.ai.Board
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentBotGameBinding
 import com.example.tictactoe.extensions.getObject
@@ -27,6 +28,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
     private var levelDifficulty: Int by Delegates.notNull<Int>()
     private lateinit var profile: Profile
     private lateinit var sharedPref: SharedPreferences
+    private val board: Board = Board.empty()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +43,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBotGameBinding.inflate(inflater, container, false)
-//        val fragment = BoardFragment()
-//        childFragmentManager
-//            .beginTransaction()
-//            .add(R.id.fragment_board, fragment)
-//            .commit()
+
         levelDifficulty = arguments?.getInt(ARG_LEVEL)!!
         when (levelDifficulty) {
             1 -> setImage(R.drawable.easy_bot).also { setInfo(R.string.easy_bot) }
