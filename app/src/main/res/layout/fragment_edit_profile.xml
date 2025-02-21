@@ -33,7 +33,6 @@
 
             <ImageView
                 android:id="@+id/view_teal"
-
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
@@ -209,10 +208,10 @@
 
 
     <Button
+        android:contentDescription="@string/select_photo"
         android:id="@+id/img_select_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="@null"
         android:background="@drawable/ic_photo_picker"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@id/avatar"

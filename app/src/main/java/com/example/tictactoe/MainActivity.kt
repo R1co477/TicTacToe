@@ -19,6 +19,7 @@ import com.example.tictactoe.fragments.BotGameFragment
 import com.example.tictactoe.fragments.DifficultyFragment
 import com.example.tictactoe.fragments.EditProfileFragment
 import com.example.tictactoe.fragments.MenuFragment
+import com.example.tictactoe.fragments.SettingsMenuFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding
@@ -84,6 +85,10 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun showEditProfileScreen() {
         launchFragment(EditProfileFragment())
+    }
+
+    override fun showSettingsMenuScreen() {
+        launchFragment(SettingsMenuFragment())
     }
 
     override fun goBack() {

@@ -1,6 +1,6 @@
 <font-family xmlns:app="http://schemas.android.com/apk/res-auto">
     <font
-        app:font="@font/font_game_titile"
+        app:font="@font/main_title"
         app:fontStyle="normal"
         app:fontWeight="400" />
 </font-family>

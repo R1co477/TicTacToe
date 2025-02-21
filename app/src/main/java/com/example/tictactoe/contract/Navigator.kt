@@ -15,6 +15,8 @@ interface Navigator {
 
     fun showEditProfileScreen()
 
+    fun showSettingsMenuScreen()
+
     fun goBack()
 
     fun goToMenu()

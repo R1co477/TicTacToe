@@ -21,6 +21,7 @@ import com.example.tictactoe.ai.Board
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentBotGameBinding
 import com.example.tictactoe.extensions.getObject
+import com.example.tictactoe.utils.AvatarManager
 import kotlin.properties.Delegates
 
 class BotGameFragment : Fragment(), HasCustomTitle {
@@ -57,25 +58,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
     private fun setupProfile() {
         val nickname = profile.nickname
         binding.playerTextview.text = nickname
-        binding.firstLetterTextView.text = nickname[0].toString()
-
-        if (profile.avatarUri == null) {
-            binding.firstLetterTextView.visibility = TextView.VISIBLE
-            binding.playerAvatar.background = ContextCompat.getDrawable(requireContext(), R.drawable.profile_avatar)
-            binding.playerAvatar.backgroundTintList = profile.selectedColor
-        } else {
-            binding.firstLetterTextView.visibility = TextView.INVISIBLE
-            Glide.with(this).asDrawable().load(profile.avatarUri).circleCrop()
-                .into(object : CustomTarget<Drawable>() {
-                    override fun onResourceReady(
-                        resource: Drawable, transition: Transition<in Drawable>?
-                    ) {
-                        binding.playerAvatar.background = resource
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-                })
-        }
+        AvatarManager(profile).setAvatar(binding.playerAvatar, binding.firstLetterTextView)
     }
 
     private fun setImage(@DrawableRes imageResId: Int) {

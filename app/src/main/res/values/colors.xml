@@ -16,6 +16,7 @@
     <color name="ocean_blue">#2f88b1</color>
     <color name="ocean_blue_pressed">#55a8cc</color>
     <color name="dark_indigo">#27175d</color>
+    <color name="dark_violet_blue">#312e81</color>
     <color name="toolbar_background">#2a1c75</color>
     <color name="profile_background">#1e1b4b</color>
     <color name="background_red">#FF6B6B</color>
@@ -29,4 +30,5 @@
     <color name="gray">#5A5A68</color>
     <color name="success_color">#22c55e</color>
     <color name="error_color">#DC2626</color>
+    <color name="evergreen_depths">#297a6f</color>
 </resources>

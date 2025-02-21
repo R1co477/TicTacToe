@@ -230,7 +230,7 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
 
 
-    override fun getTitleRes(): Int = R.string.edit_profile
+    override fun getTitleRes(): Int = R.string.toolbar_edit_profile
 
     override fun getCustomAction(): CustomAction {
         return CustomAction(iconRes = R.drawable.ic_done,

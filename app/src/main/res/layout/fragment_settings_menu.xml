@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_violet_blue">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/begin_GuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_GuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <TextView
+        android:id="@+id/txt_first_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/who_goes_first"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/player_first"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/view_board_rounded"
+        android:backgroundTint="@color/profile_background"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/txt_first_move" />
+
+    <View
+        android:id="@+id/ic_player"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/view_line_rounded"
+        android:backgroundTint="#24306d"
+        app:layout_constraintBottom_toBottomOf="@id/player_first"
+        app:layout_constraintStart_toStartOf="@id/player_first"
+        app:layout_constraintTop_toTopOf="@id/player_first" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@null"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/ic_player"
+        app:layout_constraintEnd_toEndOf="@id/ic_player"
+        app:layout_constraintStart_toStartOf="@id/ic_player"
+        app:layout_constraintTop_toTopOf="@id/ic_player"
+        tools:src="@drawable/profile_avatar" />
+
+    <TextView
+        android:id="@+id/first_letter_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="R"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ic_player"
+        app:layout_constraintEnd_toEndOf="@id/ic_player"
+        app:layout_constraintStart_toStartOf="@id/ic_player"
+        app:layout_constraintTop_toTopOf="@id/ic_player" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/you"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/player_first"
+        app:layout_constraintStart_toEndOf="@id/ic_player"
+        app:layout_constraintTop_toTopOf="@id/player_first" />
+
+
+    <View
+        android:id="@+id/computer_first"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/view_board_rounded"
+        android:backgroundTint="@color/profile_background"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/player_first" />
+
+
+    <View
+        android:id="@+id/ic_computer"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/view_line_rounded"
+        android:backgroundTint="#24306d"
+        app:layout_constraintBottom_toBottomOf="@id/computer_first"
+        app:layout_constraintStart_toStartOf="@id/computer_first"
+        app:layout_constraintTop_toTopOf="@id/computer_first" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@null"
+        android:padding="2dp"
+        android:src="@drawable/ic_robot"
+        app:layout_constraintBottom_toBottomOf="@id/ic_computer"
+        app:layout_constraintEnd_toEndOf="@id/ic_computer"
+        app:layout_constraintStart_toStartOf="@id/ic_computer"
+        app:layout_constraintTop_toTopOf="@id/ic_computer" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/computer"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/computer_first"
+        app:layout_constraintStart_toEndOf="@id/ic_computer"
+        app:layout_constraintTop_toTopOf="@id/computer_first" />
+
+
+    <View
+        android:id="@+id/random_first_move"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/view_board_rounded"
+        android:backgroundTint="@color/profile_background"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/computer_first" />
+
+    <View
+        android:id="@+id/ic_rand_move"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/view_line_rounded"
+        android:backgroundTint="#24306d"
+        app:layout_constraintBottom_toBottomOf="@id/random_first_move"
+        app:layout_constraintStart_toStartOf="@id/random_first_move"
+        app:layout_constraintTop_toTopOf="@id/random_first_move" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@null"
+        android:padding="2dp"
+        android:src="@drawable/ic_random"
+        app:layout_constraintBottom_toBottomOf="@id/ic_rand_move"
+        app:layout_constraintEnd_toEndOf="@id/ic_rand_move"
+        app:layout_constraintStart_toStartOf="@id/ic_rand_move"
+        app:layout_constraintTop_toTopOf="@id/ic_rand_move" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/random"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/random_first_move"
+        app:layout_constraintStart_toEndOf="@id/ic_rand_move"
+        app:layout_constraintTop_toTopOf="@id/random_first_move" />
+
+    <TextView
+        android:id="@+id/txt_select_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/your_symbol"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/random_first_move" />
+
+    <View
+        android:id="@+id/tac"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/view_board_rounded"
+        android:backgroundTint="@color/profile_background"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/txt_select_mark" />
+
+    <View
+        android:id="@+id/ic_tac"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/view_line_rounded"
+        android:backgroundTint="#74378a"
+        app:layout_constraintBottom_toBottomOf="@id/tac"
+        app:layout_constraintStart_toStartOf="@id/tac"
+        app:layout_constraintTop_toTopOf="@id/tac" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@null"
+        android:padding="2dp"
+        android:src="@drawable/tac"
+        app:layout_constraintBottom_toBottomOf="@id/ic_tac"
+        app:layout_constraintEnd_toEndOf="@id/ic_tac"
+        app:layout_constraintStart_toStartOf="@id/ic_tac"
+        app:layout_constraintTop_toTopOf="@id/ic_tac" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/play_as_x"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/tac"
+        app:layout_constraintStart_toEndOf="@id/ic_tac"
+        app:layout_constraintTop_toTopOf="@id/tac"
+
+        />
+
+
+    <View
+        android:id="@+id/tic"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/view_board_rounded"
+        android:backgroundTint="@color/profile_background"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/tac" />
+
+    <View
+        android:id="@+id/ic_tic"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/view_line_rounded"
+        android:backgroundTint="#473a3e"
+        app:layout_constraintBottom_toBottomOf="@id/tic"
+        app:layout_constraintStart_toStartOf="@id/tic"
+        app:layout_constraintTop_toTopOf="@id/tic" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@null"
+        android:padding="2dp"
+        android:src="@drawable/tic"
+        app:layout_constraintBottom_toBottomOf="@id/ic_tic"
+        app:layout_constraintEnd_toEndOf="@id/ic_tic"
+        app:layout_constraintStart_toStartOf="@id/ic_tic"
+        app:layout_constraintTop_toTopOf="@id/ic_tic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/play_as_o"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/tic"
+        app:layout_constraintStart_toEndOf="@id/ic_tic"
+        app:layout_constraintTop_toTopOf="@id/tic"
+
+        />
+
+
+    <View
+        android:id="@+id/random_symbol"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/view_board_rounded"
+        android:backgroundTint="@color/profile_background"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/tic" />
+
+    <View
+        android:id="@+id/ic_rand_symbol"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/view_line_rounded"
+        android:backgroundTint="#24306d"
+        app:layout_constraintBottom_toBottomOf="@id/random_symbol"
+        app:layout_constraintStart_toStartOf="@id/random_symbol"
+        app:layout_constraintTop_toTopOf="@id/random_symbol" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@null"
+        android:padding="2dp"
+        android:src="@drawable/ic_random"
+        app:layout_constraintBottom_toBottomOf="@id/ic_rand_symbol"
+        app:layout_constraintEnd_toEndOf="@id/ic_rand_symbol"
+        app:layout_constraintStart_toStartOf="@id/ic_rand_symbol"
+        app:layout_constraintTop_toTopOf="@id/ic_rand_symbol" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/random"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/random_symbol"
+        app:layout_constraintStart_toEndOf="@id/ic_rand_symbol"
+        app:layout_constraintTop_toTopOf="@id/random_symbol" />
+
+    <Space
+        android:id="@+id/center"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/random_symbol" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/profile_background"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/center"
+        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        app:layout_constraintTop_toBottomOf="@id/random_symbol" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/evergreen_depths"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        app:layout_constraintStart_toEndOf="@id/center"
+        app:layout_constraintTop_toBottomOf="@id/random_symbol" />
+</androidx.constraintlayout.widget.ConstraintLayout>
