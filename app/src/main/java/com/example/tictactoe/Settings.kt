@@ -1,52 +1,56 @@
 package com.example.tictactoe
 
-
 class Settings {
-    constructor(
-        isRandomMarkAssignment: Boolean = true,
-        isRandomFirstMove: Boolean = true,
-        isHumanMoveFirst: Boolean = false,
-        isHumanUsingTic: Boolean = false
-    ) {
-        this.isRandomMarkAssignment = isRandomMarkAssignment
-        this.isRandomFirstMove = isRandomFirstMove
-        this.isHumanMoveFirst = isHumanMoveFirst
-        this.isHumanUsingTic = isHumanUsingTic
+    private var _randomMark: Boolean
+    private var _randomMove: Boolean
+    private var _humanMove: Boolean
+    private var _humanTic: Boolean
+
+    constructor() {
+        _randomMark = true
+        _randomMove = true
+        _humanMove = false
+        _humanTic = false
     }
 
-    var isRandomMarkAssignment: Boolean
-        get() = isRandomMarkAssignment
+    constructor(
+        isRandomMarkAssignment: Boolean,
+        isRandomFirstMove: Boolean,
+        isHumanMoveFirst: Boolean,
+        isHumanUsingTic: Boolean
+    ) {
+        _randomMark = isRandomMarkAssignment
+        _randomMove = isRandomFirstMove
+        _humanMove = isHumanMoveFirst
+        _humanTic = isHumanUsingTic
+    }
+
+    var randomMark: Boolean
+        get() = _randomMark
         set(value) {
-            isRandomMarkAssignment = value
-            if (value) {
-                isHumanUsingTic = false
-            }
+            _randomMark = value
+            _humanTic = false
         }
 
-    var isRandomFirstMove: Boolean
-        get() = isRandomFirstMove
+    var randomMove: Boolean
+        get() = _randomMove
         set(value) {
-            isRandomFirstMove = value
-            if (value) {
-                isHumanMoveFirst = false
-            }
+            _randomMove = value
+            _humanMove = false
+
         }
 
-    var isHumanMoveFirst: Boolean
-        get() = isHumanMoveFirst
+    var humanMove: Boolean
+        get() = _humanMove
         set(value) {
-            isHumanMoveFirst = value
-            if (value) {
-                isRandomFirstMove = false
-            }
+            _humanMove = value
+            _randomMove = false
         }
 
-    var isHumanUsingTic: Boolean
-        get() = isHumanUsingTic
+    var humanTic: Boolean
+        get() = _humanTic
         set(value) {
-            isHumanUsingTic = value
-            if (value) {
-                isRandomMarkAssignment = false
-            }
+            _humanTic = value
+            _randomMark = false
         }
 }

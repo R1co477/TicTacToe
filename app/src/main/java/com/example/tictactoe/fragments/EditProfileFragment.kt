@@ -30,6 +30,7 @@ import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentEditProfileBinding
 import com.example.tictactoe.extensions.getObject
 import com.example.tictactoe.extensions.putObject
+import com.example.tictactoe.utils.SnackBarUtils
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -91,17 +92,22 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
             binding.firstLetterTextView.visibility = View.VISIBLE
             unFocusAllViews()
 
-            binding.avatar.background = ContextCompat.getDrawable(requireContext(), R.drawable.profile_avatar)
+            binding.avatar.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.profile_avatar)
             binding.avatar.backgroundTintList = imageView.backgroundTintList
             binding.avatar.backgroundTintMode = android.graphics.PorterDuff.Mode.SRC_IN
 
-            imageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.view_color_selected))
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(), R.drawable.view_color_selected
+                )
+            )
 
             profile.selectedColor = imageView.backgroundTintList
             profile.avatarUri = null
         }
     }
-    
+
     private fun setAvatar(uri: Uri) {
         unFocusAllViews()
         binding.firstLetterTextView.visibility = View.INVISIBLE
@@ -162,7 +168,7 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
     private fun saveChanges() {
         if (binding.edtNickname.error != null) {
-            showCustomSnackBar(
+            SnackBarUtils.showCustomSnackBar(
                 binding.root,
                 "The profile was not updated!",
                 "OK",
@@ -174,7 +180,7 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
             putObject(KEY_PROFILE, profile)
             apply()
         }
-        showCustomSnackBar(
+        SnackBarUtils.showCustomSnackBar(
             binding.root,
             "Profile updated successfully!",
             "OK",
@@ -182,41 +188,6 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         )
 
 
-    }
-
-    private fun showCustomSnackBar(
-        view: View,
-        message: String,
-        actionText: String,
-        backgroundColor: Int
-    ) {
-        val snackbar = Snackbar
-            .make(view, message, Snackbar.LENGTH_LONG)
-            .setAction(actionText) { Log.d("Snackbar", "Action clicked") }
-            .setBackgroundTint(backgroundColor)
-            .setActionTextColor(ContextCompat.getColor(view.context, R.color.white))
-            .setTextColor(ContextCompat.getColor(view.context, R.color.white))
-
-        val snackbarView = snackbar.view
-        val textView =
-            snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
-        textView.apply {
-            textSize = 18f
-            setTypeface(typeface, Typeface.BOLD)
-        }
-
-        val params = snackbarView.layoutParams as ViewGroup.MarginLayoutParams
-        params.setMargins(30, 30, 30, 50)
-        snackbarView.layoutParams = params
-
-        val actionTextView =
-            snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_action)
-        actionTextView.apply {
-            textSize = 18f
-            setTypeface(typeface, Typeface.BOLD)
-        }
-
-        snackbar.show()
     }
 
 
@@ -227,7 +198,6 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         binding.edtNickname.error = if (nickname.length > 15) "Nickname is too long" else null
         binding.charCountTextView.text = getString(R.string.char_сountTextView, nickname.length)
     }
-
 
 
     override fun getTitleRes(): Int = R.string.toolbar_edit_profile

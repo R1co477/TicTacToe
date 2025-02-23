@@ -31,4 +31,10 @@
     <color name="success_color">#22c55e</color>
     <color name="error_color">#DC2626</color>
     <color name="evergreen_depths">#297a6f</color>
+    <color name="midnight_blue">#354cab</color>
+    <color name="deep_navy">#24306d</color>
+    <color name="earthy_brown">#5A4B46</color>
+    <color name="smoky_brown">#473A3E</color>
+    <color name="deep_amethyst">#74378a</color>
+    <color name="raspberry_purple">#74378a</color>
 </resources>

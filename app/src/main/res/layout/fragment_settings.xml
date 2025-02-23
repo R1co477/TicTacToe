@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/player_first"
+        android:id="@+id/human_move"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -44,15 +44,15 @@
         app:layout_constraintTop_toBottomOf="@id/txt_first_move" />
 
     <View
-        android:id="@+id/ic_player"
+        android:id="@+id/ic_human"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/view_line_rounded"
         android:backgroundTint="#24306d"
-        app:layout_constraintBottom_toBottomOf="@id/player_first"
-        app:layout_constraintStart_toStartOf="@id/player_first"
-        app:layout_constraintTop_toTopOf="@id/player_first" />
+        app:layout_constraintBottom_toBottomOf="@id/human_move"
+        app:layout_constraintStart_toStartOf="@id/human_move"
+        app:layout_constraintTop_toTopOf="@id/human_move" />
 
     <ImageView
         android:id="@+id/avatar"
@@ -60,10 +60,10 @@
         android:layout_height="32dp"
         android:contentDescription="@null"
         android:padding="2dp"
-        app:layout_constraintBottom_toBottomOf="@id/ic_player"
-        app:layout_constraintEnd_toEndOf="@id/ic_player"
-        app:layout_constraintStart_toStartOf="@id/ic_player"
-        app:layout_constraintTop_toTopOf="@id/ic_player"
+        app:layout_constraintBottom_toBottomOf="@id/ic_human"
+        app:layout_constraintEnd_toEndOf="@id/ic_human"
+        app:layout_constraintStart_toStartOf="@id/ic_human"
+        app:layout_constraintTop_toTopOf="@id/ic_human"
         tools:src="@drawable/profile_avatar" />
 
     <TextView
@@ -73,10 +73,10 @@
         tools:text="R"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/ic_player"
-        app:layout_constraintEnd_toEndOf="@id/ic_player"
-        app:layout_constraintStart_toStartOf="@id/ic_player"
-        app:layout_constraintTop_toTopOf="@id/ic_player" />
+        app:layout_constraintBottom_toBottomOf="@id/ic_human"
+        app:layout_constraintEnd_toEndOf="@id/ic_human"
+        app:layout_constraintStart_toStartOf="@id/ic_human"
+        app:layout_constraintTop_toTopOf="@id/ic_human" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,13 +85,13 @@
         android:text="@string/you"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/player_first"
-        app:layout_constraintStart_toEndOf="@id/ic_player"
-        app:layout_constraintTop_toTopOf="@id/player_first" />
+        app:layout_constraintBottom_toBottomOf="@id/human_move"
+        app:layout_constraintStart_toEndOf="@id/ic_human"
+        app:layout_constraintTop_toTopOf="@id/human_move" />
 
 
     <View
-        android:id="@+id/computer_first"
+        android:id="@+id/computer_move"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -99,7 +99,7 @@
         android:backgroundTint="@color/profile_background"
         app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
-        app:layout_constraintTop_toBottomOf="@id/player_first" />
+        app:layout_constraintTop_toBottomOf="@id/human_move" />
 
 
     <View
@@ -109,9 +109,9 @@
         android:layout_marginStart="15dp"
         android:background="@drawable/view_line_rounded"
         android:backgroundTint="#24306d"
-        app:layout_constraintBottom_toBottomOf="@id/computer_first"
-        app:layout_constraintStart_toStartOf="@id/computer_first"
-        app:layout_constraintTop_toTopOf="@id/computer_first" />
+        app:layout_constraintBottom_toBottomOf="@id/computer_move"
+        app:layout_constraintStart_toStartOf="@id/computer_move"
+        app:layout_constraintTop_toTopOf="@id/computer_move" />
 
     <ImageView
         android:layout_width="32dp"
@@ -131,13 +131,13 @@
         android:text="@string/computer"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/computer_first"
+        app:layout_constraintBottom_toBottomOf="@id/computer_move"
         app:layout_constraintStart_toEndOf="@id/ic_computer"
-        app:layout_constraintTop_toTopOf="@id/computer_first" />
+        app:layout_constraintTop_toTopOf="@id/computer_move" />
 
 
     <View
-        android:id="@+id/random_first_move"
+        android:id="@+id/random_move"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
@@ -145,7 +145,7 @@
         android:backgroundTint="@color/profile_background"
         app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
-        app:layout_constraintTop_toBottomOf="@id/computer_first" />
+        app:layout_constraintTop_toBottomOf="@id/computer_move" />
 
     <View
         android:id="@+id/ic_rand_move"
@@ -154,9 +154,9 @@
         android:layout_marginStart="15dp"
         android:background="@drawable/view_line_rounded"
         android:backgroundTint="#24306d"
-        app:layout_constraintBottom_toBottomOf="@id/random_first_move"
-        app:layout_constraintStart_toStartOf="@id/random_first_move"
-        app:layout_constraintTop_toTopOf="@id/random_first_move" />
+        app:layout_constraintBottom_toBottomOf="@id/random_move"
+        app:layout_constraintStart_toStartOf="@id/random_move"
+        app:layout_constraintTop_toTopOf="@id/random_move" />
 
     <ImageView
         android:layout_width="32dp"
@@ -176,9 +176,9 @@
         android:text="@string/random"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/random_first_move"
+        app:layout_constraintBottom_toBottomOf="@id/random_move"
         app:layout_constraintStart_toEndOf="@id/ic_rand_move"
-        app:layout_constraintTop_toTopOf="@id/random_first_move" />
+        app:layout_constraintTop_toTopOf="@id/random_move" />
 
     <TextView
         android:id="@+id/txt_select_mark"
@@ -190,10 +190,10 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
-        app:layout_constraintTop_toBottomOf="@id/random_first_move" />
+        app:layout_constraintTop_toBottomOf="@id/random_move" />
 
     <View
-        android:id="@+id/tac"
+        android:id="@+id/symbol_tac"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -209,10 +209,10 @@
         android:layout_height="42dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/view_line_rounded"
-        android:backgroundTint="#74378a"
-        app:layout_constraintBottom_toBottomOf="@id/tac"
-        app:layout_constraintStart_toStartOf="@id/tac"
-        app:layout_constraintTop_toTopOf="@id/tac" />
+        android:backgroundTint="@color/raspberry_purple"
+        app:layout_constraintBottom_toBottomOf="@id/symbol_tac"
+        app:layout_constraintStart_toStartOf="@id/symbol_tac"
+        app:layout_constraintTop_toTopOf="@id/symbol_tac" />
 
     <ImageView
         android:layout_width="32dp"
@@ -232,15 +232,15 @@
         android:text="@string/play_as_x"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/tac"
+        app:layout_constraintBottom_toBottomOf="@id/symbol_tac"
         app:layout_constraintStart_toEndOf="@id/ic_tac"
-        app:layout_constraintTop_toTopOf="@id/tac"
+        app:layout_constraintTop_toTopOf="@id/symbol_tac"
 
         />
 
 
     <View
-        android:id="@+id/tic"
+        android:id="@+id/symbol_tic"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -248,7 +248,7 @@
         android:backgroundTint="@color/profile_background"
         app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
-        app:layout_constraintTop_toBottomOf="@id/tac" />
+        app:layout_constraintTop_toBottomOf="@id/symbol_tac" />
 
     <View
         android:id="@+id/ic_tic"
@@ -256,10 +256,10 @@
         android:layout_height="42dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/view_line_rounded"
-        android:backgroundTint="#473a3e"
-        app:layout_constraintBottom_toBottomOf="@id/tic"
-        app:layout_constraintStart_toStartOf="@id/tic"
-        app:layout_constraintTop_toTopOf="@id/tic" />
+        android:backgroundTint="@color/smoky_brown"
+        app:layout_constraintBottom_toBottomOf="@id/symbol_tic"
+        app:layout_constraintStart_toStartOf="@id/symbol_tic"
+        app:layout_constraintTop_toTopOf="@id/symbol_tic" />
 
     <ImageView
         android:layout_width="32dp"
@@ -279,15 +279,15 @@
         android:text="@string/play_as_o"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/tic"
+        app:layout_constraintBottom_toBottomOf="@id/symbol_tic"
         app:layout_constraintStart_toEndOf="@id/ic_tic"
-        app:layout_constraintTop_toTopOf="@id/tic"
+        app:layout_constraintTop_toTopOf="@id/symbol_tic"
 
         />
 
 
     <View
-        android:id="@+id/random_symbol"
+        android:id="@+id/random_mark"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
@@ -295,18 +295,18 @@
         android:backgroundTint="@color/profile_background"
         app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
-        app:layout_constraintTop_toBottomOf="@id/tic" />
+        app:layout_constraintTop_toBottomOf="@id/symbol_tic" />
 
     <View
-        android:id="@+id/ic_rand_symbol"
+        android:id="@+id/ic_rand_mark"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/view_line_rounded"
         android:backgroundTint="#24306d"
-        app:layout_constraintBottom_toBottomOf="@id/random_symbol"
-        app:layout_constraintStart_toStartOf="@id/random_symbol"
-        app:layout_constraintTop_toTopOf="@id/random_symbol" />
+        app:layout_constraintBottom_toBottomOf="@id/random_mark"
+        app:layout_constraintStart_toStartOf="@id/random_mark"
+        app:layout_constraintTop_toTopOf="@id/random_mark" />
 
     <ImageView
         android:layout_width="32dp"
@@ -314,10 +314,10 @@
         android:contentDescription="@null"
         android:padding="2dp"
         android:src="@drawable/ic_random"
-        app:layout_constraintBottom_toBottomOf="@id/ic_rand_symbol"
-        app:layout_constraintEnd_toEndOf="@id/ic_rand_symbol"
-        app:layout_constraintStart_toStartOf="@id/ic_rand_symbol"
-        app:layout_constraintTop_toTopOf="@id/ic_rand_symbol" />
+        app:layout_constraintBottom_toBottomOf="@id/ic_rand_mark"
+        app:layout_constraintEnd_toEndOf="@id/ic_rand_mark"
+        app:layout_constraintStart_toStartOf="@id/ic_rand_mark"
+        app:layout_constraintTop_toTopOf="@id/ic_rand_mark" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -326,9 +326,9 @@
         android:text="@string/random"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/random_symbol"
-        app:layout_constraintStart_toEndOf="@id/ic_rand_symbol"
-        app:layout_constraintTop_toTopOf="@id/random_symbol" />
+        app:layout_constraintBottom_toBottomOf="@id/random_mark"
+        app:layout_constraintStart_toEndOf="@id/ic_rand_mark"
+        app:layout_constraintTop_toTopOf="@id/random_mark" />
 
     <Space
         android:id="@+id/center"
@@ -337,7 +337,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
-        app:layout_constraintTop_toBottomOf="@id/random_symbol" />
+        app:layout_constraintTop_toBottomOf="@id/random_mark" />
 
     <Button
         android:id="@+id/btn_cancel"
@@ -352,7 +352,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/center"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
-        app:layout_constraintTop_toBottomOf="@id/random_symbol" />
+        app:layout_constraintTop_toBottomOf="@id/random_mark" />
 
     <Button
         android:id="@+id/btn_save"
@@ -367,5 +367,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
         app:layout_constraintStart_toEndOf="@id/center"
-        app:layout_constraintTop_toBottomOf="@id/random_symbol" />
+        app:layout_constraintTop_toBottomOf="@id/random_mark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -19,7 +18,7 @@ import com.example.tictactoe.fragments.BotGameFragment
 import com.example.tictactoe.fragments.DifficultyFragment
 import com.example.tictactoe.fragments.EditProfileFragment
 import com.example.tictactoe.fragments.MenuFragment
-import com.example.tictactoe.fragments.SettingsMenuFragment
+import com.example.tictactoe.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding
@@ -88,7 +87,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showSettingsMenuScreen() {
-        launchFragment(SettingsMenuFragment())
+        launchFragment(SettingsFragment())
     }
 
     override fun goBack() {
