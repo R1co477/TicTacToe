@@ -34,7 +34,7 @@
         app:layout_constraintGuide_end="32dp" />
 
     <com.example.tictactoe.BoardView
-        android:id="@+id/fragment_board"
+        android:id="@+id/game_board"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="160dp"
@@ -45,16 +45,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/opponent_status_view"
+        android:id="@+id/human_status_view"
         android:layout_width="150dp"
         android:layout_height="184dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/inactive_turn_background"
-        app:layout_constraintBottom_toTopOf="@id/fragment_board"
+        app:layout_constraintBottom_toTopOf="@id/game_board"
         app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/txt_human_turn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -63,9 +64,9 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
-        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
-        app:layout_constraintTop_toBottomOf="@id/opponent_status_view" />
+        app:layout_constraintEnd_toEndOf="@id/human_status_view"
+        app:layout_constraintStart_toStartOf="@id/human_status_view"
+        app:layout_constraintTop_toBottomOf="@id/human_status_view" />
 
     <TextView
         android:id="@+id/player_textview"
@@ -75,10 +76,10 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/opponent_status_view"
-        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
-        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
-        app:layout_constraintTop_toTopOf="@id/opponent_status_view"
+        app:layout_constraintBottom_toBottomOf="@id/human_status_view"
+        app:layout_constraintEnd_toEndOf="@id/human_status_view"
+        app:layout_constraintStart_toStartOf="@id/human_status_view"
+        app:layout_constraintTop_toTopOf="@id/human_status_view"
         tools:text="Player" />
 
     <ImageView
@@ -88,9 +89,9 @@
         android:background="@drawable/profile_avatar"
         android:contentDescription="@string/player_avatar"
         app:layout_constraintBottom_toTopOf="@id/player_textview"
-        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
-        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
-        app:layout_constraintTop_toTopOf="@id/opponent_status_view"
+        app:layout_constraintEnd_toEndOf="@id/human_status_view"
+        app:layout_constraintStart_toStartOf="@id/human_status_view"
+        app:layout_constraintTop_toTopOf="@id/human_status_view"
         app:tint="@color/background_red" />
 
     <TextView
@@ -108,22 +109,23 @@
 
 
     <ImageView
+        android:id="@+id/mark_human"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/player_human"
         android:src="@drawable/tac"
-        app:layout_constraintBottom_toBottomOf="@id/opponent_status_view"
-        app:layout_constraintEnd_toEndOf="@id/opponent_status_view"
-        app:layout_constraintStart_toStartOf="@id/opponent_status_view"
+        app:layout_constraintBottom_toBottomOf="@id/human_status_view"
+        app:layout_constraintEnd_toEndOf="@id/human_status_view"
+        app:layout_constraintStart_toStartOf="@id/human_status_view"
         app:layout_constraintTop_toBottomOf="@id/player_textview" />
 
     <View
-        android:id="@+id/bot_info_view"
+        android:id="@+id/bot_status_view"
         android:layout_width="150dp"
         android:layout_height="184dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/inactive_turn_background"
-        app:layout_constraintBottom_toTopOf="@id/fragment_board"
+        app:layout_constraintBottom_toTopOf="@id/game_board"
         app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,10 +138,10 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/bot_info_view"
-        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
-        app:layout_constraintStart_toStartOf="@id/bot_info_view"
-        app:layout_constraintTop_toTopOf="@id/bot_info_view" />
+        app:layout_constraintBottom_toBottomOf="@id/bot_status_view"
+        app:layout_constraintEnd_toEndOf="@id/bot_status_view"
+        app:layout_constraintStart_toStartOf="@id/bot_status_view"
+        app:layout_constraintTop_toTopOf="@id/bot_status_view" />
 
     <ImageView
         android:id="@+id/botAvatar"
@@ -149,18 +151,19 @@
         android:src="@null"
         tools:src="@drawable/easy_bot"
         app:layout_constraintBottom_toTopOf="@id/botTextView"
-        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
-        app:layout_constraintStart_toStartOf="@id/bot_info_view"
-        app:layout_constraintTop_toTopOf="@id/bot_info_view" />
+        app:layout_constraintEnd_toEndOf="@id/bot_status_view"
+        app:layout_constraintStart_toStartOf="@id/bot_status_view"
+        app:layout_constraintTop_toTopOf="@id/bot_status_view" />
 
     <ImageView
+        android:id="@+id/mark_computer"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/player_bot"
         android:src="@drawable/tic"
-        app:layout_constraintBottom_toBottomOf="@id/bot_info_view"
-        app:layout_constraintEnd_toEndOf="@id/bot_info_view"
-        app:layout_constraintStart_toStartOf="@id/bot_info_view"
+        app:layout_constraintBottom_toBottomOf="@id/bot_status_view"
+        app:layout_constraintEnd_toEndOf="@id/bot_status_view"
+        app:layout_constraintStart_toStartOf="@id/bot_status_view"
         app:layout_constraintTop_toBottomOf="@id/botTextView" />
 
 

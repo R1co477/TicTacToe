@@ -8,45 +8,50 @@ import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View.BaseSavedState
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.databinding.BoardBinding
+import kotlin.properties.Delegates
+
+typealias BoardViewListener = (r: Int, c: Int) -> Unit
 
 class BoardView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
     private val binding: BoardBinding
-
+    var humanMark: Int by Delegates.notNull<Int>()
+    val listeners = mutableListOf<BoardViewListener>()
 
     init {
         val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.board, this, true)
         binding = BoardBinding.bind(this)
-        var isTic = true
-        val drawableTic = R.drawable.cell_tic
-        val drawableTac = R.drawable.cell_tac
         for (cell in getCells()) {
-            val drawable = if (isTic) {
-                drawableTic
-            } else {
-                drawableTac
-            }
-            if (isTic) {
-                isTic = false
-            } else {
-                isTic = true
-            }
-            cell.setOnClickListener {
-                updateCell(cell, drawable)
+            cell.setOnClickListener{
+                val index = getCells().indexOf(cell)
+                val row = index / 3
+                val col = index % 3
+                updateCell(cell, humanMark)
+                notifyChanges(row, col)
             }
         }
     }
 
-    private fun setMove() {
-
+    fun setMove(row: Int, column: Int, mark: Mark) {
+        val cells = getCells()
+        val twoDimArray = Array(3) { row -> cells.sliceArray(row * 3 until (row + 1) * 3) }
+        val cell = twoDimArray[row][column]
+        when (mark) {
+            Mark.TAC -> updateCell(cell, TAC)
+            Mark.TIC -> updateCell(cell, TIC)
+            else -> return
+        }
     }
 
     private fun getCells(): Array<ImageView> {
@@ -83,6 +88,19 @@ class BoardView @JvmOverloads constructor(
         flipOut.start()
     }
 
+    fun addListener(listener: BoardViewListener) {
+        listeners.add(listener)
+    }
+
+    fun removeListener(listener: BoardViewListener) {
+        listeners.remove(listener)
+    }
+
+    private fun notifyChanges(row: Int, col: Int) {
+        listeners.forEach { it.invoke(row, col) }
+    }
+
+
     override fun onSaveInstanceState(): Parcelable? {
         val superState = super.onSaveInstanceState()!!
         val savedState = SavedState(superState)
@@ -92,8 +110,8 @@ class BoardView @JvmOverloads constructor(
 
         for (i in stateViews.indices) {
             stateViews[i] = when (cells[i].tag) {
-                R.drawable.cell_tic -> 1
-                R.drawable.cell_tac -> -1
+                TIC -> 1
+                TAC -> -1
                 else -> 0
             }
 
@@ -109,37 +127,44 @@ class BoardView @JvmOverloads constructor(
         val stateViews = savedState.stateViews
         for (i in cells.indices) {
             when (stateViews[i]) {
-                1 -> updateCell(cells[i], R.drawable.cell_tic)
-                -1 -> updateCell(cells[i], R.drawable.cell_tac)
+                1 -> updateCell(cells[i], TIC)
+                -1 -> updateCell(cells[i], TAC)
                 else -> continue
             }
         }
     }
 
-    class SavedState : BaseSavedState {
-        var stateViews: IntArray = IntArray(9)
 
-        constructor(superState: Parcelable) : super(superState)
+    companion object {
+        private val TIC = R.drawable.cell_tic
+        private val TAC = R.drawable.cell_tac
+    }
+}
 
-        constructor(parcel: Parcel) : super(parcel) {
-            stateViews = parcel.createIntArray() ?: IntArray(9)
-        }
 
-        override fun writeToParcel(out: Parcel, flags: Int) {
-            super.writeToParcel(out, flags)
-            out.writeIntArray(stateViews)
-        }
+class SavedState : BaseSavedState {
+    var stateViews: IntArray = IntArray(9)
 
-        companion object {
-            @JvmField
-            val CREATOR = object : Parcelable.Creator<SavedState> {
-                override fun createFromParcel(parcel: Parcel): SavedState {
-                    return SavedState(parcel)
-                }
+    constructor(superState: Parcelable) : super(superState)
 
-                override fun newArray(size: Int): Array<SavedState?> {
-                    return arrayOfNulls(size)
-                }
+    constructor(parcel: Parcel) : super(parcel) {
+        stateViews = parcel.createIntArray() ?: IntArray(9)
+    }
+
+    override fun writeToParcel(out: Parcel, flags: Int) {
+        super.writeToParcel(out, flags)
+        out.writeIntArray(stateViews)
+    }
+
+    companion object {
+        @JvmField
+        val CREATOR = object : Parcelable.Creator<SavedState> {
+            override fun createFromParcel(parcel: Parcel): SavedState {
+                return SavedState(parcel)
+            }
+
+            override fun newArray(size: Int): Array<SavedState?> {
+                return arrayOfNulls(size)
             }
         }
     }

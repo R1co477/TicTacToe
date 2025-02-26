@@ -22,58 +22,55 @@ class Minimax(private val board: Board, private val human: Mark, private val max
             add(Array(3) { i -> board[i, board.getGrid().size - 1 - i] })
         }
 
-        val computerLine = Array(3) { computer }
-        val humanLine = Array(3) { human }
-
-        return when {
-            lines.any { it contentEquals humanLine } -> -1
-            lines.any { it contentEquals computerLine } -> 1
-            else -> 0
+        for (line in lines) {
+            if (line[0] != Mark.EMPTY && line[0] == line[1] && line[1] == line[2]) {
+                return if (line[0] == computer) 10 else -10
+            }
         }
+
+        return 0
     }
 
     private fun minimax(isMaximizing: Boolean, depth: Int): Int {
-        val rating = evaluate()
-        val emptyCells = board.getEmptyCells()
+        val score = evaluate()
 
-        when {
-            rating == 1 || rating == -1 -> return rating
-            emptyCells.isEmpty() || depth == maxDepth -> return 0
-        }
+        if (score == 10) return score - depth
+        if (score == -10) return score + depth
+        if (board.getEmptyCells().isEmpty() || depth >= maxDepth) return 0
 
-        return if (isMaximizing) {
+        if (isMaximizing) {
             var best = Int.MIN_VALUE
 
-            for ((r, c) in emptyCells) {
+            for ((r, c) in board.getEmptyCells()) {
                 board[r, c] = computer
                 best = max(best, minimax(false, depth + 1))
                 board[r, c] = Mark.EMPTY
             }
-            best
+            return best
         } else {
             var best = Int.MAX_VALUE
 
-            for ((r, c) in emptyCells) {
+            for ((r, c) in board.getEmptyCells()) {
                 board[r, c] = human
                 best = min(best, minimax(true, depth + 1))
                 board[r, c] = Mark.EMPTY
             }
-            best
+            return best
         }
     }
 
     fun findBestMove(): Pair<Int, Int> {
-        var bestRating = Int.MIN_VALUE
+        var bestVal = Int.MIN_VALUE
         var bestMove = Pair(-1, -1)
 
         for ((r, c) in board.getEmptyCells()) {
             board[r, c] = computer
-            val moveRating = minimax(false, 0)
+            val moveVal = minimax(false, 0)
             board[r, c] = Mark.EMPTY
 
-            if (moveRating > bestRating) {
-                bestRating = moveRating
+            if (moveVal > bestVal) {
                 bestMove = Pair(r, c)
+                bestVal = moveVal
             }
         }
 
