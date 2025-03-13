@@ -1,4 +1,4 @@
-package com.example.tictactoe.fragments
+package com.example.tictactoe.screens
 
 import android.content.Context
 import android.content.SharedPreferences

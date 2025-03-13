@@ -1,20 +1,17 @@
-package com.example.tictactoe.fragments
+package com.example.tictactoe.screens
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.core.content.ContextCompat
@@ -31,7 +28,6 @@ import com.example.tictactoe.databinding.FragmentEditProfileBinding
 import com.example.tictactoe.extensions.getObject
 import com.example.tictactoe.extensions.putObject
 import com.example.tictactoe.utils.SnackBarUtils
-import com.google.android.material.snackbar.Snackbar
 
 
 const val APP_PREFERENCES = "APP_PREFERENCES"

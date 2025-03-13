@@ -40,7 +40,7 @@
         android:shadowDy="0"
         android:shadowRadius="10"
         android:text="@string/game_title"
-        android:textSize="110sp"
+        android:textSize="@dimen/menu_title"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/btn_single_player"
         app:layout_constraintEnd_toEndOf="parent"

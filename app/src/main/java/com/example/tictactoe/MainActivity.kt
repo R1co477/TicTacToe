@@ -14,11 +14,11 @@ import com.example.tictactoe.contract.HasCustomAction
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.contract.Navigator
 import com.example.tictactoe.databinding.ActivityMainBinding
-import com.example.tictactoe.fragments.BotGameFragment
-import com.example.tictactoe.fragments.DifficultyFragment
-import com.example.tictactoe.fragments.EditProfileFragment
-import com.example.tictactoe.fragments.MenuFragment
-import com.example.tictactoe.fragments.SettingsFragment
+import com.example.tictactoe.screens.BotGameFragment
+import com.example.tictactoe.screens.DifficultyFragment
+import com.example.tictactoe.screens.EditProfileFragment
+import com.example.tictactoe.screens.MenuFragment
+import com.example.tictactoe.screens.SettingsFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding

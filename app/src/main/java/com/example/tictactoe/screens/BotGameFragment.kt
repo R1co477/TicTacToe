@@ -1,4 +1,4 @@
-package com.example.tictactoe.fragments
+package com.example.tictactoe.screens
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -21,7 +21,6 @@ import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentBotGameBinding
 import com.example.tictactoe.extensions.getObject
 import com.example.tictactoe.utils.AvatarManager
-import kotlinx.coroutines.delay
 import kotlin.properties.Delegates
 import kotlin.random.Random
 
