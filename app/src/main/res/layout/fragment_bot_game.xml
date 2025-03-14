@@ -8,7 +8,7 @@
     <com.jetradarmobile.snowfall.SnowfallView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_screen_gradient"
+        android:background="@drawable/bg_nightfall"
         app:snowflakeAlphaMax="255"
         app:snowflakeAlphaMin="180"
         app:snowflakeAngleMax="4"
@@ -20,21 +20,21 @@
         app:snowflakesFadingEnabled="true" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/begin_GuideLine"
+        android:id="@+id/begin_guide_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="32dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/end_GuideLine"
+        android:id="@+id/end_guide_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="32dp" />
 
     <com.example.tictactoe.BoardView
-        android:id="@+id/game_board"
+        android:id="@+id/cv_board"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="160dp"
@@ -45,17 +45,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/human_status_view"
+        android:id="@+id/v_human_status"
         android:layout_width="150dp"
         android:layout_height="184dp"
         android:layout_marginBottom="18dp"
-        android:background="@drawable/inactive_turn_background"
-        app:layout_constraintBottom_toTopOf="@id/game_board"
-        app:layout_constraintStart_toEndOf="@id/begin_GuideLine"
+        android:background="@drawable/bg_status_inactive"
+        app:layout_constraintBottom_toTopOf="@id/cv_board"
+        app:layout_constraintStart_toEndOf="@id/begin_guide_line"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txt_human_turn"
+        android:id="@+id/tv_human_turn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -64,107 +64,106 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/human_status_view"
-        app:layout_constraintStart_toStartOf="@id/human_status_view"
-        app:layout_constraintTop_toBottomOf="@id/human_status_view" />
+        app:layout_constraintEnd_toEndOf="@id/v_human_status"
+        app:layout_constraintStart_toStartOf="@id/v_human_status"
+        app:layout_constraintTop_toBottomOf="@id/v_human_status" />
 
     <TextView
-        android:id="@+id/player_textview"
+        android:id="@+id/tv_player_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@null"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/human_status_view"
-        app:layout_constraintEnd_toEndOf="@id/human_status_view"
-        app:layout_constraintStart_toStartOf="@id/human_status_view"
-        app:layout_constraintTop_toTopOf="@id/human_status_view"
+        app:layout_constraintBottom_toBottomOf="@id/v_human_status"
+        app:layout_constraintEnd_toEndOf="@id/v_human_status"
+        app:layout_constraintStart_toStartOf="@id/v_human_status"
+        app:layout_constraintTop_toTopOf="@id/v_human_status"
         tools:text="Player" />
 
     <ImageView
-        android:id="@+id/player_avatar"
+        android:id="@+id/iv_player_avatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/profile_avatar"
         android:contentDescription="@string/player_avatar"
-        app:layout_constraintBottom_toTopOf="@id/player_textview"
-        app:layout_constraintEnd_toEndOf="@id/human_status_view"
-        app:layout_constraintStart_toStartOf="@id/human_status_view"
-        app:layout_constraintTop_toTopOf="@id/human_status_view"
+        app:layout_constraintBottom_toTopOf="@id/tv_player_nickname"
+        app:layout_constraintEnd_toEndOf="@id/v_human_status"
+        app:layout_constraintStart_toStartOf="@id/v_human_status"
+        app:layout_constraintTop_toTopOf="@id/v_human_status"
         app:tint="@color/background_red" />
 
     <TextView
-        android:id="@+id/first_letter_TextView"
+        android:id="@+id/tv_avatar_letter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/player_avatar"
-        app:layout_constraintEnd_toEndOf="@id/player_avatar"
-        app:layout_constraintStart_toStartOf="@id/player_avatar"
-        app:layout_constraintTop_toTopOf="@id/player_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/iv_player_avatar"
+        app:layout_constraintEnd_toEndOf="@id/iv_player_avatar"
+        app:layout_constraintStart_toStartOf="@id/iv_player_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_player_avatar"
         tools:text="P" />
 
 
     <ImageView
-        android:id="@+id/mark_human"
+        android:id="@+id/iv_mark_human"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/player_human"
         android:src="@drawable/tac"
-        app:layout_constraintBottom_toBottomOf="@id/human_status_view"
-        app:layout_constraintEnd_toEndOf="@id/human_status_view"
-        app:layout_constraintStart_toStartOf="@id/human_status_view"
-        app:layout_constraintTop_toBottomOf="@id/player_textview" />
+        app:layout_constraintBottom_toBottomOf="@id/v_human_status"
+        app:layout_constraintEnd_toEndOf="@id/v_human_status"
+        app:layout_constraintStart_toStartOf="@id/v_human_status"
+        app:layout_constraintTop_toBottomOf="@id/tv_player_nickname" />
 
     <View
-        android:id="@+id/bot_status_view"
+        android:id="@+id/v_bot_status"
         android:layout_width="150dp"
         android:layout_height="184dp"
         android:layout_marginBottom="18dp"
-        android:background="@drawable/inactive_turn_background"
-        app:layout_constraintBottom_toTopOf="@id/game_board"
-        app:layout_constraintEnd_toStartOf="@id/end_GuideLine"
+        android:background="@drawable/bg_status_inactive"
+        app:layout_constraintBottom_toTopOf="@id/cv_board"
+        app:layout_constraintEnd_toStartOf="@id/end_guide_line"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        tools:text="Bot"
-        android:id="@+id/botTextView"
+        android:id="@+id/tv_bot_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@null"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/bot_status_view"
-        app:layout_constraintEnd_toEndOf="@id/bot_status_view"
-        app:layout_constraintStart_toStartOf="@id/bot_status_view"
-        app:layout_constraintTop_toTopOf="@id/bot_status_view" />
+        app:layout_constraintBottom_toBottomOf="@id/v_bot_status"
+        app:layout_constraintEnd_toEndOf="@id/v_bot_status"
+        app:layout_constraintStart_toStartOf="@id/v_bot_status"
+        app:layout_constraintTop_toTopOf="@id/v_bot_status"
+        tools:text="Bot" />
 
     <ImageView
-        android:id="@+id/botAvatar"
+        android:id="@+id/iv_bot_avatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/bot_avatar"
         android:src="@null"
-        tools:src="@drawable/easy_bot"
-        app:layout_constraintBottom_toTopOf="@id/botTextView"
-        app:layout_constraintEnd_toEndOf="@id/bot_status_view"
-        app:layout_constraintStart_toStartOf="@id/bot_status_view"
-        app:layout_constraintTop_toTopOf="@id/bot_status_view" />
+        app:layout_constraintBottom_toTopOf="@id/tv_bot_nickname"
+        app:layout_constraintEnd_toEndOf="@id/v_bot_status"
+        app:layout_constraintStart_toStartOf="@id/v_bot_status"
+        app:layout_constraintTop_toTopOf="@id/v_bot_status"
+        tools:src="@drawable/easy_bot" />
 
     <ImageView
-        android:id="@+id/mark_computer"
+        android:id="@+id/iv_mark_computer"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/player_bot"
         android:src="@drawable/tic"
-        app:layout_constraintBottom_toBottomOf="@id/bot_status_view"
-        app:layout_constraintEnd_toEndOf="@id/bot_status_view"
-        app:layout_constraintStart_toStartOf="@id/bot_status_view"
-        app:layout_constraintTop_toBottomOf="@id/botTextView" />
-
+        app:layout_constraintBottom_toBottomOf="@id/v_bot_status"
+        app:layout_constraintEnd_toEndOf="@id/v_bot_status"
+        app:layout_constraintStart_toStartOf="@id/v_bot_status"
+        app:layout_constraintTop_toBottomOf="@id/tv_bot_nickname" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

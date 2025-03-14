@@ -11,21 +11,30 @@ class Minimax(private val board: Board, private val human: Mark, private val max
     private val computer: Mark = if (human == Mark.TIC) Mark.TAC else Mark.TIC
 
     private fun evaluate(): Int {
-        val lines = mutableListOf<Array<Mark>>().apply {
-            addAll(board.getGrid())
-
-            for (c in board.getGrid().indices) {
-                add(Array(3) { r -> board[r, c] })
+        for (row in board.getGrid()) {
+            if (row[0] != Mark.EMPTY && row[0] == row[1] && row[1] == row[2]) {
+                return if (row[0] == computer) 10 else -10
             }
-
-            add(Array(3) { i -> board[i, i] })
-            add(Array(3) { i -> board[i, board.getGrid().size - 1 - i] })
         }
 
-        for (line in lines) {
-            if (line[0] != Mark.EMPTY && line[0] == line[1] && line[1] == line[2]) {
-                return if (line[0] == computer) 10 else -10
+        for (c in 0 until board.getGrid().size) {
+            if (board[0, c] != Mark.EMPTY &&
+                board[0, c] == board[1, c] &&
+                board[1, c] == board[2, c]) {
+                return if (board[0, c] == computer) 10 else -10
             }
+        }
+
+        if (board[0, 0] != Mark.EMPTY &&
+            board[0, 0] == board[1, 1] &&
+            board[1, 1] == board[2, 2]) {
+            return if (board[0, 0] == computer) 10 else -10
+        }
+
+        if (board[0, 2] != Mark.EMPTY &&
+            board[0, 2] == board[1, 1] &&
+            board[1, 1] == board[2, 0]) {
+            return if (board[0, 2] == computer) 10 else -10
         }
 
         return 0
@@ -67,6 +76,7 @@ class Minimax(private val board: Board, private val human: Mark, private val max
             board[r, c] = computer
             val moveVal = minimax(false, 0)
             board[r, c] = Mark.EMPTY
+
 
             if (moveVal > bestVal) {
                 bestMove = Pair(r, c)

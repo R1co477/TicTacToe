@@ -67,16 +67,16 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
-        binding.edtNickname.addTextChangedListener(textWatcher)
+        binding.etNickname.addTextChangedListener(textWatcher)
 
         for (imageView in getImageViews()) {
             initializeImageView(imageView)
         }
 
-        binding.imgSelectPhoto.setOnClickListener {
+        binding.btSelectPhoto.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
         }
-        binding.btnSaveChanges.setOnClickListener { saveChanges() }
+        binding.btSaveChanges.setOnClickListener { saveChanges() }
 
         setupProfile(profile)
         updateUi()
@@ -85,17 +85,17 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
     private fun initializeImageView(imageView: ImageView) {
         imageView.setOnClickListener {
-            binding.firstLetterTextView.visibility = View.VISIBLE
+            binding.tvAvatarLetter.visibility = View.VISIBLE
             unFocusAllViews()
 
-            binding.avatar.background =
+            binding.ivHumanAvatar.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.profile_avatar)
-            binding.avatar.backgroundTintList = imageView.backgroundTintList
-            binding.avatar.backgroundTintMode = android.graphics.PorterDuff.Mode.SRC_IN
+            binding.ivHumanAvatar.backgroundTintList = imageView.backgroundTintList
+            binding.ivHumanAvatar.backgroundTintMode = android.graphics.PorterDuff.Mode.SRC_IN
 
             imageView.setImageDrawable(
                 ContextCompat.getDrawable(
-                    requireContext(), R.drawable.view_color_selected
+                    requireContext(), R.drawable.v_color_selected
                 )
             )
 
@@ -106,16 +106,16 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
     private fun setAvatar(uri: Uri) {
         unFocusAllViews()
-        binding.firstLetterTextView.visibility = View.INVISIBLE
+        binding.tvAvatarLetter.visibility = View.INVISIBLE
         profile.avatarUri = uri
-        binding.avatar.backgroundTintMode = null
+        binding.ivHumanAvatar.backgroundTintMode = null
 
         Glide.with(this).asDrawable().load(uri).circleCrop()
             .into(object : CustomTarget<Drawable>() {
                 override fun onResourceReady(
                     resource: Drawable, transition: Transition<in Drawable>?
                 ) {
-                    binding.avatar.background = resource
+                    binding.ivHumanAvatar.background = resource
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
@@ -123,14 +123,14 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
     }
 
     private fun unFocusAllViews() {
-        val iconDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.view_select_color)
+        val iconDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.v_select_color)
         for (imageView in getImageViews()) {
             imageView.setImageDrawable(iconDrawable)
         }
     }
 
     private fun setupProfile(profile: Profile) {
-        binding.edtNickname.setText(profile.nickname)
+        binding.etNickname.setText(profile.nickname)
 
         if (profile.avatarUri == null) {
             unFocusAllViews()
@@ -151,19 +151,19 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
     private fun getImageViews(): List<ImageView> {
         return listOf(
-            binding.viewRed,
-            binding.viewGreen,
-            binding.viewOrange,
-            binding.viewPurple,
-            binding.viewYellow,
-            binding.viewBlue,
-            binding.viewPink,
-            binding.viewTeal
+            binding.ivRed,
+            binding.ivGreen,
+            binding.ivOrange,
+            binding.ivPurple,
+            binding.ivYellow,
+            binding.ivBlue,
+            binding.ivPink,
+            binding.ivTeal
         )
     }
 
     private fun saveChanges() {
-        if (binding.edtNickname.error != null) {
+        if (binding.etNickname.error != null) {
             SnackBarUtils.showCustomSnackBar(
                 binding.root,
                 "The profile was not updated!",
@@ -188,11 +188,11 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
 
     private fun updateUi() {
-        val nickname = binding.edtNickname.text.toString().trim()
+        val nickname = binding.etNickname.text.toString().trim()
         profile.nickname = nickname
-        binding.firstLetterTextView.text = if (nickname.isEmpty()) "" else nickname[0].toString()
-        binding.edtNickname.error = if (nickname.length > 15) "Nickname is too long" else null
-        binding.charCountTextView.text = getString(R.string.char_сountTextView, nickname.length)
+        binding.tvAvatarLetter.text = if (nickname.isEmpty()) "" else nickname[0].toString()
+        binding.etNickname.error = if (nickname.length > 15) "Nickname is too long" else null
+        binding.tvNicknameSize.text = getString(R.string.char_сountTextView, nickname.length)
     }
 
 

@@ -75,8 +75,8 @@ class BotGameFragment : Fragment(), HasCustomTitle {
 
     private fun setupProfile() {
         val nickname = profile.nickname
-        binding.playerTextview.text = nickname
-        AvatarManager(profile).setAvatar(binding.playerAvatar, binding.firstLetterTextView)
+        binding.tvPlayerNickname.text = nickname
+        AvatarManager(profile).setAvatar(binding.ivPlayerAvatar, binding.tvAvatarLetter)
     }
 
 private fun setupSettings() {
@@ -94,20 +94,20 @@ private fun setupSettings() {
 
     with(binding) {
         if (humanMark == Mark.TIC) {
-            markHuman.setImageResource(tic)
-            markComputer.setImageResource(tac)
+            ivMarkHuman.setImageResource(tic)
+            ivMarkComputer.setImageResource(tac)
         } else {
-            markHuman.setImageResource(tac)
-            markComputer.setImageResource(tic)
+            ivMarkHuman.setImageResource(tac)
+            ivMarkComputer.setImageResource(tic)
         }
 
         minimax = Minimax(board, computerMark, levelDifficulty * 4)
-        gameBoard.addListener { r, c ->
+        cvBoard.addListener { r, c ->
             board[r, c] = humanMark
             computerTurn()
         }
 
-        gameBoard.humanMark = if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
+        cvBoard.humanMark = if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
 
         if (humanMove) {
             humanTurn()
@@ -127,29 +127,29 @@ private fun setupSettings() {
 
     private fun humanTurn() {
         binding.apply {
-            humanStatusView.setBackgroundResource(R.drawable.active_turn_background)
-            txtHumanTurn.visibility = TextView.VISIBLE
+            vHumanStatus.setBackgroundResource(R.drawable.bg_status_active)
+            tvHumanTurn.visibility = TextView.VISIBLE
         }
     }
 
     private fun computerTurn() {
         binding.apply {
-            humanStatusView.setBackgroundResource(R.drawable.inactive_turn_background)
-            txtHumanTurn.visibility = TextView.INVISIBLE
+            vHumanStatus.setBackgroundResource(R.drawable.bg_status_inactive)
+            tvHumanTurn.visibility = TextView.INVISIBLE
         }
         val (r, c) = minimax.findBestMove()
         board[r, c] = computerMark
-        binding.gameBoard.setMove(r, c, computerMark)
+        binding.cvBoard.setMove(r, c, computerMark)
         humanTurn()
     }
 
     private fun setImage(@DrawableRes imageResId: Int) {
         val drawable = ContextCompat.getDrawable(requireContext(), imageResId)
-        binding.botAvatar.setImageDrawable(drawable)
+        binding.ivBotAvatar.setImageDrawable(drawable)
     }
 
     private fun setInfo(@StringRes stringResId: Int) {
-        binding.botTextView.text = getString(stringResId)
+        binding.tvBotNickname.text = getString(stringResId)
     }
 
     override fun getTitleRes(): Int = R.string.toolbar_bot

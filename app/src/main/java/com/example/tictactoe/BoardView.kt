@@ -105,7 +105,7 @@ class BoardView @JvmOverloads constructor(
         val superState = super.onSaveInstanceState()!!
         val savedState = SavedState(superState)
 
-        val stateViews: IntArray = IntArray(9)
+        val stateViews = IntArray(9)
         val cells = getCells()
 
         for (i in stateViews.indices) {

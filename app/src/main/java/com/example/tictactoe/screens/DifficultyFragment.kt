@@ -21,13 +21,13 @@ class DifficultyFragment : Fragment(), HasCustomTitle, HasCustomAction {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDifficultyBinding.inflate(inflater, container, false)
-        binding.btnEasyy.setOnClickListener {
+        binding.btEasy.setOnClickListener {
             navigator().showSingleGameScreen(1)
         }
-        binding.btnMedium.setOnClickListener {
+        binding.btMedium.setOnClickListener {
             navigator().showSingleGameScreen(2)
         }
-        binding.btnDifficult.setOnClickListener {
+        binding.btDifficult.setOnClickListener {
             navigator().showSingleGameScreen(3)
         }
         return binding.root

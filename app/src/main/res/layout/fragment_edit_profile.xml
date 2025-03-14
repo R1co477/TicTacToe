@@ -6,15 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/profile_background">
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/btn_save_changes"
+        app:layout_constraintBottom_toTopOf="@id/bt_save_changes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edt_nickname">
+        app:layout_constraintTop_toBottomOf="@id/et_nickname">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,40 +22,37 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/view_red"
+                android:id="@+id/iv_red"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/view_select_color"
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_red"
                 android:contentDescription="@null" />
 
             <ImageView
-                android:id="@+id/view_teal"
+                android:id="@+id/iv_teal"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/view_select_color"
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_teal"
                 android:contentDescription="@null" />
 
             <ImageView
-                android:id="@+id/view_blue"
-
+                android:id="@+id/iv_blue"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/view_select_color"
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_blue"
                 android:contentDescription="@null" />
 
             <ImageView
-                android:id="@+id/view_green"
-
+                android:id="@+id/iv_green"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@drawable/view_select_color"
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_green"
                 android:contentDescription="@null" />
 
@@ -66,59 +62,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@id/btn_save_changes"
+            app:layout_constraintBottom_toTopOf="@id/bt_save_changes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_nickname">
+            app:layout_constraintTop_toBottomOf="@id/et_nickname">
 
             <ImageView
-                android:id="@+id/view_yellow"
-
+                android:id="@+id/iv_yellow"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/view_select_color"
-
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_yellow"
                 android:contentDescription="@null" />
 
             <ImageView
-                android:id="@+id/view_pink"
-
+                android:id="@+id/iv_pink"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/view_select_color"
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_pink"
                 android:contentDescription="@null" />
 
             <ImageView
-                android:id="@+id/view_purple"
-
+                android:id="@+id/iv_purple"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/view_select_color"
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_purple"
                 android:contentDescription="@null" />
 
             <ImageView
-                android:id="@+id/view_orange"
-
+                android:id="@+id/iv_orange"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@drawable/view_select_color"
+                android:background="@drawable/v_select_color"
                 android:backgroundTint="@color/background_orange"
                 android:contentDescription="@null" />
 
         </LinearLayout>
+
     </LinearLayout>
 
-
     <ImageView
-        android:id="@+id/avatar"
+        android:id="@+id/iv_human_avatar"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginTop="48dp"
@@ -130,18 +119,18 @@
         app:tint="@color/background_red" />
 
     <TextView
-        android:saveEnabled="true"
-        android:id="@+id/first_letter_TextView"
+        android:id="@+id/tv_avatar_letter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:saveEnabled="true"
         android:text=""
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/avatar"
-        app:layout_constraintEnd_toEndOf="@id/avatar"
-        app:layout_constraintStart_toStartOf="@id/avatar"
-        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintBottom_toBottomOf="@id/iv_human_avatar"
+        app:layout_constraintEnd_toEndOf="@id/iv_human_avatar"
+        app:layout_constraintStart_toStartOf="@id/iv_human_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_human_avatar"
         tools:text="P" />
 
     <TextView
@@ -153,11 +142,11 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/edt_nickname"
-        app:layout_constraintStart_toStartOf="@id/edt_nickname" />
+        app:layout_constraintBottom_toTopOf="@id/et_nickname"
+        app:layout_constraintStart_toStartOf="@id/et_nickname" />
 
     <TextView
-        android:id="@+id/char_countTextView"
+        android:id="@+id/tv_nickname_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -166,18 +155,18 @@
         android:textColor="#a5b4fc"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/edt_nickname"
-        app:layout_constraintTop_toBottomOf="@id/edt_nickname" />
+        app:layout_constraintEnd_toEndOf="@id/et_nickname"
+        app:layout_constraintTop_toBottomOf="@id/et_nickname" />
 
     <EditText
-        android:id="@+id/edt_nickname"
+        android:id="@+id/et_nickname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="15dp"
         android:autofillHints="username"
-        android:background="@drawable/profile_edit_text"
+        android:background="@drawable/et_profile"
         android:hint="@string/enter_your_nickname"
         android:imeOptions="actionDone"
         android:inputType="text"
@@ -187,17 +176,17 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatar" />
-
+        app:layout_constraintTop_toBottomOf="@id/iv_human_avatar"
+        tools:text="Player" />
 
     <Button
-        android:id="@+id/btn_save_changes"
+        android:id="@+id/bt_save_changes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="50dp"
-        android:background="@drawable/button_gradient_save_changes"
+        android:background="@drawable/bt_gradient_save_changes"
         android:text="@string/save_changes"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -206,16 +195,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <Button
-        android:contentDescription="@string/select_photo"
-        android:id="@+id/img_select_photo"
+        android:id="@+id/bt_select_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/ic_photo_picker"
+        android:contentDescription="@string/select_photo"
         app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@id/avatar"
-        app:layout_constraintEnd_toEndOf="@id/avatar" />
-
+        app:layout_constraintBottom_toBottomOf="@id/iv_human_avatar"
+        app:layout_constraintEnd_toEndOf="@id/iv_human_avatar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

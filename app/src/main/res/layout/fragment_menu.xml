@@ -2,20 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_screen_gradient"
-    tools:context=".MainActivity"
-
-    >
-
+    android:background="@drawable/bg_nightfall"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <com.jetradarmobile.snowfall.SnowfallView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_screen_gradient"
+        android:background="@drawable/bg_nightfall"
         app:snowflakeAlphaMax="255"
         app:snowflakeAlphaMin="180"
         app:snowflakeAngleMax="4"
@@ -26,34 +23,34 @@
         app:snowflakesAlreadyFalling="false"
         app:snowflakesFadingEnabled="true" />
 
-
     <TextView
-        android:id="@+id/game_title"
+        android:id="@+id/tv_game_title"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_centerInParent="true"
         android:fontFamily="@font/main_title"
         android:gravity="center"
         android:lines="3"
+        android:maxLines="3"
         android:shadowColor="@color/text_shadow"
         android:shadowDx="-30"
         android:shadowDy="0"
         android:shadowRadius="10"
         android:text="@string/game_title"
-        android:textSize="@dimen/menu_title"
+        android:textSize="110sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/btn_single_player"
+        app:layout_constraintBottom_toTopOf="@id/bt_single_player"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_single_player"
+        android:id="@+id/bt_single_player"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="35dp"
-        android:background="@drawable/button_gradient_one"
+        android:background="@drawable/bt_glow_magenta"
         android:text="@string/single_player"
         android:textColor="@color/white"
         android:textSize="@dimen/button_text"
@@ -62,15 +59,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/game_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_game_title"
         app:layout_constraintWidth_percent="0.75" />
 
     <Button
-        android:id="@+id/btn_multiplayer"
+        android:id="@+id/bt_multiplayer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_gradient_two"
+        android:background="@drawable/bt_sunset_glow"
         android:text="@string/multiplayer"
         android:textColor="@color/white"
         android:textSize="@dimen/button_text"
@@ -79,15 +76,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_single_player"
+        app:layout_constraintTop_toBottomOf="@id/bt_single_player"
         app:layout_constraintWidth_percent="0.75" />
 
     <Button
-        android:id="@+id/btn_local_multiplayer"
+        android:id="@+id/bt_local_multiplayer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_gradient_three"
+        android:background="@drawable/bt_ocean_sunrise"
         android:text="@string/local_multiplayer"
         android:textColor="@color/white"
         android:textSize="@dimen/button_text"
@@ -96,8 +93,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_multiplayer"
+        app:layout_constraintTop_toBottomOf="@id/bt_multiplayer"
         app:layout_constraintWidth_percent="0.75" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,18 +44,18 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        AvatarManager(profile).setAvatar(binding.avatar, binding.firstLetterTextView)
+        AvatarManager(profile).setAvatar(binding.ivHumanAvatar, binding.tvAvatarLetter)
 
-        binding.btnSave.setOnClickListener { save() }
-        binding.btnCancel.setOnClickListener { navigator().goBack() }
+        binding.btSave.setOnClickListener { save() }
+        binding.btCancel.setOnClickListener { navigator().goBack() }
 
-        binding.randomMark.setOnClickListener { selectRandomMark() }
-        binding.symbolTic.setOnClickListener { selectTic() }
-        binding.symbolTac.setOnClickListener { selectTac() }
+        binding.vItemRandomMark.setOnClickListener { selectRandomMark() }
+        binding.vItemTic.setOnClickListener { selectTic() }
+        binding.vItemTac.setOnClickListener { selectTac() }
 
-        binding.randomMove.setOnClickListener { selectRandomMove() }
-        binding.computerMove.setOnClickListener { selectMoveComputer() }
-        binding.humanMove.setOnClickListener { selectMoveHuman() }
+        binding.vItemRandomMove.setOnClickListener { selectRandomMove() }
+        binding.vItemComputer.setOnClickListener { selectMoveComputer() }
+        binding.vItemHuman.setOnClickListener { selectMoveHuman() }
 
         setupSettings()
 
@@ -73,26 +73,26 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
     private fun selectTic() {
         settings.humanTic = true
-        unSelectSymbolViews()
+        unSelectMarkViews()
         with(binding) {
-            selectView(symbolTic, icTic, R.drawable.selected_view_tic, R.color.earthy_brown)
+            selectView(vItemTic, vTicBg, R.drawable.v_selected_tic, R.color.earthy_brown)
         }
     }
 
     private fun selectTac() {
         settings.humanTic = false
-        unSelectSymbolViews()
+        unSelectMarkViews()
         with(binding) {
-            selectView(symbolTac, icTac, R.drawable.selected_view_tac, R.color.deep_amethyst)
+            selectView(vItemTac, vTacBg, R.drawable.v_selected_tac, R.color.deep_amethyst)
         }
     }
 
     private fun selectRandomMark() {
         settings.randomMark = true
-        unSelectSymbolViews()
+        unSelectMarkViews()
         with(binding) {
             selectView(
-                randomMark, icRandMark, R.drawable.selected_view_random, R.color.midnight_blue
+                vItemRandomMark, vRandMarkBg, R.drawable.v_selected_random, R.color.midnight_blue
             )
         }
     }
@@ -102,9 +102,9 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
         unSelectMoveViews()
         with(binding) {
             selectView(
-                randomMove,
-                icRandMove,
-                R.drawable.selected_view_random,
+                vItemRandomMove,
+                vRandMoveBg,
+                R.drawable.v_selected_random,
                 R.color.midnight_blue
             )
         }
@@ -115,9 +115,9 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
         unSelectMoveViews()
         with(binding) {
             selectView(
-                computerMove,
-                icComputer,
-                R.drawable.selected_view_random,
+                vItemComputer,
+                vComputerBg,
+                R.drawable.v_selected_random,
                 R.color.midnight_blue
             )
         }
@@ -128,9 +128,9 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
         unSelectMoveViews()
         with(binding) {
             selectView(
-                humanMove,
-                icHuman,
-                R.drawable.selected_view_random,
+                vItemHuman,
+                vHumanAvatarBg,
+                R.drawable.v_selected_random,
                 R.color.midnight_blue
             )
         }
@@ -143,31 +143,31 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
         updateIconTint(iconView, iconTintColorRes)
     }
 
-    private fun unSelectSymbolViews() {
-        val symbolViews = arrayOf(binding.randomMark, binding.symbolTic, binding.symbolTac)
-        for (symbolView in symbolViews) {
-            restoreView(symbolView)
+    private fun unSelectMarkViews() {
+        val markViews = arrayOf(binding.vItemRandomMark, binding.vItemTic, binding.vItemTac)
+        for (markView in markViews) {
+            restoreView(markView)
         }
-        updateIconTint(binding.icRandMark, R.color.deep_navy)
-        updateIconTint(binding.icTic, R.color.smoky_brown)
-        updateIconTint(binding.icTac, R.color.raspberry_purple)
+        updateIconTint(binding.vRandMarkBg, R.color.deep_navy)
+        updateIconTint(binding.vTicBg, R.color.smoky_brown)
+        updateIconTint(binding.vTacBg, R.color.raspberry_purple)
     }
 
     private fun unSelectMoveViews() {
         val firstMoveViews =
-            arrayOf(binding.humanMove, binding.computerMove, binding.randomMove)
+            arrayOf(binding.vItemRandomMove, binding.vItemComputer, binding.vItemHuman)
         for (firstMoveView in firstMoveViews) {
             restoreView(firstMoveView)
         }
-        updateIconTint(binding.icRandMove, R.color.deep_navy)
-        updateIconTint(binding.icComputer, R.color.deep_navy)
-        updateIconTint(binding.icHuman, R.color.deep_navy)
+        updateIconTint(binding.vRandMoveBg, R.color.deep_navy)
+        updateIconTint(binding.vComputerBg, R.color.deep_navy)
+        updateIconTint(binding.vHumanAvatarBg, R.color.deep_navy)
     }
 
     private fun restoreView(
         view: View,
     ) {
-        view.setBackgroundResource(R.drawable.view_board_rounded)
+        view.setBackgroundResource(R.drawable.v_board)
         view.backgroundTintList = ColorStateList.valueOf(
             ContextCompat.getColor(requireContext(), R.color.profile_background)
         )
@@ -178,7 +178,6 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
             ContextCompat.getColor(requireContext(), colorRes)
         )
     }
-
 
     private fun save() {
         with(sharedPref.edit()) {

@@ -15,17 +15,17 @@ class MenuFragment : Fragment(), HasCustomAction {
     private lateinit var binding: FragmentMenuBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View {
         binding = FragmentMenuBinding.inflate(inflater, container, false)
-        binding.btnSinglePlayer.setOnClickListener {
+        binding.btSinglePlayer.setOnClickListener {
             navigator().showDifficultyScreen()
         }
-        binding.btnMultiplayer.setOnClickListener {  }
-        binding.btnLocalMultiplayer.setOnClickListener {  }
+        binding.btMultiplayer.setOnClickListener {  }
+        binding.btLocalMultiplayer.setOnClickListener {  }
         return binding.root
     }
 
     override fun getCustomAction(): CustomAction {
         return CustomAction(
-            iconRes = R.drawable.profile_icon,
+            iconRes = R.drawable.ic_profile,
             textRes = R.string.player_avatar,
             onCustomAction = { navigator().showEditProfileScreen() }
         )
