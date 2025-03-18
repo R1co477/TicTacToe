@@ -26,7 +26,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_red"
                 android:contentDescription="@null" />
 
@@ -35,7 +35,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_teal"
                 android:contentDescription="@null" />
 
@@ -44,7 +44,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_blue"
                 android:contentDescription="@null" />
 
@@ -52,7 +52,7 @@
                 android:id="@+id/iv_green"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_green"
                 android:contentDescription="@null" />
 
@@ -72,7 +72,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_yellow"
                 android:contentDescription="@null" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_pink"
                 android:contentDescription="@null" />
 
@@ -90,7 +90,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_purple"
                 android:contentDescription="@null" />
 
@@ -98,7 +98,7 @@
                 android:id="@+id/iv_orange"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@drawable/v_select_color"
+                android:background="@drawable/v_color"
                 android:backgroundTint="@color/background_orange"
                 android:contentDescription="@null" />
 

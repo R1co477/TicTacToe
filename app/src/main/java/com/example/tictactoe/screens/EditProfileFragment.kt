@@ -36,7 +36,9 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
     private val pickMedia = registerForActivityResult(PickVisualMedia()) { uri ->
         uri?.let {
             unFocusAllViews()
-            setAvatar(it)
+            profile.avatarUri = it
+            profile.selectedColor = null
+            setAvatar()
         }
     }
 
@@ -87,19 +89,18 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         }
     }
 
-    private fun setAvatar(uri: Uri? = null) {
-        profile.avatarUri = uri
+    private fun setAvatar() {
         AvatarManager(profile).setAvatar(binding.ivHumanAvatar)
     }
 
     private fun unFocusAllViews() {
-        val iconDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.v_select_color)
+        val iconDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.v_color)
         getImageViews().forEach { it.setImageDrawable(iconDrawable) }
     }
 
     private fun setupProfile() {
         binding.etNickname.setText(profile.nickname)
-        setAvatar(profile.avatarUri)
+        setAvatar()
         profile.selectedColor?.let { selectedColor ->
             getImageViews().forEach { imageView ->
                 if (imageView.backgroundTintList?.defaultColor == selectedColor.defaultColor) {
@@ -144,6 +145,7 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         profile.nickname = nickname
         binding.etNickname.error = if (nickname.length > 15) "Nickname is too long" else null
         binding.tvNicknameSize.text = getString(R.string.char_сountTextView, nickname.length)
+        setAvatar()
     }
 
     override fun getTitleRes(): Int = R.string.toolbar_edit_profile
