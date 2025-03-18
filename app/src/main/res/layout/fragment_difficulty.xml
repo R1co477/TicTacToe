@@ -5,21 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jetradarmobile.snowfall.SnowfallView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_nightfall"
-        app:snowflakeAlphaMax="255"
-        app:snowflakeAlphaMin="180"
-        app:snowflakeAngleMax="4"
-        app:snowflakeSizeMax="8dp"
-        app:snowflakeSizeMin="1dp"
-        app:snowflakeSpeedMax="5"
-        app:snowflakeSpeedMin="1"
-        app:snowflakesAlreadyFalling="false"
-        app:snowflakesFadingEnabled="true"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+    <include layout="@layout/snowfall_background"/>
 
     <View
         android:layout_width="0dp"

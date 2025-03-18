@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.tictactoe.Profile
 import com.example.tictactoe.R
@@ -25,8 +23,9 @@ import kotlin.properties.Delegates
 import kotlin.random.Random
 
 class BotGameFragment : Fragment(), HasCustomTitle {
+
     private lateinit var binding: FragmentBotGameBinding
-    private var levelDifficulty: Int by Delegates.notNull<Int>()
+    private var levelDifficulty: Int by Delegates.notNull()
     private lateinit var profile: Profile
     private lateinit var settings: Settings
     private lateinit var sharedPref: SharedPreferences
@@ -39,31 +38,19 @@ class BotGameFragment : Fragment(), HasCustomTitle {
         super.onCreate(savedInstanceState)
         sharedPref = requireContext().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
-        profile = sharedPref.getObject(
-            KEY_PROFILE, Profile.default(requireContext())
-        )
-
-        settings = sharedPref.getObject(
-            KEY_SETTINGS, Settings()
-        )
+        profile = sharedPref.getObject(KEY_PROFILE, Profile.default(requireContext()))
+        settings = sharedPref.getObject(KEY_SETTINGS, Settings())
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentBotGameBinding.inflate(inflater, container, false)
 
-        levelDifficulty = arguments?.getInt(ARG_LEVEL)!!
-        when (levelDifficulty) {
-            1 -> setImage(R.drawable.easy_bot).also { setInfo(R.string.easy_bot) }
-            2 -> setImage(R.drawable.medium_bot).also { setInfo(R.string.medium_bot) }
-            3 -> setImage(R.drawable.difficult_bot).also { setInfo(R.string.difficult_bot) }
-        }
+        levelDifficulty = arguments?.getInt(ARG_LEVEL) ?: 1
+        setupBotAppearance()
         setupProfile()
         setupSettings()
-
 
         return binding.root
     }
@@ -73,49 +60,70 @@ class BotGameFragment : Fragment(), HasCustomTitle {
         // remove listener
     }
 
+    private fun setupBotAppearance() {
+        val (imageRes, infoRes) = when (levelDifficulty) {
+            1 -> R.drawable.easy_bot to R.string.easy_bot
+            2 -> R.drawable.medium_bot to R.string.medium_bot
+            3 -> R.drawable.difficult_bot to R.string.difficult_bot
+            else -> R.drawable.easy_bot to R.string.easy_bot
+        }
+
+        setImage(imageRes)
+        setInfo(infoRes)
+    }
+
     private fun setupProfile() {
-        val nickname = profile.nickname
-        binding.tvPlayerNickname.text = nickname
-        AvatarManager(profile).setAvatar(binding.ivPlayerAvatar, binding.tvAvatarLetter)
+        binding.humanEntityCard.name = profile.nickname
+        AvatarManager(profile).setAvatar(binding.humanEntityCard.ivAvatar)
     }
 
-private fun setupSettings() {
-    val tic = R.drawable.tic
-    val tac = R.drawable.tac
+    private fun setupSettings() {
+        humanMark = determineHumanMark()
+        computerMark = if (humanMark == Mark.TIC) Mark.TAC else Mark.TIC
 
-    humanMark = when {
-        settings.randomMark -> if (Random.nextBoolean()) Mark.TIC else Mark.TAC
-        settings.humanTic -> Mark.TIC
-        else -> Mark.TAC
+        setupBoard()
+        startGame()
     }
 
-    computerMark = if (humanMark == Mark.TIC) Mark.TAC else Mark.TIC
-    val humanMove = getHumanMove()
-
-    with(binding) {
-        if (humanMark == Mark.TIC) {
-            ivMarkHuman.setImageResource(tic)
-            ivMarkComputer.setImageResource(tac)
-        } else {
-            ivMarkHuman.setImageResource(tac)
-            ivMarkComputer.setImageResource(tic)
+    private fun determineHumanMark(): Mark {
+        return when {
+            settings.randomMark -> if (Random.nextBoolean()) Mark.TIC else Mark.TAC
+            settings.humanTic -> Mark.TIC
+            else -> Mark.TAC
         }
+    }
 
-        minimax = Minimax(board, computerMark, levelDifficulty * 4)
-        cvBoard.addListener { r, c ->
-            board[r, c] = humanMark
-            computerTurn()
+    private fun setupBoard() {
+        val tic = R.drawable.tic
+        val tac = R.drawable.tac
+
+        with(binding) {
+            if (humanMark == Mark.TIC) {
+                humanEntityCard.mark = tic
+                botEntityCard.mark = tac
+            } else {
+                humanEntityCard.mark = tac
+                botEntityCard.mark = tic
+            }
+
+            minimax = Minimax(board, computerMark, levelDifficulty * 4)
+            cvBoard.addListener { r, c ->
+                board[r, c] = humanMark
+                computerTurn()
+            }
+
+            cvBoard.humanMark =
+                if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
         }
+    }
 
-        cvBoard.humanMark = if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
-
-        if (humanMove) {
+    private fun startGame() {
+        if (getHumanMove()) {
             humanTurn()
         } else {
             computerTurn()
         }
     }
-}
 
     private fun getHumanMove(): Boolean {
         return when {
@@ -126,17 +134,11 @@ private fun setupSettings() {
     }
 
     private fun humanTurn() {
-        binding.apply {
-            vHumanStatus.setBackgroundResource(R.drawable.bg_status_active)
-            tvHumanTurn.visibility = TextView.VISIBLE
-        }
+        binding.humanEntityCard.active = true
     }
 
     private fun computerTurn() {
-        binding.apply {
-            vHumanStatus.setBackgroundResource(R.drawable.bg_status_inactive)
-            tvHumanTurn.visibility = TextView.INVISIBLE
-        }
+        binding.humanEntityCard.active = false
         val (r, c) = minimax.findBestMove()
         board[r, c] = computerMark
         binding.cvBoard.setMove(r, c, computerMark)
@@ -144,12 +146,11 @@ private fun setupSettings() {
     }
 
     private fun setImage(@DrawableRes imageResId: Int) {
-        val drawable = ContextCompat.getDrawable(requireContext(), imageResId)
-        binding.ivBotAvatar.setImageDrawable(drawable)
+        binding.botEntityCard.avatarResId = imageResId
     }
 
     private fun setInfo(@StringRes stringResId: Int) {
-        binding.tvBotNickname.text = getString(stringResId)
+        binding.botEntityCard.description = getString(stringResId)
     }
 
     override fun getTitleRes(): Int = R.string.toolbar_bot
@@ -158,11 +159,11 @@ private fun setupSettings() {
         private const val ARG_LEVEL = "levelDifficulty"
 
         fun newInstance(level: Int): BotGameFragment {
-            val args = Bundle()
-            args.putInt(ARG_LEVEL, level)
-            val fragment = BotGameFragment()
-            fragment.arguments = args
-            return fragment
+            return BotGameFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_LEVEL, level)
+                }
+            }
         }
     }
 }

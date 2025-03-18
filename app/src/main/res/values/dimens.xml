@@ -2,4 +2,7 @@
 <resources>
     <dimen name="button_text">28sp</dimen>
     <dimen name="menu_title">110sp</dimen>
+    <dimen name="board_cell">0.3</dimen>
+    <dimen name="iv_entity_card">0.3</dimen>
+    <dimen name="avatar_size">20dp</dimen>
 </resources>

@@ -5,27 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_nightfall"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.jetradarmobile.snowfall.SnowfallView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_nightfall"
-        app:snowflakeAlphaMax="255"
-        app:snowflakeAlphaMin="180"
-        app:snowflakeAngleMax="4"
-        app:snowflakeSizeMax="8dp"
-        app:snowflakeSizeMin="1dp"
-        app:snowflakeSpeedMax="5"
-        app:snowflakeSpeedMin="1"
-        app:snowflakesAlreadyFalling="false"
-        app:snowflakesFadingEnabled="true" />
+    <include layout="@layout/snowfall_background"/>
 
     <TextView
         android:id="@+id/tv_game_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerInParent="true"
         android:fontFamily="@font/main_title"

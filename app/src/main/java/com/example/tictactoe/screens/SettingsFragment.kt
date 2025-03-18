@@ -44,7 +44,7 @@ class SettingsFragment : Fragment(), HasCustomTitle, HasCustomAction {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        AvatarManager(profile).setAvatar(binding.ivHumanAvatar, binding.tvAvatarLetter)
+        AvatarManager(profile).setAvatar(binding.ivHumanAvatar)
 
         binding.btSave.setOnClickListener { save() }
         binding.btCancel.setOnClickListener { navigator().goBack() }

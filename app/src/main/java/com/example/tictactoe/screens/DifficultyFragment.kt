@@ -38,5 +38,4 @@ class DifficultyFragment : Fragment(), HasCustomTitle, HasCustomAction {
         R.drawable.ic_settings,
         R.string.settings
     ) { navigator().showSettingsMenuScreen() }
-
 }

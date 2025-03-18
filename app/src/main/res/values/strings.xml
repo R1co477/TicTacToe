@@ -51,4 +51,5 @@
     <string name="play_as_o">Play as O</string>
     <string name="computer">Computer</string>
     <string name="play_as_x">Play as X</string>
+    <string name="avatar">Avatar</string>
 </resources>
