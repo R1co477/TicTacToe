@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="avatar" format="reference" />
     <declare-styleable name="EntityCardView">
         <attr name="name" format="string" />
-        <attr name="avatar" format="reference" />
         <attr name="mark" format="reference" />
         <attr name="description" format="string" />
         <attr name="active" format="boolean" />
+        <attr name="avatar" />
+    </declare-styleable>
+    <declare-styleable name="ResultGameView">
+        <attr name="text" format="string" />
+        <attr name="avatar" />
     </declare-styleable>
 </resources>

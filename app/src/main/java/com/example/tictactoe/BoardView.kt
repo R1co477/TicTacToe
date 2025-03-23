@@ -4,13 +4,10 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Context
-
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View.BaseSavedState
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
@@ -139,32 +136,30 @@ class BoardView @JvmOverloads constructor(
         private val TIC = R.drawable.cell_tic
         private val TAC = R.drawable.cell_tac
     }
-}
+    class SavedState : BaseSavedState {
+        var stateViews: IntArray = IntArray(9)
 
+        constructor(superState: Parcelable) : super(superState)
 
-class SavedState : BaseSavedState {
-    var stateViews: IntArray = IntArray(9)
+        constructor(parcel: Parcel) : super(parcel) {
+            stateViews = parcel.createIntArray() ?: IntArray(9)
+        }
 
-    constructor(superState: Parcelable) : super(superState)
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.writeIntArray(stateViews)
+        }
 
-    constructor(parcel: Parcel) : super(parcel) {
-        stateViews = parcel.createIntArray() ?: IntArray(9)
-    }
+        companion object {
+            @JvmField
+            val CREATOR = object : Parcelable.Creator<SavedState> {
+                override fun createFromParcel(parcel: Parcel): SavedState {
+                    return SavedState(parcel)
+                }
 
-    override fun writeToParcel(out: Parcel, flags: Int) {
-        super.writeToParcel(out, flags)
-        out.writeIntArray(stateViews)
-    }
-
-    companion object {
-        @JvmField
-        val CREATOR = object : Parcelable.Creator<SavedState> {
-            override fun createFromParcel(parcel: Parcel): SavedState {
-                return SavedState(parcel)
-            }
-
-            override fun newArray(size: Int): Array<SavedState?> {
-                return arrayOfNulls(size)
+                override fun newArray(size: Int): Array<SavedState?> {
+                    return arrayOfNulls(size)
+                }
             }
         }
     }
