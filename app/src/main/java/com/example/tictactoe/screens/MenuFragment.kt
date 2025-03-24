@@ -20,6 +20,7 @@ class MenuFragment : Fragment(), HasCustomAction {
         }
         binding.btMultiplayer.setOnClickListener {  }
         binding.btLocalMultiplayer.setOnClickListener {  }
+
         return binding.root
     }
 

@@ -23,7 +23,6 @@ class ResultGameView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
-
     private val backgroundClipPath = Path()
     private val avatarClipPath = Path()
 
@@ -54,9 +53,8 @@ class ResultGameView @JvmOverloads constructor(
     var avatarResId: Int = 0
         set(value) {
             field = value
-            if (value != 0) {
-                val drawable = AppCompatResources.getDrawable(context, avatarResId)
-                avatarBitmap = drawable?.toBitmap()
+            if (value != 0 && width > 0 && height > 0) {
+                updateAvatarBitmap()
             }
         }
 
@@ -73,10 +71,12 @@ class ResultGameView @JvmOverloads constructor(
     }
 
     private fun initAttrs(attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) {
+        if (avatarBitmap == null) {
+            return
+        }
         context.withStyledAttributes(attrs, R.styleable.ResultGameView, defStyleAttr, defStyleRes) {
             text = getString(R.styleable.ResultGameView_text) ?: ""
-            avatarResId =
-                getResourceId(R.styleable.ResultGameView_avatar, R.drawable.profile_avatar)
+            avatarResId = getResourceId(R.styleable.ResultGameView_avatar, R.drawable.profile_avatar)
         }
     }
 
@@ -123,6 +123,10 @@ class ResultGameView @JvmOverloads constructor(
             center.x, center.y, avatarRadius - avatarMargin, Path.Direction.CW
         )
 
+        if (avatarResId != 0) {
+            updateAvatarBitmap()
+        }
+
         avatarBitmap.let {
             val bitmapWidth = avatarBitmap!!.width
             val bitmapHeight = avatarBitmap!!.height
@@ -151,21 +155,6 @@ class ResultGameView @JvmOverloads constructor(
         style = Paint.Style.FILL_AND_STROKE
         isAntiAlias = true
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-    }
-
-    private fun createPaint(color: Int) = Paint().apply {
-        this.color = context.getColor(color)
-        style = Paint.Style.FILL
-        isAntiAlias = true
-    }
-
-    private fun drawTriangle(x: Point, y: Point, z: Point, paint: Paint, canvas: Canvas) {
-        val path = Path()
-        path.moveTo(x.x, x.y)
-        path.lineTo(y.x, y.y)
-        path.lineTo(z.x, z.y)
-        path.close()
-        canvas.drawPath(path, paint)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -211,18 +200,31 @@ class ResultGameView @JvmOverloads constructor(
         }
     }
 
-    override fun onSaveInstanceState(): Parcelable? {
-        val superState = super.onSaveInstanceState()
-        val savedState = SavedState(superState)
-        savedState.resultGame = ResultGame(avatarBitmap, text)
-        return savedState
+    private fun createPaint(color: Int) = Paint().apply {
+        this.color = context.getColor(color)
+        style = Paint.Style.FILL
+        isAntiAlias = true
     }
 
-    override fun onRestoreInstanceState(state: Parcelable?) {
-        val savedState = state as SavedState
-        super.onRestoreInstanceState(savedState.superState)
-        avatarBitmap = savedState.resultGame?.bitmap
-        text = savedState.resultGame?.result ?: ""
+    private fun updateAvatarBitmap() {
+        val drawable = AppCompatResources.getDrawable(context, avatarResId)
+        if (drawable != null) {
+            val size = (avatarRadius * 2).toInt()
+            avatarBitmap = if (size > 0) {
+                drawable.toBitmap(width = size, height = size)
+            } else {
+                drawable.toBitmap(width = 100, height = 100)
+            }
+        }
+    }
+
+    private fun drawTriangle(x: Point, y: Point, z: Point, paint: Paint, canvas: Canvas) {
+        val path = Path()
+        path.moveTo(x.x, x.y)
+        path.lineTo(y.x, y.y)
+        path.lineTo(z.x, z.y)
+        path.close()
+        canvas.drawPath(path, paint)
     }
 
     private fun drawTriangleRow(
@@ -267,6 +269,21 @@ class ResultGameView @JvmOverloads constructor(
         }
     }
 
+    override fun onSaveInstanceState(): Parcelable? {
+        val superState = super.onSaveInstanceState()
+        val savedState = SavedState(superState)
+        savedState.resultGame = ResultGame(avatarBitmap, text)
+        return savedState
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState = state as SavedState
+        super.onRestoreInstanceState(savedState.superState)
+        avatarBitmap = savedState.resultGame?.bitmap
+        text = savedState.resultGame?.result ?: ""
+    }
+
+
     class SavedState : BaseSavedState {
         var resultGame: ResultGame? = null
 
@@ -299,5 +316,3 @@ class ResultGameView @JvmOverloads constructor(
         }
     }
 }
-
-
