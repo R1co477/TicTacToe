@@ -18,7 +18,6 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.withSave
 import kotlin.math.max
 
-
 class ResultGameView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
@@ -71,9 +70,10 @@ class ResultGameView @JvmOverloads constructor(
     }
 
     private fun initAttrs(attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) {
-        if (avatarBitmap == null) {
+        if (attrs == null || avatarBitmap == null) {
             return
         }
+
         context.withStyledAttributes(attrs, R.styleable.ResultGameView, defStyleAttr, defStyleRes) {
             text = getString(R.styleable.ResultGameView_text) ?: ""
             avatarResId = getResourceId(R.styleable.ResultGameView_avatar, R.drawable.profile_avatar)
