@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/snowfall_background"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/begin_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="32dp" />
+
+    <com.example.tictactoe.ResultGameView
+        android:id="@+id/cv_result"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="55dp"
+        android:background="@color/background_teal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.example.tictactoe.EntityCardView
+        android:id="@+id/human_entity_card"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        app:description="@string/you_turn"
+        tools:avatar="@drawable/medium_bot"
+        tools:name="Player"
+        app:layout_constraintStart_toStartOf="@id/begin_guide_line"
+        app:layout_constraintBottom_toTopOf="@id/cv_result"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.tictactoe.EntityCardView
+        android:id="@+id/bot_entity_card"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        app:description="@string/you_turn"
+        tools:avatar="@drawable/easy_bot"
+        tools:name="bot"
+        tools:mark="@drawable/tic"
+        app:layout_constraintEnd_toStartOf="@id/end_guide_line"
+        app:layout_constraintBottom_toTopOf="@id/cv_result"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/bt_red_glow"
+        android:contentDescription="@string/button_refresh"
+        android:src="@drawable/ic_refresh"
+        android:scaleType="fitXY"
+        android:padding="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_result"
+        app:layout_constraintBottom_toBottomOf="@id/cv_result"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

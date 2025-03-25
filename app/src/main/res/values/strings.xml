@@ -52,4 +52,5 @@
     <string name="computer">Computer</string>
     <string name="play_as_x">Play as X</string>
     <string name="avatar">Avatar</string>
+    <string name="button_refresh">button_refresh</string>
 </resources>
