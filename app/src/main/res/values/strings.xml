@@ -28,6 +28,7 @@
     <string name="toolbar_difficulty">Choose Difficulty</string>
     <string name="toolbar_bot">Tic-Tac-Toe: Bot</string>
     <string name="toolbar_settings">Tic-Tac-Toe: Settings</string>
+    <string name="toolbar_game_result">Game Over: Play Again?</string>
     <string name="player_avatar">Player avatar</string>
     <string name="bot_avatar">Bot avatar</string>
     <string name="player_human">Player human</string>

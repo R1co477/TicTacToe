@@ -1,6 +1,7 @@
 package com.example.tictactoe.screens
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -34,6 +35,7 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
     private val pickMedia = registerForActivityResult(PickVisualMedia()) { uri ->
         uri?.let {
+            requireContext().contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             unFocusAllViews()
             profile.avatarUri = it
             profile.selectedColor = null

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/snowfall_background"/>
+    <include layout="@layout/snowfall_background" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/begin_guide_line"
@@ -22,50 +22,52 @@
         app:layout_constraintGuide_end="32dp" />
 
     <com.example.tictactoe.ResultGameView
-        android:id="@+id/cv_result"
+        android:id="@+id/result_game"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="55dp"
-        android:background="@color/background_teal"
+        android:layout_marginLeft="@dimen/result_game_margin"
+        android:layout_marginTop="160dp"
+        android:layout_marginRight="@dimen/result_game_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.tictactoe.EntityCardView
         android:id="@+id/human_entity_card"
         android:layout_width="150dp"
         android:layout_height="0dp"
         app:description="@string/you_turn"
-        tools:avatar="@drawable/medium_bot"
-        tools:name="Player"
+        app:layout_constraintBottom_toTopOf="@id/result_game"
         app:layout_constraintStart_toStartOf="@id/begin_guide_line"
-        app:layout_constraintBottom_toTopOf="@id/cv_result"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:avatar="@drawable/medium_bot"
+        tools:name="Player" />
 
     <com.example.tictactoe.EntityCardView
         android:id="@+id/bot_entity_card"
         android:layout_width="150dp"
         android:layout_height="0dp"
         app:description="@string/you_turn"
-        tools:avatar="@drawable/easy_bot"
-        tools:name="bot"
-        tools:mark="@drawable/tic"
+        app:layout_constraintBottom_toTopOf="@id/result_game"
         app:layout_constraintEnd_toStartOf="@id/end_guide_line"
-        app:layout_constraintBottom_toTopOf="@id/cv_result"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:avatar="@drawable/easy_bot"
+        tools:mark="@drawable/tic"
+        tools:name="bot" />
 
     <ImageButton
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:id="@+id/bt_refresh"
+        android:layout_width="@dimen/bt_refresh"
+        android:layout_height="@dimen/bt_refresh"
         android:background="@drawable/bt_red_glow"
         android:contentDescription="@string/button_refresh"
-        android:src="@drawable/ic_refresh"
+        android:padding="@dimen/bt_refresh_padding"
         android:scaleType="fitXY"
-        android:padding="14dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintBottom_toBottomOf="@id/result_game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_result"
-        app:layout_constraintBottom_toBottomOf="@id/cv_result"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result_game" />
 </androidx.constraintlayout.widget.ConstraintLayout>

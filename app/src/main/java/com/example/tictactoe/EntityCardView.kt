@@ -78,6 +78,14 @@ class EntityCardView @JvmOverloads constructor(
         initializeAttributes(attrs, defStyleAttr, defStyleRes)
     }
 
+    fun loadEntityCard(entityCard: EntityCard) {
+        name = entityCard.name
+        avatarBitmap = entityCard.avatar
+        mark = entityCard.mark
+        description = entityCard.description
+        invalidate()
+    }
+
     private fun adjustTextSize() {
         val screenWidth = Resources.getSystem().displayMetrics.widthPixels
         val textSizeInDp = screenWidth * 0.045f / Resources.getSystem().displayMetrics.density

@@ -1,5 +1,7 @@
 package com.example.tictactoe.utils
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -34,13 +36,17 @@ class AvatarManager(private val profile: Profile) {
                 .load(profile.avatarUri)
                 .circleCrop()
                 .into(object : CustomTarget<Drawable>() {
-                    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                    override fun onResourceReady(
+                        resource: Drawable,
+                        transition: Transition<in Drawable>?
+                    ) {
                         imageView.setImageDrawable(resource)
                     }
+
                     override fun onLoadCleared(placeholder: Drawable?) {}
                 })
         }
-        }
+    }
 
     private fun createTextDrawable(letter: String, color: Int, imageView: ImageView): Drawable {
         val size = if (imageView.width > 0) imageView.width else 200
@@ -63,4 +69,29 @@ class AvatarManager(private val profile: Profile) {
 
         return bitmap.toDrawable(imageView.context.resources)
     }
+
+    fun createTextBitmap(profile: Profile, context: Context): Bitmap {
+        val size = 200
+        val bitmap = createBitmap(size, size)
+        val canvas = Canvas(bitmap)
+
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = profile.selectedColor?.defaultColor ?: Color.GRAY
+        }
+        canvas.drawCircle(size / 2f, size / 2f, size / 2f, paint)
+
+        val letter = profile.nickname.firstOrNull()?.uppercase() ?: "?"
+
+        paint.color = Color.WHITE
+        paint.textSize = size * 0.4f
+        paint.textAlign = Paint.Align.CENTER
+
+        val textHeight = paint.descent() - paint.ascent()
+        val textOffset = textHeight / 2 - paint.descent()
+
+        canvas.drawText(letter, size / 2f, size / 2f + textOffset, paint)
+
+        return bitmap
     }
+
+}

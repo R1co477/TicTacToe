@@ -6,8 +6,8 @@ import android.os.Parcelable
 import com.example.tictactoe.utils.bitmapToByteArray
 import com.example.tictactoe.utils.byteArrayToBitmap
 
-class ResultGame(val bitmap: Bitmap?, val result: String) : Parcelable {
-    val bitmapData: ByteArray? = bitmap?.let { bitmapToByteArray(it) }
+class ResultGame(val avatarBitmap: Bitmap?, val result: String) : Parcelable {
+    private val bitmapData: ByteArray? = avatarBitmap?.let { bitmapToByteArray(it) }
 
     constructor(parcel: Parcel) : this(
         parcel.createByteArray()?.let { byteArrayToBitmap(it) },

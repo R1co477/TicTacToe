@@ -127,10 +127,14 @@ class ResultGameView @JvmOverloads constructor(
             updateAvatarBitmap()
         }
 
-        avatarBitmap.let {
-            val bitmapWidth = avatarBitmap!!.width
-            val bitmapHeight = avatarBitmap!!.height
-            val scale = (avatarRadius * 2) / minOf(bitmapWidth, bitmapHeight)
+        avatarBitmap?.let { bitmap ->
+            val bitmapWidth = bitmap.width
+            val bitmapHeight = bitmap.height
+            val scale = if (bitmapWidth > 0 && bitmapHeight > 0) {
+                (avatarRadius * 2) / minOf(bitmapWidth, bitmapHeight).toFloat()
+            } else {
+                0f
+            }
 
             val left = center.x - (bitmapWidth * scale / 2)
             val top = center.y - (bitmapHeight * scale / 2)
@@ -138,6 +142,8 @@ class ResultGameView @JvmOverloads constructor(
             avatarRect = RectF(
                 left, top, left + bitmapWidth * scale, top + bitmapHeight * scale
             )
+        } ?: run {
+            avatarRect = RectF(0f, 0f, 0f, 0f)
         }
     }
 
@@ -194,10 +200,17 @@ class ResultGameView @JvmOverloads constructor(
         canvas.drawCircle(center.x, center.y, avatarRadius, paintAvatar)
         canvas.withSave {
             clipPath(avatarClipPath)
-            avatarBitmap.let {
-                canvas.drawBitmap(it!!, null, avatarRect, null)
+            avatarBitmap?.let {
+                canvas.drawBitmap(it, null, avatarRect, null)
             }
         }
+    }
+
+    fun loadResultGame(resultGame: ResultGame) {
+        text = resultGame.result
+        avatarBitmap = resultGame.avatarBitmap
+        requestLayout()
+        invalidate()
     }
 
     private fun createPaint(color: Int) = Paint().apply {
@@ -279,7 +292,7 @@ class ResultGameView @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable?) {
         val savedState = state as SavedState
         super.onRestoreInstanceState(savedState.superState)
-        avatarBitmap = savedState.resultGame?.bitmap
+        avatarBitmap = savedState.resultGame?.avatarBitmap
         text = savedState.resultGame?.result ?: ""
     }
 

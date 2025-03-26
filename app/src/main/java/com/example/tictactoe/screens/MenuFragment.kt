@@ -13,14 +13,18 @@ import com.example.tictactoe.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment(), HasCustomAction {
     private lateinit var binding: FragmentMenuBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = FragmentMenuBinding.inflate(inflater, container, false)
+
         binding.btSinglePlayer.setOnClickListener {
             navigator().showDifficultyScreen()
         }
-        binding.btMultiplayer.setOnClickListener {  }
-        binding.btLocalMultiplayer.setOnClickListener {  }
+        binding.btMultiplayer.setOnClickListener { }
+        binding.btLocalMultiplayer.setOnClickListener {
 
+        }
         return binding.root
     }
 
@@ -28,7 +32,6 @@ class MenuFragment : Fragment(), HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_profile,
             textRes = R.string.player_avatar,
-            onCustomAction = { navigator().showEditProfileScreen() }
-        )
+            onCustomAction = { navigator().showEditProfileScreen() })
     }
 }
