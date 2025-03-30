@@ -41,6 +41,12 @@ class MainActivity : AppCompatActivity(), Navigator {
             val fragment = MenuFragment()
             supportFragmentManager
                 .beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
                 .add(R.id.fragmentContainer, fragment)
                 .commit()
         }

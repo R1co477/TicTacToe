@@ -54,4 +54,8 @@
     <string name="play_as_x">Play as X</string>
     <string name="avatar">Avatar</string>
     <string name="button_refresh">button_refresh</string>
+    <string name="you_win">YOU WIN!</string>
+    <string name="you_lose">YOU LOSE!</string>
+    <string name="draw">DRAW!</string>
+    <string name="bot_turn">Bot Turn\n</string>
 </resources>

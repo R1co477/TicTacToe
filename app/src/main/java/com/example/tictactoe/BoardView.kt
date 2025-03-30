@@ -2,63 +2,302 @@ package com.example.tictactoe
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
+import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.databinding.BoardBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.properties.Delegates
 
+enum class GameState {
+    ONGOING,
+    HUMAN_WIN,
+    AI_WIN,
+    DRAW
+}
+
 typealias BoardViewListener = (r: Int, c: Int) -> Unit
+typealias GameStateListener = (GameState) -> Unit
 
 class BoardView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
+
     private val binding: BoardBinding
+    private val cells: Array<ImageView>
+
     var humanMark: Int by Delegates.notNull<Int>()
-    val listeners = mutableListOf<BoardViewListener>()
+    private var boardState = Array(3) { IntArray(3) { 0 } }
+
+    private val moveListeners = mutableListOf<BoardViewListener>()
+    private val gameStateListeners = mutableListOf<GameStateListener>()
+
+    internal var currentGameState: GameState = GameState.ONGOING
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyGameStateChanged(value)
+            }
+        }
 
     init {
         val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.board, this, true)
         binding = BoardBinding.bind(this)
-        for (cell in getCells()) {
-            cell.setOnClickListener{
-                val index = getCells().indexOf(cell)
+        cells = getCells()
+
+        setupCellClickListeners()
+    }
+
+    private fun setupCellClickListeners() {
+        for (cell in cells) {
+            cell.setOnClickListener {
+                val index = cells.indexOf(it)
                 val row = index / 3
                 val col = index % 3
-                updateCell(cell, humanMark)
-                notifyChanges(row, col)
+
+                if (boardState[row][col] == 0 && currentGameState == GameState.ONGOING) {
+                    makeHumanMove(row, col)
+                }
             }
         }
     }
 
+    private fun makeHumanMove(row: Int, col: Int) {
+        updateCell(cells[row * 3 + col], humanMark)
+        boardState[row][col] = if (humanMark == TIC) 1 else -1
+        notifyChanges(row, col)
+        checkGameState()
+    }
+
     fun setMove(row: Int, column: Int, mark: Mark) {
-        val cells = getCells()
-        val twoDimArray = Array(3) { row -> cells.sliceArray(row * 3 until (row + 1) * 3) }
-        val cell = twoDimArray[row][column]
+        val cell = cells[row * 3 + column]
         when (mark) {
             Mark.TAC -> updateCell(cell, TAC)
             Mark.TIC -> updateCell(cell, TIC)
             else -> return
         }
+        boardState[row][column] = if (mark == Mark.TIC) 1 else -1
+        checkGameState()
+    }
+
+    private fun checkGameState() {
+        val humanValue = if (humanMark == TIC) 1 else -1
+        val aiValue = if (humanMark == TIC) -1 else 1
+
+        if (checkWin(humanValue)) {
+            currentGameState = GameState.HUMAN_WIN
+        } else if (checkWin(aiValue)) {
+            currentGameState = GameState.AI_WIN
+        } else if (isBoardFull()) {
+            currentGameState = GameState.DRAW
+        } else {
+            currentGameState = GameState.ONGOING
+        }
+    }
+
+    private fun checkWin(player: Int): Boolean {
+        for (row in 0 until 3) {
+            if (boardState[row].all { it == player }) return true
+        }
+
+        for (col in 0 until 3) {
+            if ((0 until 3).all { boardState[it][col] == player }) return true
+        }
+
+        if ((0 until 3).all { boardState[it][it] == player }) return true
+        if ((0 until 3).all { boardState[it][2 - it] == player }) return true
+
+        return false
+    }
+
+    private fun isBoardFull(): Boolean {
+        return boardState.all { row -> row.all { it != 0 } }
+    }
+
+    fun addMoveListener(listener: BoardViewListener) {
+        moveListeners.add(listener)
+    }
+
+    fun addGameStateListener(listener: GameStateListener) {
+        gameStateListeners.add(listener)
+    }
+
+    private fun notifyChanges(row: Int, col: Int) {
+        moveListeners.forEach { it.invoke(row, col) }
+    }
+
+    private val scope = CoroutineScope(Dispatchers.Main + Job())
+    private fun notifyGameStateChanged(state: GameState) {
+        scope.launch {
+            when (state) {
+                GameState.HUMAN_WIN -> {
+                    val winLine = getWinLine(humanMark)
+                    animateWinLine(winLine)
+                    delay(1000)
+                }
+
+                GameState.AI_WIN -> {
+                    val computerMark = if (humanMark == TIC) TAC else TIC
+                    val winLine = getWinLine(computerMark)
+                    animateWinLine(winLine)
+                    delay(1000)
+                }
+
+                GameState.DRAW -> {
+                    delay(1000)
+                }
+
+                GameState.ONGOING -> {
+
+                }
+            }
+            gameStateListeners.forEach { it.invoke(state) }
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        scope.cancel()
+    }
+
+    private fun getWinLine(markResId: Int): Array<ImageView> {
+        val boardValue = if (markResId == TIC) 1 else -1
+
+        for (i in 0 until 3) {
+            if (boardState[0][i] == boardValue && boardState[1][i] == boardValue && boardState[2][i] == boardValue) {
+                return arrayOf(getCells()[i], getCells()[i + 3], getCells()[i + 6])
+            }
+            if (boardState[i][0] == boardValue && boardState[i][1] == boardValue && boardState[i][2] == boardValue) {
+                return arrayOf(getCells()[i * 3], getCells()[i * 3 + 1], getCells()[i * 3 + 2])
+            }
+        }
+
+        if (boardState[0][0] == boardValue && boardState[1][1] == boardValue && boardState[2][2] == boardValue) {
+            return arrayOf(getCells()[0], getCells()[4], getCells()[8])
+        }
+        if (boardState[0][2] == boardValue && boardState[1][1] == boardValue && boardState[2][0] == boardValue) {
+            return arrayOf(getCells()[2], getCells()[4], getCells()[6])
+        }
+
+        return emptyArray()
+    }
+
+    private fun animateWinLine(winLine: Array<ImageView>) {
+        if (winLine.isEmpty()) return
+
+        for (cell in winLine) {
+            cell.alpha = 1f
+            cell.scaleX = 1f
+            cell.scaleY = 1f
+        }
+
+        val duration = 300L
+        val delay = 100L
+
+        for (i in winLine.indices) {
+            val cell = winLine[i]
+
+            val scaleUp = ObjectAnimator.ofPropertyValuesHolder(
+                cell,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f)
+            ).apply {
+                this.duration = duration
+                this.startDelay = i * delay
+                interpolator = DecelerateInterpolator()
+            }
+
+            val scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                cell,
+                PropertyValuesHolder.ofFloat("scaleX", 1f),
+                PropertyValuesHolder.ofFloat("scaleY", 1f)
+            ).apply {
+                this.duration = duration
+                interpolator = AccelerateInterpolator()
+            }
+
+            val highlight = ObjectAnimator.ofArgb(
+                cell,
+                "colorFilter",
+                Color.WHITE,
+                Color.YELLOW
+            ).apply {
+                this.duration = duration * 2
+                this.startDelay = i * delay
+                interpolator = AccelerateDecelerateInterpolator()
+                repeatCount = ObjectAnimator.INFINITE
+                repeatMode = ObjectAnimator.REVERSE
+            }
+
+            val animatorSet = AnimatorSet().apply {
+                playSequentially(scaleUp, scaleDown)
+            }
+
+            animatorSet.start()
+            highlight.start()
+        }
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()!!
+        val savedState = SavedState(superState)
+
+        savedState.boardState = boardState.flatMap { it.toList() }.toIntArray()
+        savedState.gameState = currentGameState.ordinal
+
+        return savedState
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState = state as SavedState
+        super.onRestoreInstanceState(savedState.superState)
+
+        val flatState = savedState.boardState
+        for (i in 0 until 3) {
+            for (j in 0 until 3) {
+                boardState[i][j] = flatState[i * 3 + j]
+                when (flatState[i * 3 + j]) {
+                    1 -> updateCell(cells[i * 3 + j], TIC)
+                    -1 -> updateCell(cells[i * 3 + j], TAC)
+                }
+            }
+        }
+
+        currentGameState = GameState.entries.toTypedArray()[savedState.gameState]
     }
 
     private fun getCells(): Array<ImageView> {
         with(binding) {
             return arrayOf(
-                cell11, cell12, cell13, cell21, cell22, cell23, cell31, cell32, cell33
+                cell11, cell12, cell13,
+                cell21, cell22, cell23,
+                cell31, cell32, cell33
             )
         }
     }
-
 
     private fun updateCell(imageView: ImageView, newDrawableRes: Int) {
         imageView.tag = newDrawableRes
@@ -85,69 +324,26 @@ class BoardView @JvmOverloads constructor(
         flipOut.start()
     }
 
-    fun addListener(listener: BoardViewListener) {
-        listeners.add(listener)
-    }
-
-    fun removeListener(listener: BoardViewListener) {
-        listeners.remove(listener)
-    }
-
-    private fun notifyChanges(row: Int, col: Int) {
-        listeners.forEach { it.invoke(row, col) }
-    }
-
-
-    override fun onSaveInstanceState(): Parcelable? {
-        val superState = super.onSaveInstanceState()!!
-        val savedState = SavedState(superState)
-
-        val stateViews = IntArray(9)
-        val cells = getCells()
-
-        for (i in stateViews.indices) {
-            stateViews[i] = when (cells[i].tag) {
-                TIC -> 1
-                TAC -> -1
-                else -> 0
-            }
-
-        }
-        savedState.stateViews = stateViews
-        return savedState
-    }
-
-    override fun onRestoreInstanceState(state: Parcelable?) {
-        val savedState = state as SavedState
-        super.onRestoreInstanceState(savedState.superState)
-        val cells = getCells()
-        val stateViews = savedState.stateViews
-        for (i in cells.indices) {
-            when (stateViews[i]) {
-                1 -> updateCell(cells[i], TIC)
-                -1 -> updateCell(cells[i], TAC)
-                else -> continue
-            }
-        }
-    }
-
-
     companion object {
         private val TIC = R.drawable.cell_tic
         private val TAC = R.drawable.cell_tac
     }
+
     class SavedState : BaseSavedState {
-        var stateViews: IntArray = IntArray(9)
+        var boardState: IntArray = IntArray(9)
+        var gameState: Int = 0
 
         constructor(superState: Parcelable) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
-            stateViews = parcel.createIntArray() ?: IntArray(9)
+            boardState = parcel.createIntArray() ?: IntArray(9)
+            gameState = parcel.readInt()
         }
 
         override fun writeToParcel(out: Parcel, flags: Int) {
             super.writeToParcel(out, flags)
-            out.writeIntArray(stateViews)
+            out.writeIntArray(boardState)
+            out.writeInt(gameState)
         }
 
         companion object {

@@ -2,6 +2,9 @@ package com.example.tictactoe.screens
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +12,27 @@ import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.example.tictactoe.EntityCard
+import com.example.tictactoe.GameState
 import com.example.tictactoe.Profile
 import com.example.tictactoe.R
+import com.example.tictactoe.ResultGame
 import com.example.tictactoe.Settings
 import com.example.tictactoe.ai.Board
 import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.ai.Minimax
 import com.example.tictactoe.contract.HasCustomTitle
+import com.example.tictactoe.contract.navigator
 import com.example.tictactoe.databinding.FragmentBotGameBinding
 import com.example.tictactoe.extensions.getObject
 import com.example.tictactoe.utils.AvatarManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.properties.Delegates
 import kotlin.random.Random
 
@@ -33,11 +47,11 @@ class BotGameFragment : Fragment(), HasCustomTitle {
     private val board: Board = Board.empty()
     private lateinit var humanMark: Mark
     private lateinit var computerMark: Mark
+    private var isComputerThinking = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPref = requireContext().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-
         profile = sharedPref.getObject(KEY_PROFILE, Profile.default(requireContext()))
         settings = sharedPref.getObject(KEY_SETTINGS, Settings())
     }
@@ -46,18 +60,16 @@ class BotGameFragment : Fragment(), HasCustomTitle {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentBotGameBinding.inflate(inflater, container, false)
-
         levelDifficulty = arguments?.getInt(ARG_LEVEL) ?: 1
         setupBotAppearance()
         setupProfile()
         setupSettings()
-
         return binding.root
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        // remove listener
+        isComputerThinking = false
     }
 
     private fun setupBotAppearance() {
@@ -67,7 +79,6 @@ class BotGameFragment : Fragment(), HasCustomTitle {
             3 -> R.drawable.difficult_bot to R.string.difficult_bot
             else -> R.drawable.easy_bot to R.string.easy_bot
         }
-
         setImage(imageRes)
         setInfo(infoRes)
     }
@@ -80,7 +91,6 @@ class BotGameFragment : Fragment(), HasCustomTitle {
     private fun setupSettings() {
         humanMark = determineHumanMark()
         computerMark = if (humanMark == Mark.TIC) Mark.TAC else Mark.TIC
-
         setupBoard()
         startGame()
     }
@@ -106,15 +116,97 @@ class BotGameFragment : Fragment(), HasCustomTitle {
                 botEntityCard.mark = tic
             }
 
-            minimax = Minimax(board, computerMark, levelDifficulty * 4)
-            cvBoard.addListener { r, c ->
-                board[r, c] = humanMark
-                computerTurn()
-            }
-
             cvBoard.humanMark =
                 if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
+            minimax = Minimax(board, computerMark, levelDifficulty * 4)
+
+            cvBoard.addMoveListener { r, c ->
+                if (!isComputerThinking) {
+                    board[r, c] = humanMark
+                    computerTurn()
+                }
+            }
+
+            cvBoard.addGameStateListener { state ->
+                showGameOverScreen(state)
+                binding.humanEntityCard.active = false
+                binding.botEntityCard.active = false
+            }
         }
+    }
+
+    private fun showGameOverScreen(state: GameState) {
+        val result = when (state) {
+            GameState.HUMAN_WIN -> getString(R.string.you_win)
+            GameState.AI_WIN -> getString(R.string.you_lose)
+            GameState.DRAW -> getString(R.string.draw)
+            GameState.ONGOING -> return
+        }
+
+        if (profile.avatarUri != null) {
+            Glide.with(this)
+                .asBitmap()
+                .load(profile.avatarUri)
+                .circleCrop()
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        navigateToGameOverFragment(resource, result)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        val avatarManager = AvatarManager(profile)
+                        navigateToGameOverFragment(
+                            avatarManager.createTextBitmap(profile, requireContext()),
+                            result
+                        )
+                    }
+                })
+        } else {
+            val avatarManager = AvatarManager(profile)
+            navigateToGameOverFragment(
+                avatarManager.createTextBitmap(profile, requireContext()),
+                result
+            )
+        }
+    }
+
+    private fun navigateToGameOverFragment(humanAvatar: Bitmap?, result: String) {
+        val botAvatar =
+            BitmapFactory.decodeResource(requireContext().resources, R.drawable.easy_bot)
+        val fragment = GameOverFragment.newInstance(
+            EntityCard(
+                name = profile.nickname,
+                description = "You",
+                mark = if (humanMark == Mark.TIC) R.drawable.tic else R.drawable.tac,
+                avatar = humanAvatar
+            ),
+            EntityCard(
+                name = "Bot",
+                description = "Opponent",
+                mark = if (computerMark == Mark.TIC) R.drawable.tic else R.drawable.tac,
+                avatar = botAvatar
+            ),
+            ResultGame(avatarBitmap = humanAvatar, result = result)
+        )
+
+        fragment.onRefreshClick = {
+            navigator().showSingleGameScreen(levelDifficulty)
+        }
+
+        parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun startGame() {
@@ -135,14 +227,32 @@ class BotGameFragment : Fragment(), HasCustomTitle {
 
     private fun humanTurn() {
         binding.humanEntityCard.active = true
+        binding.botEntityCard.active = false
     }
 
     private fun computerTurn() {
+        if (isComputerThinking) return
+
+        isComputerThinking = true
         binding.humanEntityCard.active = false
-        val (r, c) = minimax.findBestMove()
-        board[r, c] = computerMark
-        binding.cvBoard.setMove(r, c, computerMark)
-        humanTurn()
+        binding.botEntityCard.active = true
+
+        lifecycleScope.launch {
+            val move = withContext(Dispatchers.Default) {
+                minimax.findBestMove()
+            }
+
+            if (!isComputerThinking) return@launch
+
+            board[move.first, move.second] = computerMark
+            binding.cvBoard.setMove(move.first, move.second, computerMark)
+            binding.botEntityCard.active = false
+            isComputerThinking = false
+
+            if (binding.cvBoard.currentGameState == GameState.ONGOING) {
+                humanTurn()
+            }
+        }
     }
 
     private fun setImage(@DrawableRes imageResId: Int) {
@@ -150,7 +260,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
     }
 
     private fun setInfo(@StringRes stringResId: Int) {
-        binding.botEntityCard.description = getString(stringResId)
+        binding.botEntityCard.name = getString(stringResId)
     }
 
     override fun getTitleRes(): Int = R.string.toolbar_bot

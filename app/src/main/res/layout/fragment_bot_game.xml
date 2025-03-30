@@ -37,14 +37,15 @@
         android:layout_width="150dp"
         android:layout_height="0dp"
         app:description="@string/you_turn"
-        app:layout_constraintStart_toStartOf="@id/begin_guide_line"
         app:layout_constraintBottom_toTopOf="@id/cv_board"
+        app:layout_constraintStart_toStartOf="@id/begin_guide_line"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.tictactoe.EntityCardView
         android:id="@+id/bot_entity_card"
         android:layout_width="150dp"
         android:layout_height="0dp"
+        app:description="@string/bot_turn"
         app:layout_constraintBottom_toTopOf="@id/cv_board"
         app:layout_constraintEnd_toStartOf="@id/end_guide_line"
         app:layout_constraintTop_toTopOf="parent"
