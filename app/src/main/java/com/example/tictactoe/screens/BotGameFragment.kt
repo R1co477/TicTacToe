@@ -231,8 +231,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
     }
 
     private fun computerTurn() {
-        if (isComputerThinking) return
-
+        if (isComputerThinking || isBoardFull()) return
         isComputerThinking = true
         binding.humanEntityCard.active = false
         binding.botEntityCard.active = true
@@ -253,6 +252,17 @@ class BotGameFragment : Fragment(), HasCustomTitle {
                 humanTurn()
             }
         }
+    }
+
+    private fun isBoardFull(): Boolean {
+        for (i in 0 until 3) {
+            for (j in 0 until 3) {
+                if (board[i, j] == Mark.EMPTY) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
     private fun setImage(@DrawableRes imageResId: Int) {
