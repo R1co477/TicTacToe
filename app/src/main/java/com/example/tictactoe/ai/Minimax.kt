@@ -20,20 +20,23 @@ class Minimax(private val board: Board, private val human: Mark, private val max
         for (c in 0 until board.getGrid().size) {
             if (board[0, c] != Mark.EMPTY &&
                 board[0, c] == board[1, c] &&
-                board[1, c] == board[2, c]) {
+                board[1, c] == board[2, c]
+            ) {
                 return if (board[0, c] == computer) 10 else -10
             }
         }
 
         if (board[0, 0] != Mark.EMPTY &&
             board[0, 0] == board[1, 1] &&
-            board[1, 1] == board[2, 2]) {
+            board[1, 1] == board[2, 2]
+        ) {
             return if (board[0, 0] == computer) 10 else -10
         }
 
         if (board[0, 2] != Mark.EMPTY &&
             board[0, 2] == board[1, 1] &&
-            board[1, 1] == board[2, 0]) {
+            board[1, 1] == board[2, 0]
+        ) {
             return if (board[0, 2] == computer) 10 else -10
         }
 

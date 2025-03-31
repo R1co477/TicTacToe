@@ -4,18 +4,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.tictactoe.EntityCard
 import com.example.tictactoe.GameState
 import com.example.tictactoe.Profile
@@ -30,6 +29,7 @@ import com.example.tictactoe.contract.navigator
 import com.example.tictactoe.databinding.FragmentBotGameBinding
 import com.example.tictactoe.extensions.getObject
 import com.example.tictactoe.utils.AvatarManager
+import com.example.tictactoe.utils.vectorDrawableToBitmap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -144,70 +144,72 @@ class BotGameFragment : Fragment(), HasCustomTitle {
             GameState.ONGOING -> return
         }
 
-        if (profile.avatarUri != null) {
-            Glide.with(this)
-                .asBitmap()
-                .load(profile.avatarUri)
-                .circleCrop()
-                .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?
-                    ) {
-                        navigateToGameOverFragment(resource, result)
-                    }
+        lifecycleScope.launch {
+            val humanAvatar = getHumanAvatar()
+            val botAvatar = getBotAvatar()
 
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        val avatarManager = AvatarManager(profile)
-                        navigateToGameOverFragment(
-                            avatarManager.createTextBitmap(requireContext()),
-                            result
-                        )
-                    }
-                })
-        } else {
-            val avatarManager = AvatarManager(profile)
-            navigateToGameOverFragment(
-                avatarManager.createTextBitmap(requireContext()),
-                result
-            )
-        }
-    }
-
-    private fun navigateToGameOverFragment(humanAvatar: Bitmap?, result: String) {
-        val botAvatar =
-            BitmapFactory.decodeResource(requireContext().resources, R.drawable.easy_bot)
-        val fragment = GameOverFragment.newInstance(
-            EntityCard(
+            val humanEntityCard = EntityCard(
                 name = profile.nickname,
                 description = "You",
                 mark = if (humanMark == Mark.TIC) R.drawable.tic else R.drawable.tac,
                 avatar = humanAvatar
-            ),
-            EntityCard(
-                name = "Bot",
+            )
+
+            val botEntityCard = EntityCard(
+                name = when (levelDifficulty) {
+                    1 -> getString(R.string.easy_bot)
+                    2 -> getString(R.string.medium_bot)
+                    3 -> getString(R.string.difficult_bot)
+                    else -> getString(R.string.easy_bot)
+                },
                 description = "Opponent",
                 mark = if (computerMark == Mark.TIC) R.drawable.tic else R.drawable.tac,
                 avatar = botAvatar
-            ),
-            ResultGame(avatarBitmap = humanAvatar, result = result)
-        )
-
-        fragment.onRefreshClick = {
-            navigator().showBotGameScreen(levelDifficulty)
-        }
-
-        parentFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.slide_in,
-                R.anim.fade_out,
-                R.anim.fade_in,
-                R.anim.slide_out
             )
-            .replace(R.id.fragmentContainer, fragment)
-            .addToBackStack(null)
-            .commit()
+
+            val resultGame = ResultGame(avatarBitmap = humanAvatar, result = result)
+
+            navigator().showGameOverScreen(
+                humanEntityCard,
+                botEntityCard,
+                resultGame
+            ) {
+                navigator().showBotGameScreen(levelDifficulty)
+            }
+        }
+    }
+
+    private suspend fun getHumanAvatar(): Bitmap? = withContext(Dispatchers.IO) {
+        return@withContext if (profile.avatarUri != null) {
+            try {
+                Glide.with(requireContext())
+                    .asBitmap()
+                    .circleCrop()
+                    .load(profile.avatarUri)
+                    .submit()
+                    .get()
+            } catch (_: Exception) {
+                AvatarManager(profile).createTextBitmap()
+            }
+        } else {
+            AvatarManager(profile).createTextBitmap()
+        }
+    }
+
+    private suspend fun getBotAvatar(): Bitmap = withContext(Dispatchers.IO) {
+        try {
+            val botResId = when (levelDifficulty) {
+                1 -> R.drawable.easy_bot
+                2 -> R.drawable.medium_bot
+                3 -> R.drawable.difficult_bot
+                else -> R.drawable.easy_bot
+            }
+            val vectorDrawable =
+                ContextCompat.getDrawable(requireContext(), botResId) as VectorDrawable
+            vectorDrawableToBitmap(vectorDrawable)
+        } catch (_: Exception) {
+            BitmapFactory.decodeResource(resources, R.drawable.profile_avatar)
+        }
     }
 
     private fun startGame() {

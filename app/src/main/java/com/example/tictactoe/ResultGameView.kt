@@ -76,14 +76,16 @@ class ResultGameView @JvmOverloads constructor(
 
         context.withStyledAttributes(attrs, R.styleable.ResultGameView, defStyleAttr, defStyleRes) {
             text = getString(R.styleable.ResultGameView_text) ?: ""
-            avatarResId = getResourceId(R.styleable.ResultGameView_avatar, R.drawable.profile_avatar)
+            avatarResId =
+                getResourceId(R.styleable.ResultGameView_avatar, R.drawable.profile_avatar)
         }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val minWidth = suggestedMinimumWidth + paddingLeft + paddingRight
 
-        val desiredWidth = max(minWidth, MeasureSpec.getSize(widthMeasureSpec) + paddingLeft + paddingRight)
+        val desiredWidth =
+            max(minWidth, MeasureSpec.getSize(widthMeasureSpec) + paddingLeft + paddingRight)
         val desiredHeight = desiredWidth
 
         setMeasuredDimension(
@@ -170,7 +172,7 @@ class ResultGameView @JvmOverloads constructor(
             backgroundRect, backgroundCornerRadius, backgroundCornerRadius, paintBackground
         )
 
-        canvas.withSave() {
+        canvas.withSave {
             clipPath(backgroundClipPath)
 
             // draw top triangle

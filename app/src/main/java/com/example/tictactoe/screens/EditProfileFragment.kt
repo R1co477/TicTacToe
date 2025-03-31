@@ -35,7 +35,10 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
 
     private val pickMedia = registerForActivityResult(PickVisualMedia()) { uri ->
         uri?.let {
-            requireContext().contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            requireContext().contentResolver.takePersistableUriPermission(
+                it,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
             unFocusAllViews()
             profile.avatarUri = it
             profile.selectedColor = null
@@ -47,6 +50,7 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             updateUi()
         }
+
         override fun afterTextChanged(p0: Editable?) {}
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
     }

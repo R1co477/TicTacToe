@@ -12,13 +12,13 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.tictactoe.Profile
+import com.example.tictactoe.R
+import com.example.tictactoe.Settings
 import com.example.tictactoe.contract.CustomAction
 import com.example.tictactoe.contract.HasCustomAction
 import com.example.tictactoe.contract.HasCustomTitle
-import com.example.tictactoe.databinding.FragmentSettingsBinding
-import com.example.tictactoe.R
-import com.example.tictactoe.Settings
 import com.example.tictactoe.contract.navigator
+import com.example.tictactoe.databinding.FragmentSettingsBinding
 import com.example.tictactoe.extensions.getObject
 import com.example.tictactoe.extensions.putObject
 import com.example.tictactoe.utils.AvatarManager

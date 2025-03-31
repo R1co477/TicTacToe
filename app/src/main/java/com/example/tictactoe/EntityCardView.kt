@@ -100,7 +100,8 @@ class EntityCardView @JvmOverloads constructor(
         context.withStyledAttributes(
             attrs, R.styleable.EntityCardView, defStyleAttr, defStyleRes
         ) {
-            name = getString(R.styleable.EntityCardView_name) ?: context.getString(R.string.easy_bot)
+            name =
+                getString(R.styleable.EntityCardView_name) ?: context.getString(R.string.easy_bot)
             avatarResId = getResourceId(R.styleable.EntityCardView_avatar, R.drawable.easy_bot)
             mark = getResourceId(R.styleable.EntityCardView_mark, R.drawable.tac)
             description = getString(R.styleable.EntityCardView_description) ?: ""

@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +12,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.tictactoe.EntityCard
 import com.example.tictactoe.GameState
 import com.example.tictactoe.Profile
 import com.example.tictactoe.R
 import com.example.tictactoe.ResultGame
-import com.example.tictactoe.ai.Board
 import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.contract.navigator
@@ -47,7 +43,11 @@ class LocalMultiplayerFragment : Fragment(), HasCustomTitle {
         super.onCreate(savedInstanceState)
         sharedPref = requireContext().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         profile = sharedPref.getObject(KEY_PROFILE, Profile.default(requireContext()))
-        opponentProfile = Profile("Opponent", null, ColorStateList.valueOf(requireContext().getColor(R.color.background_red)))
+        opponentProfile = Profile(
+            "Opponent",
+            null,
+            ColorStateList.valueOf(requireContext().getColor(R.color.background_red))
+        )
     }
 
     override fun onCreateView(
@@ -87,7 +87,8 @@ class LocalMultiplayerFragment : Fragment(), HasCustomTitle {
 
     private fun setupBoard() {
         with(binding) {
-            cvBoard.humanMark = if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
+            cvBoard.humanMark =
+                if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
             cvBoard.addMoveListener { r, c ->
                 cvBoard.setMove(r, c, if (humanMove) humanMark else opponentMark)
                 humanMove = !humanMove
@@ -163,19 +164,19 @@ class LocalMultiplayerFragment : Fragment(), HasCustomTitle {
                     .load(profile.avatarUri)
                     .submit()
                     .get()
-            } catch (e: Exception) {
-                AvatarManager(profile).createTextBitmap(requireContext())
+            } catch (_: Exception) {
+                AvatarManager(profile).createTextBitmap()
             }
         } else {
-            AvatarManager(profile).createTextBitmap(requireContext())
+            AvatarManager(profile).createTextBitmap()
         }
     }
 
     private suspend fun getOpponentAvatar(): Bitmap = withContext(Dispatchers.IO) {
         try {
             AvatarManager(opponentProfile)
-                .createTextBitmap(requireContext())
-        } catch (e: Exception) {
+                .createTextBitmap()
+        } catch (_: Exception) {
             BitmapFactory.decodeResource(resources, R.drawable.profile_avatar)
         }
     }

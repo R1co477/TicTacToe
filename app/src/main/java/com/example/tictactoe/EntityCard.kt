@@ -6,13 +6,15 @@ import android.os.Parcelable
 import com.example.tictactoe.utils.bitmapToByteArray
 import com.example.tictactoe.utils.byteArrayToBitmap
 
-class EntityCard(val name: String, val description: String, val avatar: Bitmap?, val mark: Int) : Parcelable {
+class EntityCard(val name: String, val description: String, val avatar: Bitmap?, val mark: Int) :
+    Parcelable {
     private val avatarData: ByteArray = avatar?.let { bitmapToByteArray(it) } ?: ByteArray(0)
 
     constructor(parcel: Parcel) : this(
         name = parcel.readString() ?: "",
         description = parcel.readString() ?: "",
-        avatar = parcel.createByteArray()?.let { if (it.isNotEmpty()) byteArrayToBitmap(it) else null },
+        avatar = parcel.createByteArray()
+            ?.let { if (it.isNotEmpty()) byteArrayToBitmap(it) else null },
         mark = parcel.readInt()
     )
 

@@ -3,11 +3,14 @@ package com.example.tictactoe.utils
 import android.content.ContentResolver
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.ImageDecoder
+import android.graphics.drawable.VectorDrawable
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.createBitmap
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
@@ -54,4 +57,14 @@ internal fun uriToBitmap(contentResolver: ContentResolver, fileUri: Uri?): Bitma
     } else {
         getBitmapLegacy(contentResolver, fileUri)
     }
+}
+
+fun vectorDrawableToBitmap(vectorDrawable: VectorDrawable): Bitmap {
+    val bitmap = createBitmap(vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight)
+
+    val canvas = Canvas(bitmap)
+    vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
+    vectorDrawable.draw(canvas)
+
+    return bitmap
 }

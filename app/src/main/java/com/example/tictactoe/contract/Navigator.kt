@@ -2,9 +2,7 @@ package com.example.tictactoe.contract
 
 import androidx.fragment.app.Fragment
 import com.example.tictactoe.EntityCard
-import com.example.tictactoe.GameState
 import com.example.tictactoe.ResultGame
-import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.screens.OnRefreshClick
 
 
@@ -24,7 +22,12 @@ interface Navigator {
 
     fun showLocalMultiplayerScreen()
 
-    fun showGameOverScreen(humanEntityCard: EntityCard, opponentEntityCard: EntityCard, resultGame: ResultGame, onRefreshClick: OnRefreshClick)
+    fun showGameOverScreen(
+        humanEntityCard: EntityCard,
+        opponentEntityCard: EntityCard,
+        resultGame: ResultGame,
+        onRefreshClick: OnRefreshClick
+    )
 
     fun goBack()
 

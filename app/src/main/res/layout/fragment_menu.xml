@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <include layout="@layout/snowfall_background"/>
+    <include layout="@layout/snowfall_background" />
 
     <TextView
         android:id="@+id/tv_game_title"

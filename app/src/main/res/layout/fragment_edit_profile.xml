@@ -111,13 +111,12 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginTop="48dp"
-        tools:background="@drawable/profile_avatar"
-        tools:tint="@color/background_red"
         android:contentDescription="@string/player_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
+        tools:background="@drawable/profile_avatar"
+        tools:tint="@color/background_red" />
 
     <TextView
         android:id="@+id/tv_avatar_letter"

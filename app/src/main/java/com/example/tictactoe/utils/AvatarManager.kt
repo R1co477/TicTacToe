@@ -1,6 +1,5 @@
 package com.example.tictactoe.utils
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -18,11 +17,10 @@ class AvatarManager(private val profile: Profile) {
     fun setAvatar(imageView: ImageView) {
         if (profile.avatarUri == null) {
             val nickname = profile.nickname
-            val letter: String
-            if (nickname.isEmpty()) {
-                letter = " "
+            val letter = if (nickname.isEmpty()) {
+                " "
             } else {
-                letter = nickname[0].toString()
+                nickname[0].toString()
             }
             val textDrawable = createTextDrawable(
                 letter,
@@ -70,7 +68,7 @@ class AvatarManager(private val profile: Profile) {
         return bitmap.toDrawable(imageView.context.resources)
     }
 
-    fun createTextBitmap(context: Context): Bitmap {
+    fun createTextBitmap(): Bitmap {
         val size = 200
         val bitmap = createBitmap(size, size)
         val canvas = Canvas(bitmap)

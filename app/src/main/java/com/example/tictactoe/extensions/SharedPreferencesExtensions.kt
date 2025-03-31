@@ -2,6 +2,7 @@ package com.example.tictactoe.extensions
 
 import android.content.SharedPreferences
 import android.net.Uri
+import androidx.core.net.toUri
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.TypeAdapter
@@ -40,7 +41,7 @@ class UriAdapter : TypeAdapter<Uri>() {
             reader.nextNull()
             null
         } else {
-            Uri.parse(reader.nextString())
+            reader.nextString().toUri()
         }
     }
 }
