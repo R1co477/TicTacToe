@@ -87,7 +87,9 @@ class LocalMultiplayerFragment : Fragment(), HasCustomTitle {
 
     private fun setupBoard() {
         with(binding) {
+            cvBoard.humanMark = if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
             cvBoard.addMoveListener { r, c ->
+                cvBoard.setMove(r, c, if (humanMove) humanMark else opponentMark)
                 humanMove = !humanMove
                 if (humanMove) {
                     humanTurn()
@@ -107,17 +109,11 @@ class LocalMultiplayerFragment : Fragment(), HasCustomTitle {
     private fun humanTurn() {
         binding.humanEntityCard.active = true
         binding.opponentEntityCard.active = false
-
-        binding.cvBoard.humanMark =
-            if (humanMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
     }
 
     private fun opponentTurn() {
         binding.humanEntityCard.active = false
         binding.opponentEntityCard.active = true
-
-        binding.cvBoard.humanMark =
-            if (opponentMark == Mark.TIC) R.drawable.cell_tic else R.drawable.cell_tac
     }
 
     private fun showGameOverScreen(state: GameState) {

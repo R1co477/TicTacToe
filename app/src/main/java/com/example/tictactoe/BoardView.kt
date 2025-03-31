@@ -86,8 +86,6 @@ class BoardView @JvmOverloads constructor(
     }
 
     private fun makeHumanMove(row: Int, col: Int) {
-        updateCell(cells[row * 3 + col], humanMark)
-        boardState[row][col] = if (humanMark == TIC) 1 else -1
         notifyChanges(row, col)
         checkGameState()
     }

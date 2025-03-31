@@ -123,6 +123,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
             cvBoard.addMoveListener { r, c ->
                 if (!isComputerThinking) {
                     board[r, c] = humanMark
+                    cvBoard.setMove(r, c, humanMark)
                     computerTurn()
                 }
             }
