@@ -70,7 +70,7 @@ class AvatarManager(private val profile: Profile) {
         return bitmap.toDrawable(imageView.context.resources)
     }
 
-    fun createTextBitmap(profile: Profile, context: Context): Bitmap {
+    fun createTextBitmap(context: Context): Bitmap {
         val size = 200
         val bitmap = createBitmap(size, size)
         val canvas = Canvas(bitmap)

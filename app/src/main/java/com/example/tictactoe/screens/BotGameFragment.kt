@@ -160,7 +160,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
                     override fun onLoadFailed(errorDrawable: Drawable?) {
                         val avatarManager = AvatarManager(profile)
                         navigateToGameOverFragment(
-                            avatarManager.createTextBitmap(profile, requireContext()),
+                            avatarManager.createTextBitmap(requireContext()),
                             result
                         )
                     }
@@ -168,7 +168,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
         } else {
             val avatarManager = AvatarManager(profile)
             navigateToGameOverFragment(
-                avatarManager.createTextBitmap(profile, requireContext()),
+                avatarManager.createTextBitmap(requireContext()),
                 result
             )
         }
@@ -194,7 +194,7 @@ class BotGameFragment : Fragment(), HasCustomTitle {
         )
 
         fragment.onRefreshClick = {
-            navigator().showSingleGameScreen(levelDifficulty)
+            navigator().showBotGameScreen(levelDifficulty)
         }
 
         parentFragmentManager.beginTransaction()

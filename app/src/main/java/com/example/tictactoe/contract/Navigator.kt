@@ -1,6 +1,11 @@
 package com.example.tictactoe.contract
 
 import androidx.fragment.app.Fragment
+import com.example.tictactoe.EntityCard
+import com.example.tictactoe.GameState
+import com.example.tictactoe.ResultGame
+import com.example.tictactoe.ai.Mark
+import com.example.tictactoe.screens.OnRefreshClick
 
 
 fun Fragment.navigator(): Navigator {
@@ -9,13 +14,17 @@ fun Fragment.navigator(): Navigator {
 
 interface Navigator {
 
-    fun showSingleGameScreen(level: Int)
+    fun showBotGameScreen(level: Int)
 
     fun showDifficultyScreen()
 
     fun showEditProfileScreen()
 
     fun showSettingsMenuScreen()
+
+    fun showLocalMultiplayerScreen()
+
+    fun showGameOverScreen(humanEntityCard: EntityCard, opponentEntityCard: EntityCard, resultGame: ResultGame, onRefreshClick: OnRefreshClick)
 
     fun goBack()
 

@@ -1,24 +1,39 @@
 package com.example.tictactoe
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.contract.CustomAction
 import com.example.tictactoe.contract.HasCustomAction
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.contract.Navigator
 import com.example.tictactoe.databinding.ActivityMainBinding
+import com.example.tictactoe.extensions.getObject
+import com.example.tictactoe.screens.APP_PREFERENCES
 import com.example.tictactoe.screens.BotGameFragment
 import com.example.tictactoe.screens.DifficultyFragment
 import com.example.tictactoe.screens.EditProfileFragment
+import com.example.tictactoe.screens.GameOverFragment
+import com.example.tictactoe.screens.KEY_PROFILE
+import com.example.tictactoe.screens.LocalMultiplayerFragment
 import com.example.tictactoe.screens.MenuFragment
+import com.example.tictactoe.screens.OnRefreshClick
 import com.example.tictactoe.screens.SettingsFragment
+import com.example.tictactoe.utils.AvatarManager
 
 class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding
@@ -96,6 +111,31 @@ class MainActivity : AppCompatActivity(), Navigator {
         launchFragment(SettingsFragment())
     }
 
+    override fun showBotGameScreen(level: Int) {
+        launchFragment(BotGameFragment.newInstance(level))
+    }
+
+    override fun showLocalMultiplayerScreen() {
+        launchFragment(LocalMultiplayerFragment())
+    }
+
+    override fun showGameOverScreen(
+        humanEntityCard: EntityCard,
+        opponentEntityCard: EntityCard,
+        resultGame: ResultGame,
+        onRefreshClick: () -> Unit
+    ) {
+
+        val fragment = GameOverFragment.newInstance(
+            humanEntityCard,
+            opponentEntityCard,
+            resultGame
+        )
+
+        fragment.onRefreshClick = onRefreshClick
+
+        launchFragment(fragment)
+    }
     override fun goBack() {
         onBackPressedDispatcher.onBackPressed()
     }
@@ -141,9 +181,5 @@ class MainActivity : AppCompatActivity(), Navigator {
             action.onCustomAction.run()
             return@setOnMenuItemClickListener true
         }
-    }
-
-    override fun showSingleGameScreen(level: Int) {
-        launchFragment(BotGameFragment.newInstance(level))
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/snowfall_background" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/begin_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="32dp" />
+
+    <com.example.tictactoe.BoardView
+        android:id="@+id/cv_board"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="160dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.tictactoe.EntityCardView
+        android:id="@+id/human_entity_card"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        app:description="@string/you_turn"
+        app:layout_constraintBottom_toTopOf="@id/cv_board"
+        app:layout_constraintStart_toStartOf="@id/begin_guide_line"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.tictactoe.EntityCardView
+        android:id="@+id/opponent_entity_card"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        app:name="Opponent"
+        app:description="@string/opponent_turn"
+        app:layout_constraintBottom_toTopOf="@id/cv_board"
+        app:layout_constraintEnd_toStartOf="@id/end_guide_line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mark="@drawable/tac" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
