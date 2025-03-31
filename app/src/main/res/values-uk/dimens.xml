@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="difficulty_bt_text">24sp</dimen>
+    <dimen name="difficulty_tv">35sp</dimen>
+</resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button_text">28sp</dimen>
+    <dimen name="difficulty_bt_text">28sp</dimen>
+    <dimen name="bt_menu_text">28sp</dimen>
     <dimen name="menu_title">110sp</dimen>
     <dimen name="board_cell">0.3</dimen>
     <dimen name="iv_entity_card">0.3</dimen>
@@ -8,4 +9,5 @@
     <dimen name="bt_refresh">90dp</dimen>
     <dimen name="bt_refresh_padding">14dp</dimen>
     <dimen name="result_game_margin">10dp</dimen>
+    <dimen name="difficulty_tv">50sp</dimen>
 </resources>

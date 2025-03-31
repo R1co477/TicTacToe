@@ -23,7 +23,7 @@
     <string name="medium_difficulty_level_image">Medium difficulty level image</string>
     <string name="medium_bot">Medium Bot</string>
     <string name="easy_difficulty_level_image">Easy difficulty level image</string>
-    <string name="opponent">Opponent</string>
+    <string name="opponent" translatable="false">Opponent</string>
     <string name="toolbar_menu">Game Menu</string>
     <string name="toolbar_difficulty">Choose Difficulty</string>
     <string name="toolbar_bot">Tic-Tac-Toe: Bot</string>
@@ -58,6 +58,6 @@
     <string name="you_win">YOU WIN!</string>
     <string name="you_lose">YOU LOSE!</string>
     <string name="draw">DRAW!</string>
-    <string name="bot_turn">Bot Turn\n</string>
+    <string name="bot_turn">Bot Turn</string>
     <string name="opponent_turn">Opponent Turn</string>
 </resources>
