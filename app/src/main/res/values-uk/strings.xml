@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">Tic Tac Toe</string>
-    <string name="single_player">Одиночна гра</string>
+    <string name="app_name">TicTacToe</string>
+
+    <string name="single_player">Один гравець</string>
+
     <string name="multiplayer">Мультиплеєр</string>
-    <string name="local_multiplayer">Локальний мультиплеєр</string>
+
+    <string name="local_multiplayer">Гра удвох</string>
+
     <string name="game_title">
         <font color="#fed032">T</font>
         <font color="#eb1751">I</font>
@@ -16,6 +20,7 @@
         <font color="#eb1751">O</font>
         <font color="#fed032">E</font>
     </string>
+
     <string name="select_difficulty">Виберіть складність</string>
     <string name="easy_bot">Легкий бот</string>
     <string name="difficult_level_image">Зображення складного рівня</string>
@@ -25,19 +30,17 @@
     <string name="easy_difficulty_level_image">Зображення легкого рівня</string>
     <string name="toolbar_menu">Меню гри</string>
     <string name="toolbar_difficulty">Оберіть складність</string>
-    <string name="toolbar_bot">Tic-Tac-Toe: Бот</string>
-    <string name="toolbar_settings">Tic-Tac-Toe: Налаштування</string>
+    <string name="toolbar_bot">TicTacToe: Гра з ботом</string>
+    <string name="toolbar_settings">TicTacToe: Налаштування</string>
     <string name="toolbar_game_result">Гра завершена: Грати ще?</string>
-    <string name="toolbar_local_multiplayer">Tic-Tac-Toe: Локальний мультиплеєр</string>
+    <string name="toolbar_local_multiplayer">TicTacToe: Гра удвох</string>
     <string name="player_avatar">Аватар гравця</string>
     <string name="bot_avatar">Аватар бота</string>
     <string name="player_human">Гравець</string>
     <string name="player_bot">Бот</string>
-    <string name="you_turn">Твій хід</string>
-    <string name="toolbar_edit_profile">Редагувати профіль</string>
+    <string name="you_turn">Ваш хід</string> <string name="toolbar_edit_profile">Редагувати профіль</string>
     <string name="done">Готово</string>
-    <string name="enter_your_nickname">Введіть свій нікнейм</string>
-    <string name="nickname">Нікнейм</string>
+    <string name="enter_your_nickname">Введіть ваш нікнейм</string> <string name="nickname">Нікнейм</string>
     <string name="save_changes">Зберегти зміни</string>
     <string name="icon_for_selecting_an_image_from_the_gallery">Іконка для вибору зображення з галереї</string>
     <string name="char_сount_tv">%d/15</string>
@@ -45,18 +48,15 @@
     <string name="who_goes_first">Хто ходить першим?</string>
     <string name="random">Випадково</string>
     <string name="select_photo">Вибрати фото</string>
-    <string name="your_symbol">Твій символ</string>
-    <string name="save">Зберегти</string>
+    <string name="your_symbol">Ваш символ</string> <string name="save">Зберегти</string>
     <string name="cancel">Скасувати</string>
-    <string name="you">Ти</string>
-    <string name="play_as_o">Грати за O</string>
+    <string name="you">Ви</string> <string name="play_as_o">Грати за O</string>
     <string name="computer">Комп\'ютер</string>
     <string name="play_as_x">Грати за X</string>
     <string name="avatar">Аватар</string>
-    <string name="button_refresh">Оновити</string>
-    <string name="you_win">ТИ ПЕРЕМІГ!</string>
-    <string name="you_lose">ТИ ПРОГРАВ!</string>
+    <string name="button_refresh">Грати ще</string>
+    <string name="you_win">ВИ ПЕРЕМОГЛИ!</string>
+    <string name="you_lose">ВИ ПРОГРАЛИ!</string>
     <string name="draw">НІЧИЯ!</string>
     <string name="bot_turn">Хід бота</string>
-    <string name="opponent_turn">Хід противника</string>
-</resources>
+    <string name="opponent_turn">Хід суперника</string> </resources>
