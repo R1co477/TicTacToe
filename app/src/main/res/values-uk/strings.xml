@@ -38,19 +38,23 @@
     <string name="bot_avatar">Аватар бота</string>
     <string name="player_human">Гравець</string>
     <string name="player_bot">Бот</string>
-    <string name="you_turn">Ваш хід</string> <string name="toolbar_edit_profile">Редагувати профіль</string>
+    <string name="you_turn">Ваш хід</string>
+    <string name="toolbar_edit_profile">Редагувати профіль</string>
     <string name="done">Готово</string>
-    <string name="enter_your_nickname">Введіть ваш нікнейм</string> <string name="nickname">Нікнейм</string>
+    <string name="enter_your_nickname">Введіть ваш нікнейм</string>
+    <string name="nickname">Нікнейм</string>
     <string name="save_changes">Зберегти зміни</string>
     <string name="icon_for_selecting_an_image_from_the_gallery">Іконка для вибору зображення з галереї</string>
-    <string name="char_сount_tv">%d/15</string>
+    <string name="char_count_tv">%d/15</string>
     <string name="settings">Налаштування</string>
     <string name="who_goes_first">Хто ходить першим?</string>
     <string name="random">Випадково</string>
     <string name="select_photo">Вибрати фото</string>
-    <string name="your_symbol">Ваш символ</string> <string name="save">Зберегти</string>
+    <string name="your_symbol">Ваш символ</string>
+    <string name="save">Зберегти</string>
     <string name="cancel">Скасувати</string>
-    <string name="you">Ви</string> <string name="play_as_o">Грати за O</string>
+    <string name="you">Ви</string>
+    <string name="play_as_o">Грати за O</string>
     <string name="computer">Комп\'ютер</string>
     <string name="play_as_x">Грати за X</string>
     <string name="avatar">Аватар</string>
@@ -59,4 +63,5 @@
     <string name="you_lose">ВИ ПРОГРАЛИ!</string>
     <string name="draw">НІЧИЯ!</string>
     <string name="bot_turn">Хід бота</string>
-    <string name="opponent_turn">Хід суперника</string> </resources>
+    <string name="opponent_turn">Хід суперника</string>
+</resources>
