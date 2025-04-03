@@ -114,7 +114,7 @@ class ResultGameView @JvmOverloads constructor(
         rightSecond = Point(width.toFloat(), height.toFloat() - sizeTriangle)
 
         val locale = context.resources.configuration.locales[0]
-        textPaint.textSize = if (locale.language == "uk") width / 7f else width / 6f
+        textPaint.textSize = if (locale.language == "uk") width / 8f else width / 6f
 
         backgroundClipPath.reset()
         backgroundClipPath.addRoundRect(
