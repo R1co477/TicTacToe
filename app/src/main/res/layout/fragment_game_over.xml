@@ -21,7 +21,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="32dp" />
 
-    <com.example.tictactoe.ResultGameView
+    <com.example.tictactoe.customViews.ResultGameView
         android:id="@+id/result_game"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.tictactoe.EntityCardView
+    <com.example.tictactoe.customViews.EntityCardView
         android:id="@+id/human_entity_card"
         android:layout_width="150dp"
         android:layout_height="0dp"
@@ -45,7 +45,7 @@
         tools:avatar="@drawable/medium_bot"
         tools:name="Player" />
 
-    <com.example.tictactoe.EntityCardView
+    <com.example.tictactoe.customViews.EntityCardView
         android:id="@+id/bot_entity_card"
         android:layout_width="150dp"
         android:layout_height="0dp"

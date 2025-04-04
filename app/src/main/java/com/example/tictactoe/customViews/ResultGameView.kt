@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.customViews
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -16,6 +16,9 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.withSave
+import com.example.tictactoe.R
+import com.example.tictactoe.data.Point
+import com.example.tictactoe.data.ResultGame
 import kotlin.math.max
 
 class ResultGameView @JvmOverloads constructor(

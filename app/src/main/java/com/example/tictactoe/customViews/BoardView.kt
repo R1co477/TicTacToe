@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.customViews
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -16,6 +16,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.tictactoe.R
 import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.databinding.BoardBinding
 import kotlinx.coroutines.CoroutineScope

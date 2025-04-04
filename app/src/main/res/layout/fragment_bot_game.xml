@@ -20,7 +20,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="32dp" />
 
-    <com.example.tictactoe.BoardView
+    <com.example.tictactoe.customViews.BoardView
         android:id="@+id/cv_board"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.tictactoe.EntityCardView
+    <com.example.tictactoe.customViews.EntityCardView
         android:id="@+id/human_entity_card"
         android:layout_width="150dp"
         android:layout_height="0dp"
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="@id/begin_guide_line"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.tictactoe.EntityCardView
+    <com.example.tictactoe.customViews.EntityCardView
         android:id="@+id/bot_entity_card"
         android:layout_width="150dp"
         android:layout_height="0dp"

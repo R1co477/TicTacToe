@@ -11,7 +11,7 @@ import androidx.core.graphics.drawable.toDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.tictactoe.Profile
+import com.example.tictactoe.data.Profile
 
 class AvatarManager(private val profile: Profile) {
     fun setAvatar(imageView: ImageView) {

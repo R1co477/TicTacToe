@@ -1,4 +1,4 @@
-package com.example.tictactoe.screens
+package com.example.tictactoe.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,12 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.example.tictactoe.EntityCard
-import com.example.tictactoe.GameState
-import com.example.tictactoe.Profile
+import com.example.tictactoe.data.EntityCard
+import com.example.tictactoe.customViews.GameState
+import com.example.tictactoe.data.Profile
 import com.example.tictactoe.R
-import com.example.tictactoe.ResultGame
-import com.example.tictactoe.Settings
+import com.example.tictactoe.data.ResultGame
+import com.example.tictactoe.data.Settings
 import com.example.tictactoe.ai.Board
 import com.example.tictactoe.ai.Mark
 import com.example.tictactoe.ai.Minimax

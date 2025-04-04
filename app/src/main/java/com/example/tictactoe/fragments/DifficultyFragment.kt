@@ -1,4 +1,4 @@
-package com.example.tictactoe.screens
+package com.example.tictactoe.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

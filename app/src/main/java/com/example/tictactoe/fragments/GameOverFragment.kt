@@ -1,4 +1,4 @@
-package com.example.tictactoe.screens
+package com.example.tictactoe.fragments
 
 import android.os.Build
 import android.os.Bundle
@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import com.example.tictactoe.EntityCard
+import com.example.tictactoe.data.EntityCard
 import com.example.tictactoe.R
-import com.example.tictactoe.ResultGame
+import com.example.tictactoe.data.ResultGame
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.databinding.FragmentGameOverBinding
 

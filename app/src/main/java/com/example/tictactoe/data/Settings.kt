@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.data
 
 class Settings {
     private var _randomMark: Boolean

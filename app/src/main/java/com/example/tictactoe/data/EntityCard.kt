@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.data
 
 import android.graphics.Bitmap
 import android.os.Parcel

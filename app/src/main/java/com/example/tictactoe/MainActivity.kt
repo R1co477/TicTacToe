@@ -13,14 +13,16 @@ import com.example.tictactoe.contract.CustomAction
 import com.example.tictactoe.contract.HasCustomAction
 import com.example.tictactoe.contract.HasCustomTitle
 import com.example.tictactoe.contract.Navigator
+import com.example.tictactoe.data.EntityCard
+import com.example.tictactoe.data.ResultGame
 import com.example.tictactoe.databinding.ActivityMainBinding
-import com.example.tictactoe.screens.BotGameFragment
-import com.example.tictactoe.screens.DifficultyFragment
-import com.example.tictactoe.screens.EditProfileFragment
-import com.example.tictactoe.screens.GameOverFragment
-import com.example.tictactoe.screens.LocalMultiplayerFragment
-import com.example.tictactoe.screens.MenuFragment
-import com.example.tictactoe.screens.SettingsFragment
+import com.example.tictactoe.fragments.BotGameFragment
+import com.example.tictactoe.fragments.DifficultyFragment
+import com.example.tictactoe.fragments.EditProfileFragment
+import com.example.tictactoe.fragments.GameOverFragment
+import com.example.tictactoe.fragments.LocalMultiplayerFragment
+import com.example.tictactoe.fragments.MenuFragment
+import com.example.tictactoe.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding

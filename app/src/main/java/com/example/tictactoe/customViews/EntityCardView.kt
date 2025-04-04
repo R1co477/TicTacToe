@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.customViews
 
 import android.content.Context
 import android.content.res.Resources
@@ -14,6 +14,8 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.drawable.toBitmap
+import com.example.tictactoe.R
+import com.example.tictactoe.data.EntityCard
 import com.example.tictactoe.databinding.EntityCardBinding
 
 class EntityCardView @JvmOverloads constructor(

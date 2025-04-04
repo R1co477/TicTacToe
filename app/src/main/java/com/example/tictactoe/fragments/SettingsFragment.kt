@@ -1,4 +1,4 @@
-package com.example.tictactoe.screens
+package com.example.tictactoe.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,9 +11,9 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.tictactoe.Profile
+import com.example.tictactoe.data.Profile
 import com.example.tictactoe.R
-import com.example.tictactoe.Settings
+import com.example.tictactoe.data.Settings
 import com.example.tictactoe.contract.CustomAction
 import com.example.tictactoe.contract.HasCustomAction
 import com.example.tictactoe.contract.HasCustomTitle

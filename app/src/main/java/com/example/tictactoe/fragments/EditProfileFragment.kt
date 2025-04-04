@@ -1,4 +1,4 @@
-package com.example.tictactoe.screens
+package com.example.tictactoe.fragments
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.tictactoe.Profile
+import com.example.tictactoe.data.Profile
 import com.example.tictactoe.R
 import com.example.tictactoe.contract.CustomAction
 import com.example.tictactoe.contract.HasCustomAction
