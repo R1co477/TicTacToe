@@ -13,18 +13,6 @@ class Settings {
         _humanTic = false
     }
 
-    constructor(
-        isRandomMarkAssignment: Boolean,
-        isRandomFirstMove: Boolean,
-        isHumanMoveFirst: Boolean,
-        isHumanUsingTic: Boolean
-    ) {
-        _randomMark = isRandomMarkAssignment
-        _randomMove = isRandomFirstMove
-        _humanMove = isHumanMoveFirst
-        _humanTic = isHumanUsingTic
-    }
-
     var randomMark: Boolean
         get() = _randomMark
         set(value) {
