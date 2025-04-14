@@ -15,6 +15,6 @@
         app:snowflakeSizeMin="1dp"
         app:snowflakeSpeedMax="5"
         app:snowflakeSpeedMin="1"
-        app:snowflakesAlreadyFalling="false"
+        app:snowflakesAlreadyFalling="true"
         app:snowflakesFadingEnabled="true" />
 </merge>

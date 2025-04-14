@@ -1,14 +1,90 @@
 <resources>
-    <!-- Base application theme -->
     <style name="Base.Theme.TicTacToe" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/toolbar_background</item>
-        <!-- Apply custom button style -->
-        <!--        <item name="materialButtonStyle">@style/MyButtonStyle</item>-->
     </style>
 
-    <!--    <style name="MyButtonStyle" parent="Widget.Material3.Button">-->
-    <!--        <item name="backgroundTint">@color/blue</item>-->
-    <!--        <item name="android:textColor">@color/white</item>-->
-    <!--    </style>-->
+    <style name="bt_main_menu">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/bt_menu_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@null</item>
+        <item name="layout_constraintHeight_percent">0.085</item>
+        <item name="layout_constraintWidth_percent">0.75</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
+    <style name="bt_difficulty">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginStart">60dp</item>
+        <item name="android:paddingStart">45dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/bt_difficulty_text</item>
+        <item name="backgroundTint">@null</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintHeight_percent">0.1</item>
+        <item name="layout_constraintWidth_percent">0.65</item>
+    </style>
+
+    <style name="ic_difficulty">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_marginEnd">-60dp</item>
+    </style>
+
+    <style name="item_settings">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:background">@drawable/v_board</item>
+        <item name="android:backgroundTint">@color/profile_background</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="layout_constraintEnd_toStartOf">@+id/end_guide_line</item>
+        <item name="layout_constraintStart_toEndOf">@+id/begin_guide_line</item>
+    </style>
+
+    <style name="ic_bg_settings">
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:backgroundTint">@color/deep_navy</item>
+    </style>
+
+    <style name="ic_settings">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="item_tv_settings">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="tv_settings">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">35dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="bt_settings">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">15dp</item>
+    </style>
+
     <style name="Theme.TicTacToe" parent="Base.Theme.TicTacToe" />
 </resources>

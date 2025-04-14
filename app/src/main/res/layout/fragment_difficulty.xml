@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="MissingConstraints">
 
     <include layout="@layout/snowfall_background" />
 
@@ -30,27 +32,14 @@
 
     <Button
         android:id="@+id/bt_easy"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="60dp"
+        style="@style/bt_difficulty"
         android:background="@drawable/bt_easy_bot"
-        android:paddingStart="45dp"
-        android:paddingEnd="0dp"
         android:text="@string/easy_bot"
-        android:textColor="@color/white"
-        android:textSize="@dimen/difficulty_bt_text"
-        app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@id/bt_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_select_difficulty"
-        app:layout_constraintWidth_percent="0.65" />
+        app:layout_constraintTop_toBottomOf="@id/tv_select_difficulty" />
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="-60dp"
+        style="@style/ic_difficulty"
         android:contentDescription="@string/easy_difficulty_level_image"
         android:src="@drawable/easy_bot"
         app:layout_constraintBottom_toBottomOf="@id/bt_easy"
@@ -59,27 +48,14 @@
 
     <Button
         android:id="@+id/bt_medium"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="60dp"
+        style="@style/bt_difficulty"
         android:background="@drawable/bt_medium_bot"
-        android:paddingStart="45dp"
-        android:paddingEnd="0dp"
         android:text="@string/medium_bot"
-        android:textColor="@color/white"
-        android:textSize="@dimen/difficulty_bt_text"
-        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_select_difficulty"
-        app:layout_constraintWidth_percent="0.65" />
+        app:layout_constraintTop_toBottomOf="@id/tv_select_difficulty" />
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="-60dp"
+        style="@style/ic_difficulty"
         android:contentDescription="@string/medium_difficulty_level_image"
         android:src="@drawable/medium_bot"
         app:layout_constraintBottom_toBottomOf="@id/bt_medium"
@@ -88,27 +64,14 @@
 
     <Button
         android:id="@+id/bt_difficult"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="60dp"
+        style="@style/bt_difficulty"
         android:background="@drawable/bt_difficult_bot"
-        android:paddingStart="45dp"
-        android:paddingEnd="0dp"
         android:text="@string/difficult_bot"
-        android:textColor="@color/white"
-        android:textSize="@dimen/difficulty_bt_text"
-        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bt_medium"
-        app:layout_constraintWidth_percent="0.65" />
+        app:layout_constraintTop_toBottomOf="@id/bt_medium" />
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="-60dp"
+        style="@style/ic_difficulty"
         android:contentDescription="@string/difficult_level_image"
         android:src="@drawable/difficult_bot"
         app:layout_constraintBottom_toBottomOf="@id/bt_difficult"
