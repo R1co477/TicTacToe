@@ -134,6 +134,12 @@ class BoardView @JvmOverloads constructor(
         return boardState.all { row -> row.all { it != 0 } }
     }
 
+    fun getBoardState(): List<List<Int>> {
+        return boardState.map { rowArray ->
+            rowArray.toList()
+        }
+    }
+
     fun addMoveListener(listener: BoardViewListener) {
         moveListeners.add(listener)
     }

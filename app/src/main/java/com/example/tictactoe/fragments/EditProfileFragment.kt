@@ -148,7 +148,7 @@ class EditProfileFragment : Fragment(), HasCustomTitle, HasCustomAction {
     private fun updateUi() {
         val nickname = binding.etNickname.text.toString().trim()
         profile.nickname = nickname
-        binding.etNickname.error = if (nickname.length > 15) "Nickname is too long" else null
+        binding.etNickname.error = if (nickname.length > 15) getString(R.string.error_nickname_too_long) else null
         binding.tvNicknameSize.text = getString(R.string.char_count_tv, nickname.length)
         setAvatar()
     }

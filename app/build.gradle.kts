@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    kotlin("plugin.serialization") version "2.1.10"
 }
 android {
     namespace = "com.example.tictactoe"
@@ -54,4 +55,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
+    implementation (libs.shimmer)
+    implementation(libs.androidx.swiperefreshlayout)
+    implementation ("androidx.lifecycle:lifecycle-process:2.8.7")
 }

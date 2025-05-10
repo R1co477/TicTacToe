@@ -21,7 +21,9 @@ class MenuFragment : Fragment(), HasCustomAction {
         binding.btSinglePlayer.setOnClickListener {
             navigator().showDifficultyScreen()
         }
-        binding.btMultiplayer.setOnClickListener { }
+        binding.btMultiplayer.setOnClickListener {
+            navigator().showMultiplayerScreen()
+        }
         binding.btLocalMultiplayer.setOnClickListener {
             navigator().showLocalMultiplayerScreen()
         }

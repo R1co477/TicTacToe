@@ -32,6 +32,8 @@
     <string name="toolbar_settings">Tic-Tac-Toe: Settings</string>
     <string name="toolbar_game_result">Game Over: Play Again?</string>
     <string name="toolbar_local_multiplayer">Tic-Tac-Toe: Local Multiplayer</string>
+    <string name="toolbar_lobby">Tic-Tac-Toe: Waiting Room</string>
+    <string name="toolbar_multiplayer">Tic-Tac-Toe: Multiplayer</string>
     <string name="player_avatar">Player Avatar</string>
     <string name="bot_avatar">Bot Avatar</string>
     <string name="player_human">Human Player</string>
@@ -44,6 +46,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="char_count_tv">%d/15</string>
     <string name="settings">Settings</string>
+    <string name="add_room">Add room</string>
     <string name="who_goes_first">Who goes first?</string>
     <string name="random">Random</string>
     <string name="select_photo">Select Photo</string>
@@ -61,4 +64,23 @@
     <string name="draw">DRAW!</string>
     <string name="bot_turn">Bot Turn</string>
     <string name="opponent_turn">Opponent Turn</string>
+    <string name="available_games">Available Games:</string>
+    <string name="play">Play</string>
+    <string name="create_new_room">Create New Room</string>
+    <string name="room_name">Room Name:</string>
+    <string name="enter_room_name">Enter room name…</string>
+    <string name="password_protected_game">Password Protected Game</string>
+    <string name="password">Password:</string>
+    <string name="enter_password">Enter password…</string>
+    <string name="create">Create</string>
+    <string name="error_room_name_required">Please enter room name</string>
+    <string name="error_nickname_too_long">Nickname is too long</string>
+    <string name="waiting_for_opponent">Waiting for opponent…</string>
+    <string name="join">Join</string>
+    <string name="error_room_not_found">Room not found or already closed</string>
+    <string name="error_room_delete_failed">Error deleting room</string>
+    <string name="error_fetch_rooms">Failed to load rooms. Please try again.</string>
+    <string name="error_create_room">Failed to create room. Please try again.</string>
+    <string name="error_sign_in_room_password">Failed to join room. Check the password and try again.</string>
+    <string name="error_sign_in_room">Failed to join room.</string>
 </resources>

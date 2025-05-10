@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.tictactoe.data.EntityCard
@@ -56,8 +57,20 @@ class GameOverFragment : Fragment(), HasCustomTitle {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    parentFragmentManager.popBackStack()
-                    parentFragmentManager.popBackStack()
+                    val fm = requireActivity().supportFragmentManager
+                    val targetTag = MultiplayerFragment::class.java.name
+
+                    val entryIndex = (0 until fm.backStackEntryCount)
+                        .firstOrNull { i -> fm.getBackStackEntryAt(i).name == targetTag }
+
+                    if (entryIndex != null) {
+                        val firstEntry = fm.getBackStackEntryAt(0)
+                        fm.popBackStack(firstEntry.id, 0)
+                    } else {
+                        parentFragmentManager.popBackStack()
+                        parentFragmentManager.popBackStack()
+                    }
+
                 }
             })
     }

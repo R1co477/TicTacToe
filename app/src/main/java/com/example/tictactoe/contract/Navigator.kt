@@ -22,12 +22,18 @@ interface Navigator {
 
     fun showLocalMultiplayerScreen()
 
+    fun showMultiplayerScreen()
+
     fun showGameOverScreen(
         humanEntityCard: EntityCard,
         opponentEntityCard: EntityCard,
         resultGame: ResultGame,
         onRefreshClick: OnRefreshClick
     )
+
+    fun showLobbyScreen(roomName: String)
+
+    fun showMultiplayerGameScreen(roomName: String, secondPlayer: String, createdBy: String)
 
     fun goBack()
 

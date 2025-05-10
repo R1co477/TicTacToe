@@ -7,6 +7,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.tictactoe.contract.CustomAction
@@ -20,8 +23,11 @@ import com.example.tictactoe.fragments.BotGameFragment
 import com.example.tictactoe.fragments.DifficultyFragment
 import com.example.tictactoe.fragments.EditProfileFragment
 import com.example.tictactoe.fragments.GameOverFragment
+import com.example.tictactoe.fragments.LobbyFragment
 import com.example.tictactoe.fragments.LocalMultiplayerFragment
 import com.example.tictactoe.fragments.MenuFragment
+import com.example.tictactoe.fragments.MultiplayerFragment
+import com.example.tictactoe.fragments.MultiplayerGameFragment
 import com.example.tictactoe.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
@@ -72,7 +78,7 @@ class MainActivity : AppCompatActivity(), Navigator {
                 R.anim.fade_in,
                 R.anim.slide_out
             )
-            .addToBackStack(null)
+            .addToBackStack(fragment::class.java.name)
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
@@ -106,6 +112,18 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun showLocalMultiplayerScreen() {
         launchFragment(LocalMultiplayerFragment())
+    }
+
+    override fun showMultiplayerScreen() {
+        launchFragment(MultiplayerFragment())
+    }
+
+    override fun showLobbyScreen(roomName: String) {
+        launchFragment(LobbyFragment.newInstance(roomName))
+    }
+
+    override fun showMultiplayerGameScreen(roomName: String, secondPlayer: String, createdBy: String) {
+        launchFragment(MultiplayerGameFragment.newInstance(roomName, secondPlayer, createdBy))
     }
 
     override fun showGameOverScreen(
