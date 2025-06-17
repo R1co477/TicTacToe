@@ -1,7 +1,5 @@
 <resources>
     <style name="Base.Theme.TicTacToe" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
-        <item name="android:statusBarColor">@color/toolbar_background</item>
     </style>
 
     <style name="bt_main_menu">
